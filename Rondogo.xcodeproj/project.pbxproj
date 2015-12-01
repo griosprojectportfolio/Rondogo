@@ -1,0 +1,866 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1729C0E21AAED20A009FA46E /* MediaPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729C0E11AAED209009FA46E /* MediaPreviewViewController.swift */; };
+		1729C0E51AAEF327009FA46E /* icon_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 1729C0E41AAEF327009FA46E /* icon_share.png */; };
+		1729C0E71AAEF427009FA46E /* icon_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1729C0E61AAEF427009FA46E /* icon_back.png */; };
+		1729C0EB1AAF083E009FA46E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729C0EA1AAF083E009FA46E /* SettingsViewController.swift */; };
+		17312DA91ABA9E1F002BA776 /* SyncClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17312DA81ABA9E1F002BA776 /* SyncClass.swift */; };
+		17312DAB1ABAC56C002BA776 /* SynchronizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17312DAA1ABAC56C002BA776 /* SynchronizeApp.swift */; };
+		17312DB21ABAE602002BA776 /* Rondogo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17312DB01ABAE602002BA776 /* Rondogo.xcdatamodeld */; };
+		17327B391AB6B5D30000D151 /* TicketBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17327B381AB6B5D30000D151 /* TicketBookingViewController.swift */; };
+		17327B851AB710A80000D151 /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17327B841AB710A80000D151 /* UIColor+RGB.swift */; };
+		17327B881AB711870000D151 /* AppApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 17327B871AB711870000D151 /* AppApi.m */; };
+		173760501AC3EBBB00A6A0FD /* MediaObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1737604F1AC3EBBB00A6A0FD /* MediaObject.m */; };
+		173760531AC4112700A6A0FD /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 173760521AC4112700A6A0FD /* User.m */; };
+		173A676C1AC5419500E40A53 /* AdminMediaPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173A676B1AC5419500E40A53 /* AdminMediaPreviewViewController.swift */; };
+		173A67721AC562FB00E40A53 /* TimeStamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 173A67711AC562FB00E40A53 /* TimeStamp.m */; };
+		173AAFD11ABC1BB3000CF406 /* CommonUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173AAFD01ABC1BB3000CF406 /* CommonUtilities.swift */; };
+		174137C51AC693B9003126BD /* icon_admin.png in Resources */ = {isa = PBXBuildFile; fileRef = 174137C41AC693B9003126BD /* icon_admin.png */; };
+		1749CC1F1AC9730300D8E8D6 /* ShowMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749CC1E1AC9730300D8E8D6 /* ShowMediaViewController.swift */; };
+		1749CC211AC9731F00D8E8D6 /* ShowMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1749CC201AC9731F00D8E8D6 /* ShowMediaCell.swift */; };
+		174A512B1AAD6B0700B0A851 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174A512A1AAD6B0700B0A851 /* SignUpViewController.swift */; };
+		174A512D1AADA62F00B0A851 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174A512C1AADA62F00B0A851 /* ForgotPasswordViewController.swift */; };
+		174E7F361AA6D822000807C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174E7F351AA6D822000807C1 /* AppDelegate.swift */; };
+		174E7F3B1AA6D822000807C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 174E7F391AA6D822000807C1 /* Main.storyboard */; };
+		174E7F3D1AA6D822000807C1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 174E7F3C1AA6D822000807C1 /* Images.xcassets */; };
+		174E7F401AA6D822000807C1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 174E7F3E1AA6D822000807C1 /* LaunchScreen.xib */; };
+		174E7F4C1AA6D822000807C1 /* RondogoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174E7F4B1AA6D822000807C1 /* RondogoTests.swift */; };
+		174E7F5B1AA6D92B000807C1 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174E7F5A1AA6D92B000807C1 /* HomePageViewController.swift */; };
+		174E7F711AA72CC0000807C1 /* UploadMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174E7F701AA72CBF000807C1 /* UploadMediaViewController.swift */; };
+		174F77BE1AE4E49500AE51FE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174F77BB1AE4E49500AE51FE /* Default-568h@2x.png */; };
+		174F77BF1AE4E49500AE51FE /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174F77BC1AE4E49500AE51FE /* Default-667h@2x.png */; };
+		174F77C01AE4E49500AE51FE /* Default-1104h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174F77BD1AE4E49500AE51FE /* Default-1104h@2x.png */; };
+		175040371AB948C80041AE2A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175040361AB948C80041AE2A /* CFNetwork.framework */; };
+		175040391AB948D80041AE2A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175040381AB948D80041AE2A /* Security.framework */; };
+		1750403B1AB948E90041AE2A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1750403A1AB948E90041AE2A /* SystemConfiguration.framework */; };
+		1750403D1AB949030041AE2A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1750403C1AB949030041AE2A /* QuartzCore.framework */; };
+		1750403F1AB949170041AE2A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1750403E1AB949170041AE2A /* libz.dylib */; };
+		175040411AB949300041AE2A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 175040401AB949300041AE2A /* libc++.dylib */; };
+		175040431AB965540041AE2A /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175040421AB965540041AE2A /* DropboxSDK.framework */; };
+		175040451AB98CE40041AE2A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175040441AB98CE30041AE2A /* CoreLocation.framework */; };
+		175040471AB992C00041AE2A /* BottomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175040461AB992C00041AE2A /* BottomTabBarView.swift */; };
+		1750404C1AB9B7B90041AE2A /* icon_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 1750404B1AB9B7B90041AE2A /* icon_settings.png */; };
+		1750404E1AB9BAF70041AE2A /* icon_bookTicket.png in Resources */ = {isa = PBXBuildFile; fileRef = 1750404D1AB9BAF70041AE2A /* icon_bookTicket.png */; };
+		175040501AB9C0860041AE2A /* icon_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 1750404F1AB9C0860041AE2A /* icon_login.png */; };
+		175043881AA854AA00D3ECD6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175043871AA854A900D3ECD6 /* LoginViewController.swift */; };
+		175F65B31ABFDE40004A219D /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175F65B21ABFDE40004A219D /* ActivityIndicatorView.swift */; };
+		1784303E1AE64825007A76E1 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784303D1AE64825007A76E1 /* TextField.swift */; };
+		17BB2A271AB828E300044054 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB2A261AB828E300044054 /* DetailViewController.swift */; };
+		17C0B8571AC00C0D0044D3B5 /* AdminPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0B8561AC00C0D0044D3B5 /* AdminPanelViewController.swift */; };
+		17C0B8591AC01F380044D3B5 /* icon_adminPanel.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C0B8581AC01F380044D3B5 /* icon_adminPanel.png */; };
+		17C385571AB17D8C00B6B8FD /* SelectAppLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C385561AB17D8C00B6B8FD /* SelectAppLanguageViewController.swift */; };
+		17C3855C1AB191D600B6B8FD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17C3855E1AB191D600B6B8FD /* Localizable.strings */; };
+		17C563C11AB849AC0046E714 /* icon_dropBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C563BD1AB849AC0046E714 /* icon_dropBox.png */; };
+		17C563C21AB849AC0046E714 /* icon_viber.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C563BE1AB849AC0046E714 /* icon_viber.png */; };
+		17C563C31AB849AC0046E714 /* icon_waze.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C563BF1AB849AC0046E714 /* icon_waze.png */; };
+		17C563C41AB849AC0046E714 /* icon_whatsApp.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C563C01AB849AC0046E714 /* icon_whatsApp.png */; };
+		17C9CB301AB31DAB00BC5026 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C9CB2F1AB31DAB00BC5026 /* BaseViewController.swift */; };
+		76CD3F5D18940E114EC7D6A5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9682CC4131DC0937C00C7850 /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		174E7F461AA6D822000807C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 174E7F281AA6D822000807C1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 174E7F2F1AA6D822000807C1;
+			remoteInfo = Rondogo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1729C0E11AAED209009FA46E /* MediaPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaPreviewViewController.swift; sourceTree = "<group>"; };
+		1729C0E41AAEF327009FA46E /* icon_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_share.png; sourceTree = "<group>"; };
+		1729C0E61AAEF427009FA46E /* icon_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_back.png; sourceTree = "<group>"; };
+		1729C0EA1AAF083E009FA46E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		1730A96F1AB4179300C8F0D0 /* Rondogo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Rondogo-Bridging-Header.h"; sourceTree = "<group>"; };
+		17312DA81ABA9E1F002BA776 /* SyncClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncClass.swift; sourceTree = "<group>"; };
+		17312DAA1ABAC56C002BA776 /* SynchronizeApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizeApp.swift; sourceTree = "<group>"; };
+		17312DB11ABAE602002BA776 /* Rondogo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rondogo.xcdatamodel; sourceTree = "<group>"; };
+		17327B381AB6B5D30000D151 /* TicketBookingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketBookingViewController.swift; sourceTree = "<group>"; };
+		17327B841AB710A80000D151 /* UIColor+RGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+RGB.swift"; sourceTree = "<group>"; };
+		17327B861AB711870000D151 /* AppApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppApi.h; sourceTree = "<group>"; };
+		17327B871AB711870000D151 /* AppApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppApi.m; sourceTree = "<group>"; };
+		1737604E1AC3EBBB00A6A0FD /* MediaObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MediaObject.h; path = ../CoreData/MediaObject.h; sourceTree = "<group>"; };
+		1737604F1AC3EBBB00A6A0FD /* MediaObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MediaObject.m; path = ../CoreData/MediaObject.m; sourceTree = "<group>"; };
+		173760511AC4112700A6A0FD /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = ../CoreData/User.h; sourceTree = "<group>"; };
+		173760521AC4112700A6A0FD /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = ../CoreData/User.m; sourceTree = "<group>"; };
+		173A676B1AC5419500E40A53 /* AdminMediaPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminMediaPreviewViewController.swift; sourceTree = "<group>"; };
+		173A67701AC562FB00E40A53 /* TimeStamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeStamp.h; path = ../CoreData/TimeStamp.h; sourceTree = "<group>"; };
+		173A67711AC562FB00E40A53 /* TimeStamp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimeStamp.m; path = ../CoreData/TimeStamp.m; sourceTree = "<group>"; };
+		173AAFD01ABC1BB3000CF406 /* CommonUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtilities.swift; sourceTree = "<group>"; };
+		174137C41AC693B9003126BD /* icon_admin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_admin.png; sourceTree = "<group>"; };
+		1749CC1E1AC9730300D8E8D6 /* ShowMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMediaViewController.swift; sourceTree = "<group>"; };
+		1749CC201AC9731F00D8E8D6 /* ShowMediaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMediaCell.swift; sourceTree = "<group>"; };
+		174A512A1AAD6B0700B0A851 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		174A512C1AADA62F00B0A851 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		174E7F301AA6D822000807C1 /* Rondogo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rondogo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		174E7F341AA6D822000807C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		174E7F351AA6D822000807C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		174E7F3A1AA6D822000807C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		174E7F3C1AA6D822000807C1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		174E7F3F1AA6D822000807C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		174E7F451AA6D822000807C1 /* RondogoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RondogoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		174E7F4A1AA6D822000807C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		174E7F4B1AA6D822000807C1 /* RondogoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondogoTests.swift; sourceTree = "<group>"; };
+		174E7F5A1AA6D92B000807C1 /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		174E7F701AA72CBF000807C1 /* UploadMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadMediaViewController.swift; sourceTree = "<group>"; };
+		174F77BB1AE4E49500AE51FE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		174F77BC1AE4E49500AE51FE /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
+		174F77BD1AE4E49500AE51FE /* Default-1104h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-1104h@2x.png"; sourceTree = "<group>"; };
+		175040361AB948C80041AE2A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		175040381AB948D80041AE2A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		1750403A1AB948E90041AE2A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1750403C1AB949030041AE2A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1750403E1AB949170041AE2A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		175040401AB949300041AE2A /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		175040421AB965540041AE2A /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
+		175040441AB98CE30041AE2A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		175040461AB992C00041AE2A /* BottomTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomTabBarView.swift; sourceTree = "<group>"; };
+		1750404B1AB9B7B90041AE2A /* icon_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_settings.png; sourceTree = "<group>"; };
+		1750404D1AB9BAF70041AE2A /* icon_bookTicket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bookTicket.png; sourceTree = "<group>"; };
+		1750404F1AB9C0860041AE2A /* icon_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_login.png; sourceTree = "<group>"; };
+		175043871AA854A900D3ECD6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		175F65B21ABFDE40004A219D /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		1784303D1AE64825007A76E1 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		17BB2A261AB828E300044054 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		17C0B8561AC00C0D0044D3B5 /* AdminPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminPanelViewController.swift; sourceTree = "<group>"; };
+		17C0B8581AC01F380044D3B5 /* icon_adminPanel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_adminPanel.png; sourceTree = "<group>"; };
+		17C385561AB17D8C00B6B8FD /* SelectAppLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAppLanguageViewController.swift; sourceTree = "<group>"; };
+		17C385581AB1916200B6B8FD /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Main.strings; sourceTree = "<group>"; };
+		17C385591AB1916200B6B8FD /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		17C3855D1AB191D600B6B8FD /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		17C3855F1AB191DA00B6B8FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		17C563BD1AB849AC0046E714 /* icon_dropBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_dropBox.png; sourceTree = "<group>"; };
+		17C563BE1AB849AC0046E714 /* icon_viber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_viber.png; sourceTree = "<group>"; };
+		17C563BF1AB849AC0046E714 /* icon_waze.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_waze.png; sourceTree = "<group>"; };
+		17C563C01AB849AC0046E714 /* icon_whatsApp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_whatsApp.png; sourceTree = "<group>"; };
+		17C9CB2D1AB31BC400BC5026 /* Rondogo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Rondogo-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		17C9CB2F1AB31DAB00BC5026 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		32CC896017D050A96C725ADE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		9682CC4131DC0937C00C7850 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5176062FAFC59BF09745485 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		174E7F2D1AA6D822000807C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				175040451AB98CE40041AE2A /* CoreLocation.framework in Frameworks */,
+				175040411AB949300041AE2A /* libc++.dylib in Frameworks */,
+				1750403F1AB949170041AE2A /* libz.dylib in Frameworks */,
+				1750403D1AB949030041AE2A /* QuartzCore.framework in Frameworks */,
+				175040431AB965540041AE2A /* DropboxSDK.framework in Frameworks */,
+				1750403B1AB948E90041AE2A /* SystemConfiguration.framework in Frameworks */,
+				175040391AB948D80041AE2A /* Security.framework in Frameworks */,
+				175040371AB948C80041AE2A /* CFNetwork.framework in Frameworks */,
+				76CD3F5D18940E114EC7D6A5 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		174E7F421AA6D822000807C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1729C0E31AAEF318009FA46E /* NavigationBarImages */ = {
+			isa = PBXGroup;
+			children = (
+				1729C0E41AAEF327009FA46E /* icon_share.png */,
+				1729C0E61AAEF427009FA46E /* icon_back.png */,
+				17C563BD1AB849AC0046E714 /* icon_dropBox.png */,
+				17C563BE1AB849AC0046E714 /* icon_viber.png */,
+				17C563BF1AB849AC0046E714 /* icon_waze.png */,
+				17C563C01AB849AC0046E714 /* icon_whatsApp.png */,
+			);
+			path = NavigationBarImages;
+			sourceTree = "<group>";
+		};
+		1730A9671AB40EAD00C8F0D0 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				1730A96F1AB4179300C8F0D0 /* Rondogo-Bridging-Header.h */,
+				17327B861AB711870000D151 /* AppApi.h */,
+				17327B871AB711870000D151 /* AppApi.m */,
+				17312DA81ABA9E1F002BA776 /* SyncClass.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		17312DAF1ABAE5CA002BA776 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				17312DB01ABAE602002BA776 /* Rondogo.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		17327B831AB710950000D151 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				17327B841AB710A80000D151 /* UIColor+RGB.swift */,
+				1784303D1AE64825007A76E1 /* TextField.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		174E7F271AA6D822000807C1 = {
+			isa = PBXGroup;
+			children = (
+				17312DAF1ABAE5CA002BA776 /* CoreData */,
+				1730A9671AB40EAD00C8F0D0 /* API */,
+				17C9CB2E1AB31D6A00BC5026 /* BaseClasses */,
+				17C3855E1AB191D600B6B8FD /* Localizable.strings */,
+				174E7F6B1AA701EB000807C1 /* Utility */,
+				174E7F551AA6D8B4000807C1 /* Images */,
+				174E7F561AA6D8B4000807C1 /* Models */,
+				174E7F571AA6D8B4000807C1 /* ViewControllers */,
+				174E7F321AA6D822000807C1 /* Rondogo */,
+				174E7F481AA6D822000807C1 /* RondogoTests */,
+				174E7F311AA6D822000807C1 /* Products */,
+				5A3EE780CB00E6E203978860 /* Pods */,
+				25EC7E50286D089C31F47F25 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		174E7F311AA6D822000807C1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				174E7F301AA6D822000807C1 /* Rondogo.app */,
+				174E7F451AA6D822000807C1 /* RondogoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		174E7F321AA6D822000807C1 /* Rondogo */ = {
+			isa = PBXGroup;
+			children = (
+				174E7F351AA6D822000807C1 /* AppDelegate.swift */,
+				174E7F391AA6D822000807C1 /* Main.storyboard */,
+				174E7F3C1AA6D822000807C1 /* Images.xcassets */,
+				174E7F3E1AA6D822000807C1 /* LaunchScreen.xib */,
+				174E7F331AA6D822000807C1 /* Supporting Files */,
+			);
+			path = Rondogo;
+			sourceTree = "<group>";
+		};
+		174E7F331AA6D822000807C1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				174E7F341AA6D822000807C1 /* Info.plist */,
+				17C9CB2D1AB31BC400BC5026 /* Rondogo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		174E7F481AA6D822000807C1 /* RondogoTests */ = {
+			isa = PBXGroup;
+			children = (
+				174E7F4B1AA6D822000807C1 /* RondogoTests.swift */,
+				174E7F491AA6D822000807C1 /* Supporting Files */,
+			);
+			path = RondogoTests;
+			sourceTree = "<group>";
+		};
+		174E7F491AA6D822000807C1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				174E7F4A1AA6D822000807C1 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		174E7F551AA6D8B4000807C1 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				174F77BA1AE4E48100AE51FE /* SplashImages */,
+				1750404A1AB9B7A80041AE2A /* Others */,
+				1729C0E31AAEF318009FA46E /* NavigationBarImages */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		174E7F561AA6D8B4000807C1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				175040461AB992C00041AE2A /* BottomTabBarView.swift */,
+				17312DAA1ABAC56C002BA776 /* SynchronizeApp.swift */,
+				175F65B21ABFDE40004A219D /* ActivityIndicatorView.swift */,
+				173760511AC4112700A6A0FD /* User.h */,
+				173760521AC4112700A6A0FD /* User.m */,
+				1737604E1AC3EBBB00A6A0FD /* MediaObject.h */,
+				1737604F1AC3EBBB00A6A0FD /* MediaObject.m */,
+				173A67701AC562FB00E40A53 /* TimeStamp.h */,
+				173A67711AC562FB00E40A53 /* TimeStamp.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		174E7F571AA6D8B4000807C1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				175043871AA854A900D3ECD6 /* LoginViewController.swift */,
+				174A512A1AAD6B0700B0A851 /* SignUpViewController.swift */,
+				174A512C1AADA62F00B0A851 /* ForgotPasswordViewController.swift */,
+				174E7F5A1AA6D92B000807C1 /* HomePageViewController.swift */,
+				17BB2A261AB828E300044054 /* DetailViewController.swift */,
+				1749CC1E1AC9730300D8E8D6 /* ShowMediaViewController.swift */,
+				1749CC201AC9731F00D8E8D6 /* ShowMediaCell.swift */,
+				174E7F701AA72CBF000807C1 /* UploadMediaViewController.swift */,
+				1729C0E11AAED209009FA46E /* MediaPreviewViewController.swift */,
+				1729C0EA1AAF083E009FA46E /* SettingsViewController.swift */,
+				17C385561AB17D8C00B6B8FD /* SelectAppLanguageViewController.swift */,
+				17327B381AB6B5D30000D151 /* TicketBookingViewController.swift */,
+				17C0B8561AC00C0D0044D3B5 /* AdminPanelViewController.swift */,
+				173A676B1AC5419500E40A53 /* AdminMediaPreviewViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		174E7F6B1AA701EB000807C1 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				17327B831AB710950000D151 /* Extensions */,
+				173AAFD01ABC1BB3000CF406 /* CommonUtilities.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		174F77BA1AE4E48100AE51FE /* SplashImages */ = {
+			isa = PBXGroup;
+			children = (
+				174F77BB1AE4E49500AE51FE /* Default-568h@2x.png */,
+				174F77BC1AE4E49500AE51FE /* Default-667h@2x.png */,
+				174F77BD1AE4E49500AE51FE /* Default-1104h@2x.png */,
+			);
+			path = SplashImages;
+			sourceTree = "<group>";
+		};
+		1750404A1AB9B7A80041AE2A /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				1750404B1AB9B7B90041AE2A /* icon_settings.png */,
+				1750404D1AB9BAF70041AE2A /* icon_bookTicket.png */,
+				1750404F1AB9C0860041AE2A /* icon_login.png */,
+				17C0B8581AC01F380044D3B5 /* icon_adminPanel.png */,
+				174137C41AC693B9003126BD /* icon_admin.png */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		17C9CB2E1AB31D6A00BC5026 /* BaseClasses */ = {
+			isa = PBXGroup;
+			children = (
+				17C9CB2F1AB31DAB00BC5026 /* BaseViewController.swift */,
+			);
+			path = BaseClasses;
+			sourceTree = "<group>";
+		};
+		25EC7E50286D089C31F47F25 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				175040441AB98CE30041AE2A /* CoreLocation.framework */,
+				175040421AB965540041AE2A /* DropboxSDK.framework */,
+				175040401AB949300041AE2A /* libc++.dylib */,
+				1750403E1AB949170041AE2A /* libz.dylib */,
+				1750403C1AB949030041AE2A /* QuartzCore.framework */,
+				1750403A1AB948E90041AE2A /* SystemConfiguration.framework */,
+				175040381AB948D80041AE2A /* Security.framework */,
+				175040361AB948C80041AE2A /* CFNetwork.framework */,
+				9682CC4131DC0937C00C7850 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5A3EE780CB00E6E203978860 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				32CC896017D050A96C725ADE /* Pods.debug.xcconfig */,
+				E5176062FAFC59BF09745485 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		174E7F2F1AA6D822000807C1 /* Rondogo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 174E7F4F1AA6D822000807C1 /* Build configuration list for PBXNativeTarget "Rondogo" */;
+			buildPhases = (
+				ADFDF569162D223B9427B6E0 /* Check Pods Manifest.lock */,
+				174E7F2C1AA6D822000807C1 /* Sources */,
+				174E7F2D1AA6D822000807C1 /* Frameworks */,
+				174E7F2E1AA6D822000807C1 /* Resources */,
+				AEE89F1A4ED1310F6D622381 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Rondogo;
+			productName = Rondogo;
+			productReference = 174E7F301AA6D822000807C1 /* Rondogo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		174E7F441AA6D822000807C1 /* RondogoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 174E7F521AA6D822000807C1 /* Build configuration list for PBXNativeTarget "RondogoTests" */;
+			buildPhases = (
+				174E7F411AA6D822000807C1 /* Sources */,
+				174E7F421AA6D822000807C1 /* Frameworks */,
+				174E7F431AA6D822000807C1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				174E7F471AA6D822000807C1 /* PBXTargetDependency */,
+			);
+			name = RondogoTests;
+			productName = RondogoTests;
+			productReference = 174E7F451AA6D822000807C1 /* RondogoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		174E7F281AA6D822000807C1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = GrepRuby3;
+				TargetAttributes = {
+					174E7F2F1AA6D822000807C1 = {
+						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 6TN9C797PU;
+					};
+					174E7F441AA6D822000807C1 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 174E7F2F1AA6D822000807C1;
+					};
+				};
+			};
+			buildConfigurationList = 174E7F2B1AA6D822000807C1 /* Build configuration list for PBXProject "Rondogo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 174E7F271AA6D822000807C1;
+			productRefGroup = 174E7F311AA6D822000807C1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				174E7F2F1AA6D822000807C1 /* Rondogo */,
+				174E7F441AA6D822000807C1 /* RondogoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		174E7F2E1AA6D822000807C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17C563C41AB849AC0046E714 /* icon_whatsApp.png in Resources */,
+				1729C0E71AAEF427009FA46E /* icon_back.png in Resources */,
+				17C3855C1AB191D600B6B8FD /* Localizable.strings in Resources */,
+				174E7F3B1AA6D822000807C1 /* Main.storyboard in Resources */,
+				1750404C1AB9B7B90041AE2A /* icon_settings.png in Resources */,
+				174137C51AC693B9003126BD /* icon_admin.png in Resources */,
+				174F77BF1AE4E49500AE51FE /* Default-667h@2x.png in Resources */,
+				17C563C11AB849AC0046E714 /* icon_dropBox.png in Resources */,
+				174E7F401AA6D822000807C1 /* LaunchScreen.xib in Resources */,
+				17C563C21AB849AC0046E714 /* icon_viber.png in Resources */,
+				17C563C31AB849AC0046E714 /* icon_waze.png in Resources */,
+				174F77BE1AE4E49500AE51FE /* Default-568h@2x.png in Resources */,
+				175040501AB9C0860041AE2A /* icon_login.png in Resources */,
+				1729C0E51AAEF327009FA46E /* icon_share.png in Resources */,
+				174F77C01AE4E49500AE51FE /* Default-1104h@2x.png in Resources */,
+				17C0B8591AC01F380044D3B5 /* icon_adminPanel.png in Resources */,
+				1750404E1AB9BAF70041AE2A /* icon_bookTicket.png in Resources */,
+				174E7F3D1AA6D822000807C1 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		174E7F431AA6D822000807C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		ADFDF569162D223B9427B6E0 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AEE89F1A4ED1310F6D622381 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		174E7F2C1AA6D822000807C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				173760531AC4112700A6A0FD /* User.m in Sources */,
+				17312DA91ABA9E1F002BA776 /* SyncClass.swift in Sources */,
+				17C385571AB17D8C00B6B8FD /* SelectAppLanguageViewController.swift in Sources */,
+				1784303E1AE64825007A76E1 /* TextField.swift in Sources */,
+				17312DAB1ABAC56C002BA776 /* SynchronizeApp.swift in Sources */,
+				1749CC1F1AC9730300D8E8D6 /* ShowMediaViewController.swift in Sources */,
+				173AAFD11ABC1BB3000CF406 /* CommonUtilities.swift in Sources */,
+				17C9CB301AB31DAB00BC5026 /* BaseViewController.swift in Sources */,
+				17BB2A271AB828E300044054 /* DetailViewController.swift in Sources */,
+				1749CC211AC9731F00D8E8D6 /* ShowMediaCell.swift in Sources */,
+				175F65B31ABFDE40004A219D /* ActivityIndicatorView.swift in Sources */,
+				174E7F5B1AA6D92B000807C1 /* HomePageViewController.swift in Sources */,
+				1729C0EB1AAF083E009FA46E /* SettingsViewController.swift in Sources */,
+				1729C0E21AAED20A009FA46E /* MediaPreviewViewController.swift in Sources */,
+				174A512D1AADA62F00B0A851 /* ForgotPasswordViewController.swift in Sources */,
+				173760501AC3EBBB00A6A0FD /* MediaObject.m in Sources */,
+				174E7F711AA72CC0000807C1 /* UploadMediaViewController.swift in Sources */,
+				17327B391AB6B5D30000D151 /* TicketBookingViewController.swift in Sources */,
+				174E7F361AA6D822000807C1 /* AppDelegate.swift in Sources */,
+				17C0B8571AC00C0D0044D3B5 /* AdminPanelViewController.swift in Sources */,
+				17327B881AB711870000D151 /* AppApi.m in Sources */,
+				173A676C1AC5419500E40A53 /* AdminMediaPreviewViewController.swift in Sources */,
+				173A67721AC562FB00E40A53 /* TimeStamp.m in Sources */,
+				17312DB21ABAE602002BA776 /* Rondogo.xcdatamodeld in Sources */,
+				17327B851AB710A80000D151 /* UIColor+RGB.swift in Sources */,
+				175040471AB992C00041AE2A /* BottomTabBarView.swift in Sources */,
+				174A512B1AAD6B0700B0A851 /* SignUpViewController.swift in Sources */,
+				175043881AA854AA00D3ECD6 /* LoginViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		174E7F411AA6D822000807C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				174E7F4C1AA6D822000807C1 /* RondogoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		174E7F471AA6D822000807C1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 174E7F2F1AA6D822000807C1 /* Rondogo */;
+			targetProxy = 174E7F461AA6D822000807C1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		174E7F391AA6D822000807C1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				174E7F3A1AA6D822000807C1 /* Base */,
+				17C385581AB1916200B6B8FD /* he */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		174E7F3E1AA6D822000807C1 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				174E7F3F1AA6D822000807C1 /* Base */,
+				17C385591AB1916200B6B8FD /* he */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		17C3855E1AB191D600B6B8FD /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17C3855D1AB191D600B6B8FD /* he */,
+				17C3855F1AB191DA00B6B8FD /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		174E7F4D1AA6D822000807C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32CC896017D050A96C725ADE /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Doron Shamir";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Doron Shamir";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Rondogo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "f4444aec-965e-4b35-ae82-2a511f6cdb23";
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		174E7F4E1AA6D822000807C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5176062FAFC59BF09745485 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Doron Shamir";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Doron Shamir";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Rondogo-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "f4444aec-965e-4b35-ae82-2a511f6cdb23";
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		174E7F501AA6D822000807C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32CC896017D050A96C725ADE /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Doron Shamir";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Doron Shamir";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Rondogo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"DISABLE_PUSH_NOTIFICATIONS=1",
+				);
+				INFOPLIST_FILE = Rondogo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f4444aec-965e-4b35-ae82-2a511f6cdb23";
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/API/Rondogo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		174E7F511AA6D822000807C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5176062FAFC59BF09745485 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Doron Shamir";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Doron Shamir";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Rondogo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"DISABLE_PUSH_NOTIFICATIONS=1",
+				);
+				INFOPLIST_FILE = Rondogo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f4444aec-965e-4b35-ae82-2a511f6cdb23";
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/API/Rondogo-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		174E7F531AA6D822000807C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RondogoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rondogo.app/Rondogo";
+			};
+			name = Debug;
+		};
+		174E7F541AA6D822000807C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RondogoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rondogo.app/Rondogo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		174E7F2B1AA6D822000807C1 /* Build configuration list for PBXProject "Rondogo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				174E7F4D1AA6D822000807C1 /* Debug */,
+				174E7F4E1AA6D822000807C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		174E7F4F1AA6D822000807C1 /* Build configuration list for PBXNativeTarget "Rondogo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				174E7F501AA6D822000807C1 /* Debug */,
+				174E7F511AA6D822000807C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		174E7F521AA6D822000807C1 /* Build configuration list for PBXNativeTarget "RondogoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				174E7F531AA6D822000807C1 /* Debug */,
+				174E7F541AA6D822000807C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		17312DB01ABAE602002BA776 /* Rondogo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				17312DB11ABAE602002BA776 /* Rondogo.xcdatamodel */,
+			);
+			currentVersion = 17312DB11ABAE602002BA776 /* Rondogo.xcdatamodel */;
+			path = Rondogo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 174E7F281AA6D822000807C1 /* Project object */;
+}

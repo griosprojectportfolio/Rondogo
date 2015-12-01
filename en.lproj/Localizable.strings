@@ -1,0 +1,82 @@
+/* 
+  Localizable.strings
+  Rondogo
+
+  Created by GrepRuby3 on 12/03/15.
+  Copyright (c) 2015 GrepRuby3. All rights reserved.
+*/
+
+/* Navigation Tittles */
+
+REGISTER = "Register";
+TREASURE_HUNT = "Treasure Hunt";
+NIGHT_STAR = "Night Star";
+MISSIONN_POSSIBLE = "Mission Possible";
+COPS_AND_ROBBERS = "Cops And Robbers";
+YOUR_RACE = "Your Race";
+TIMELESS_ROPES = "TimeLess Ropes";
+ADMIN_PANEL = "Admin Panel";
+PREVIEW = "Preview";
+SETTINGS = "Settings";
+CHOOSE_LANGUAGE = "Choose Language";
+TICKET_BOOKING = "Ticket Booking";
+ALL_MEDIA = "Media";
+
+/* UIAlertView Strings */
+
+OK = "Ok";
+ALERT = "Alert";
+CAMERA_NOT_AVAILABLE = "Camera Not Available in Device";
+UPLOAD_ON_SERVER = "Upload To Server";
+
+/* Login Page Strings */
+
+USER_NAME = "User Name";
+PASSWORD = "Password";
+SIGNIN = "Sign In";
+LOGIN = "Log In";
+LOGIN_WITH_FACEBOOK = "LogIn With FaceBook";
+SIGNUP = "Sign Up";
+FORGOT_PASSWORD = "Forgot Password";
+
+/* Sign Up page Strings */
+
+FIRST_NAME = "First Name";
+LAST_NAME = "Last Name";
+EMAIL = "Email";
+CONTACT_NUMBER = "Contact Number";
+CONFIRM_PASSWORD = "Confirm Password";
+SIGNUP_WITH_FACEBOOK = "SignUp With FaceBook";
+UPDATE = "Update";
+
+/* Settings Page Strings */
+
+APPLICATION_LANGUAGES = "Application Languages";
+SYNC_APP = "Sync App";
+SET_AUTO_SYNC_DURATION = "Set Auto Sync Duration";
+UPDATE_PROFILE = "Update Profile";
+SIGN_OUT = "Sign Out";
+
+/* Change Application Languadge Page Strings */
+
+ENGLISH = "English";
+HEBREW = "Hebrew";
+
+/* Upload Media Page Strings */
+
+UPLOAD_VIDEO = "Upload Video";
+UPLOAD_IMAGE = "Upload Image";
+UPLOAD_PDF = "Upload Pdf";
+CAPTURE_IMAGE = "Capture Image";
+CAPTURE_VIDEO = "Capture Video";
+
+/* Media PreView Page Strings */
+
+WHATS_APP = "Whats App";
+VIBER = "Viber";
+DROPBOX = "Dropbox";
+FACEBOOK = "FaceBook";
+CANCEL = "Cancel";
+
+There_is_no_data_for_english = "There is no data for english.";
+There_is_no_data_for_Hebrew = "There is no data for hebrew.";

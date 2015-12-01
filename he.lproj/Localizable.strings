@@ -1,0 +1,84 @@
+/* 
+  Localizable.strings
+  Rondogo
+
+  Created by GrepRuby3 on 12/03/15.
+  Copyright (c) 2015 GrepRuby3. All rights reserved.
+*/
+
+/* Navigation Tittles */
+
+REGISTER = "הרשמה";
+TREASURE_HUNT = "אוצר היסט)ו(רי";
+NIGHT_STAR = "כוכב לערב אחד";
+MISSIONN_POSSIBLE = "אקשן. המשימה... אפשרית!";
+COPS_AND_ROBBERS = "שוטרים וגנבים";
+YOUR_RACE = "במרוץ שלכם";
+TIMELESS_ROPES = "חֶבֶל על הזמן";
+ADMIN_PANEL = "פנל ניהול";
+PREVIEW = "תצוגה מקדימה";
+SETTINGS = "הגדרות";
+CHOOSE_LANGUAGE = "בחר את השפה";
+TICKET_BOOKING = "הזמנת כרטיסים";
+ALL_MEDIA = "כל המדיה";
+
+/* UIAlertView Strings */
+
+OK = "אוקי";
+ALERT = "התראה";
+CAMERA_NOT_AVAILABLE = "מצלמה לא זמינה בהתקן";
+UPLOAD_ON_SERVER = "להעלות לשרת";
+
+/* Login Page Strings */
+
+USER_NAME = "שם משתמש";
+PASSWORD = "סיסמא";
+SIGNIN = "כניסה";
+LOGIN = "Log In";
+LOGIN_WITH_FACEBOOK = "התחבר עם פייסבוק";
+SIGNUP = "הירשם";
+FORGOT_PASSWORD = "שכחת את סיסמא";
+
+/* Sign Up page Strings */
+
+FIRST_NAME = "שם פרטים";
+LAST_NAME = "שם משפחה";
+EMAIL = "דוא";
+CONTACT_NUMBER = "צור קשר עם מספר";
+CONFIRM_PASSWORD = "אשר סיסמא";
+SIGNUP_WITH_FACEBOOK = "הרשמה דרך פייסבוק";
+UPDATE = "עדכון";
+
+/* Settings Page Strings */
+
+APPLICATION_LANGUAGES = "שפות יישום";
+SYNC_APP = "סנכרון אפליקציה";
+SET_AUTO_SYNC_DURATION = "להגדיר משך סנכרון האוטומטי";
+UPDATE_PROFILE = "עדכון פרופיל";
+SIGN_OUT = "התנתק";
+
+/* Change Application Languadge Page Strings */
+
+ENGLISH = "אנגלית";
+HEBREW = "עברית";
+
+/* Upload Media Page Strings */
+
+UPLOAD_VIDEO = "העלאת וידאו";
+UPLOAD_IMAGE = "טעינת תמונה";
+UPLOAD_PDF = "ההעלאה PDF";
+CAPTURE_IMAGE = "לכידת תמונה";
+CAPTURE_VIDEO = "לכידת וידאו";
+
+/* Media PreView Page Strings */
+
+WHATS_APP = "Whats App";
+VIBER = "Viber";
+DROPBOX = "Dropbox";
+FACEBOOK = "FaceBook";
+CANCEL = "לבטל";
+
+/* Alet Message */
+
+There_is_no_data_for_english = "אין נתונים לאנגלית.";
+There_is_no_data_for_Hebrew = "אין נתונים לעברית.";
