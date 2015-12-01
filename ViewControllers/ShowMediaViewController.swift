@@ -26,6 +26,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         super.viewDidLoad()
         self.title = NSLocalizedString("ALL_MEDIA",comment: "All Media")
         self.navigationController?.navigationBarHidden = false
+        self.view.backgroundColor = UIColor().appBackgroundColor()
         self.addRightAndLeftNavItemOnView()
         self.refreshData()
         self.applyDefaults()
@@ -113,9 +114,11 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
     func applyDefaults(){
       
       if arrShowData.count == 0 {
-        let lblAlert:UILabel = UILabel(frame: CGRectMake((self.view.frame.width-250)/2,(self.view.frame.height-40)/2,250,40))
         
+        let lblAlert:UILabel = UILabel(frame: CGRectMake((self.view.frame.width-250)/2,(self.view.frame.height-40)/2,250,40))
         lblAlert.textAlignment = NSTextAlignment.Center
+        lblAlert.font = UIFont.systemFontOfSize(20.0)
+        lblAlert.textColor = UIColor.darkGrayColor()
         self.view.addSubview(lblAlert)
         self.view.bringSubviewToFront(lblAlert)
         
@@ -310,7 +313,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         
         let settingsActionSheet: UIAlertController = UIAlertController(title:nil, message:nil, preferredStyle:UIAlertControllerStyle.ActionSheet)
         settingsActionSheet.addAction(UIAlertAction(title:"Upload", style:UIAlertActionStyle.Default, handler:{ action in
-            
+            self.rightNavShareButtonTapped()
         }))
         settingsActionSheet.addAction(UIAlertAction(title:"Share", style:UIAlertActionStyle.Default, handler:{ action in
             if intIndex == 0 {
@@ -330,7 +333,13 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
             }
         }))
         settingsActionSheet.addAction(UIAlertAction(title:"Cancel", style:UIAlertActionStyle.Cancel, handler:nil))
-        presentViewController(settingsActionSheet, animated:true, completion:nil)
+        
+        if let popoverController = settingsActionSheet.popoverPresentationController {
+            popoverController.sourceView = self.bottomTabBar
+            popoverController.sourceRect = self.bottomTabBar.bounds
+        }
+        self.presentViewController(settingsActionSheet, animated: true, completion: nil)
+        
     }
     
     

@@ -42,6 +42,7 @@ class ShowMediaCell: UITableViewCell {
             }
             lblDesc = UILabel(frame : CGRectMake(self.frame.origin.x + 20, y + 150, self.frame.size.width - 40, 20))
             lblDesc.text = mediaName as String
+            lblDesc.textColor = UIColor.darkGrayColor()
             lblDesc.textAlignment = NSTextAlignment.Center
             self.contentView.addSubview(lblDesc)
             
@@ -58,6 +59,7 @@ class ShowMediaCell: UITableViewCell {
             }
             lblDesc = UILabel(frame : CGRectMake(self.frame.origin.x + 20, y + 150, self.frame.size.width - 40, 20))
             lblDesc.text = mediaName as String
+            lblDesc.textColor = UIColor.darkGrayColor()
             lblDesc.textAlignment = NSTextAlignment.Center
             self.contentView.addSubview(lblDesc)
             
@@ -70,6 +72,7 @@ class ShowMediaCell: UITableViewCell {
             }
             lblDesc = UILabel(frame : CGRectMake(self.frame.origin.x + 20, y + 150, self.frame.size.width - 40, 20))
             lblDesc.text = mediaName as String
+            lblDesc.textColor = UIColor.darkGrayColor()
             lblDesc.textAlignment = NSTextAlignment.Center
             self.contentView.addSubview(lblDesc)
             

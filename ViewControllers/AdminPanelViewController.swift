@@ -23,7 +23,7 @@ class AdminPanelViewController: BaseViewController,UIImagePickerControllerDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = NSLocalizedString("ADMIN_PANEL",comment: "Admin Panel")
+        self.title = NSLocalizedString("UPLOAD",comment: "Upload")
         self.view.backgroundColor = UIColor().appBackgroundColor()
         self.navigationController?.navigationBarHidden = false
         self.addRightAndLeftNavItemOnView()

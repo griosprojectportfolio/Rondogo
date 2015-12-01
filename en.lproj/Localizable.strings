@@ -16,6 +16,7 @@ COPS_AND_ROBBERS = "Cops And Robbers";
 YOUR_RACE = "Your Race";
 TIMELESS_ROPES = "TimeLess Ropes";
 ADMIN_PANEL = "Admin Panel";
+UPLOAD = "Upload";
 PREVIEW = "Preview";
 SETTINGS = "Settings";
 CHOOSE_LANGUAGE = "Choose Language";
