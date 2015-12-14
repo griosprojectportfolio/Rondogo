@@ -20,6 +20,9 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
     var categoryId : NSInteger!
     var subCategoryId : NSInteger!
     
+    var singleTapGesture : UITapGestureRecognizer!
+    var leftSwipeGesture : UISwipeGestureRecognizer!
+    var selectedIndexPath : NSIndexPath = NSIndexPath( forRow: 0, inSection: 0)
     
     override func viewDidLoad() {
         
@@ -131,7 +134,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
       }
       
         
-        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+64, self.view.frame.size.width, self.view.frame.size.height-114))
+        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height-114))
          tblView.tableFooterView = UIView(frame:CGRectZero)
         self.tblView.delegate = self
         self.tblView.dataSource = self
@@ -219,63 +222,90 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
             cell.lblDesc.text = ""
         }
         
+        leftSwipeGesture = UISwipeGestureRecognizer(target: self, action: "swipeGestureHandler:")
+        leftSwipeGesture.direction = .Left
+        cell.addGestureRecognizer(leftSwipeGesture)
+
+        singleTapGesture = UITapGestureRecognizer(target: self, action: "singleTapHandler:")
+        singleTapGesture.numberOfTapsRequired = 1
+        cell.addGestureRecognizer(singleTapGesture)
+        
+        cell.tag = indexPath.row
         cell.configureShowMediaTableViewCell(cell, dictTemp: arrShowData.objectAtIndex(indexPath.row) as! NSDictionary)
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
+    // MARK: - Cell Tap Gesture and Swipe Gesture methods
+    
+    func swipeGestureHandler(sender: UISwipeGestureRecognizer) {
         
-        let tappedObjectDict : NSDictionary = arrShowData.objectAtIndex(indexPath.row) as! NSDictionary
+        let cell : ShowMediaCell = sender.view as! ShowMediaCell
+        let tapIndex : Int = cell.tag
+        
+        let tappedObjectDict : NSDictionary = arrShowData.objectAtIndex(tapIndex) as! NSDictionary
         socialShareDict = tappedObjectDict
         let mediaType : Int = tappedObjectDict.objectForKey("type") as! Int
         
         switch mediaType {
             
         case 1 :
-          if self.api.isMediaFileExistInDocumentDirectory(arrShowData.objectAtIndex(indexPath.row) as! [NSObject : AnyObject]){
-            let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
-            destinationViewController.selectedImage = self.api.getImageFromDocumentDirectoryFileURL(tappedObjectDict as [NSObject : AnyObject])
-            destinationViewController.selectedVideoUrl = nil
-            destinationViewController.isMediaTypeImage = 1
-            destinationViewController.socialShareDict = tappedObjectDict
-            self.navigationController?.pushViewController(destinationViewController, animated: true)
-          }else{
-            let alert:UIAlertView! = UIAlertView(title:nil, message:"File not downloaded yet. ", delegate:nil, cancelButtonTitle:"OK")
-            alert.show()
-          }
-          
+            if self.api.isMediaFileExistInDocumentDirectory(arrShowData.objectAtIndex(tapIndex) as! [NSObject : AnyObject]){
+                let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
+                destinationViewController.selectedImage = self.api.getImageFromDocumentDirectoryFileURL(tappedObjectDict as [NSObject : AnyObject])
+                destinationViewController.selectedVideoUrl = nil
+                destinationViewController.isMediaTypeImage = 1
+                destinationViewController.socialShareDict = tappedObjectDict
+                self.navigationController?.pushViewController(destinationViewController, animated: true)
+            }else{
+                let alert:UIAlertView! = UIAlertView(title:nil, message:"File not downloaded yet. ", delegate:nil, cancelButtonTitle:"OK")
+                alert.show()
+            }
+            
         case 2 :
-          if self.api.isMediaFileExistInDocumentDirectory(arrShowData.objectAtIndex(indexPath.row) as! [NSObject : AnyObject]){
-            let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
-            destinationViewController.selectedImage = nil
-            destinationViewController.selectedVideoUrl = self.api.getDocumentDirectoryFileURL(tappedObjectDict as [NSObject : AnyObject])
-            destinationViewController.isMediaTypeImage = 2
-            destinationViewController.socialShareDict = tappedObjectDict
-            self.navigationController?.pushViewController(destinationViewController, animated: true)
-          }else{
-            let alert:UIAlertView! = UIAlertView(title:nil, message:"File not downloaded yet. ", delegate:nil, cancelButtonTitle:"OK")
-            alert.show()
-          }
-          
+            if self.api.isMediaFileExistInDocumentDirectory(arrShowData.objectAtIndex(tapIndex) as! [NSObject : AnyObject]){
+                let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
+                destinationViewController.selectedImage = nil
+                destinationViewController.selectedVideoUrl = self.api.getDocumentDirectoryFileURL(tappedObjectDict as [NSObject : AnyObject])
+                destinationViewController.isMediaTypeImage = 2
+                destinationViewController.socialShareDict = tappedObjectDict
+                self.navigationController?.pushViewController(destinationViewController, animated: true)
+            }else{
+                let alert:UIAlertView! = UIAlertView(title:nil, message:"File not downloaded yet. ", delegate:nil, cancelButtonTitle:"OK")
+                alert.show()
+            }
+            
         case 3 :
-          if self.api.isMediaFileExistInDocumentDirectory(arrShowData.objectAtIndex(indexPath.row) as! [NSObject : AnyObject]){
-            let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
-            destinationViewController.selectedImage = nil
-            destinationViewController.selectedVideoUrl = self.api.getDocumentDirectoryFileURL(tappedObjectDict as [NSObject : AnyObject])
-            destinationViewController.isMediaTypeImage = 3
-            destinationViewController.socialShareDict = tappedObjectDict
-            self.navigationController?.pushViewController(destinationViewController, animated: true)
-          }else{
-            let alert:UIAlertView! = UIAlertView(title:nil, message:"File not downloaded yet. ", delegate:nil, cancelButtonTitle:"OK")
-            alert.show()
-          }
-          
+            if self.api.isMediaFileExistInDocumentDirectory(arrShowData.objectAtIndex(tapIndex) as! [NSObject : AnyObject]){
+                let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
+                destinationViewController.selectedImage = nil
+                destinationViewController.selectedVideoUrl = self.api.getDocumentDirectoryFileURL(tappedObjectDict as [NSObject : AnyObject])
+                destinationViewController.isMediaTypeImage = 3
+                destinationViewController.socialShareDict = tappedObjectDict
+                self.navigationController?.pushViewController(destinationViewController, animated: true)
+            }else{
+                let alert:UIAlertView! = UIAlertView(title:nil, message:"File not downloaded yet. ", delegate:nil, cancelButtonTitle:"OK")
+                alert.show()
+            }
+            
         default :
             print("Default button Tapped")
         }
         
     }
     
+    func singleTapHandler(sender: UITapGestureRecognizer) {
+        
+        let preSelectedCell : ShowMediaCell = self.tblView.cellForRowAtIndexPath(selectedIndexPath) as! ShowMediaCell
+        preSelectedCell.setSelected(false, animated: true)
+        
+        let selectedCell : ShowMediaCell = sender.view as! ShowMediaCell
+        selectedIndexPath = NSIndexPath(forRow: selectedCell.tag, inSection: selectedIndexPath.section)
+        
+        let tappedObjectDict : NSDictionary = arrShowData.objectAtIndex(selectedCell.tag) as! NSDictionary
+        socialShareDict = tappedObjectDict
+        selectedCell.setSelected(true, animated: true)
+    }
     
     
     // MARK: - BottomTabBarDelegate Delegate Method
@@ -288,11 +318,23 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
             
             switch btnSender.tag {
                 
-            case 0 : self.showSharingOptionsOnButtonTap(0)
+            case 0 :
+                if self.socialShareDict.count != 0 {
+                    self.bottomTabBar.btnWhatsAppTapped(self.socialShareDict)
+                    self.showSuccessAlertToUser("Successfully shared on Whats app", strMessage: "" )
+                }else{
+                    self.showSuccessAlertToUser("You didn't selected any media", strMessage: "Please choose any file to share." )
+                }
                 
             case 1 : self.bottomTabBar.btnViberTapped(sender)
                 
-            case 2 : self.showSharingOptionsOnButtonTap(2)
+            case 2 :
+                if self.socialShareDict.count != 0 {
+                    self.bottomTabBar.btnDropBoxTapped(self.socialShareDict , viewController: self)
+                    self.showSuccessAlertToUser("Successfully shared on Dropbox", strMessage: "" )
+                }else{
+                    self.showSuccessAlertToUser("You didn't selected any media", strMessage: "Please choose any file to share." )
+                }
                 
             case 3 : bottomTabBar.btnWazeTapped(sender)
                 
@@ -309,40 +351,6 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
     
      // MARK: - Current page common methods
     
-    func showSharingOptionsOnButtonTap(intIndex: Int16) {
-        
-        let settingsActionSheet: UIAlertController = UIAlertController(title:nil, message:nil, preferredStyle:UIAlertControllerStyle.ActionSheet)
-        settingsActionSheet.addAction(UIAlertAction(title:"Upload", style:UIAlertActionStyle.Default, handler:{ action in
-            self.rightNavShareButtonTapped()
-        }))
-        settingsActionSheet.addAction(UIAlertAction(title:"Share", style:UIAlertActionStyle.Default, handler:{ action in
-            if intIndex == 0 {
-                if self.socialShareDict.count != 0 {
-                    self.bottomTabBar.btnWhatsAppTapped(self.socialShareDict)
-                    self.showSuccessAlertToUser("Successfully shared on Whats app", strMessage: "" )
-                }else{
-                    self.showSuccessAlertToUser("You didn't selected any media", strMessage: "Please choose any file to share." )
-                }
-            }else {
-                if self.socialShareDict.count != 0 {
-                    self.bottomTabBar.btnDropBoxTapped(self.socialShareDict , viewController: self)
-                    self.showSuccessAlertToUser("Successfully shared on Dropbox", strMessage: "" )
-                }else{
-                    self.showSuccessAlertToUser("You didn't selected any media", strMessage: "Please choose any file to share." )
-                }
-            }
-        }))
-        settingsActionSheet.addAction(UIAlertAction(title:"Cancel", style:UIAlertActionStyle.Cancel, handler:nil))
-        
-        if let popoverController = settingsActionSheet.popoverPresentationController {
-            popoverController.sourceView = self.bottomTabBar
-            popoverController.sourceRect = self.bottomTabBar.bounds
-        }
-        self.presentViewController(settingsActionSheet, animated: true, completion: nil)
-        
-    }
-    
-    
     func showSuccessAlertToUser(strTittle : NSString ,strMessage : NSString){
         
         let alertController = UIAlertController(title: strTittle as String, message:
@@ -355,6 +363,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
             })
         })
     }
+    
     
     
 

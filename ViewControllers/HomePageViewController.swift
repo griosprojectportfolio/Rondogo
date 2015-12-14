@@ -35,6 +35,7 @@ class HomePageViewController: BaseViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBarHidden = true
+        self.showAndHideLoginAndSettingsButton()
     }
   
     override func didReceiveMemoryWarning() {
@@ -254,6 +255,17 @@ class HomePageViewController: BaseViewController {
                 
         })
     }
+    
+    func showAndHideLoginAndSettingsButton() {
+        if self.auth_token[0] == "" {
+            self.btnLink1.hidden = false
+            self.btnLink3.hidden = true
+        }else {
+            self.btnLink1.hidden = true
+            self.btnLink3.hidden = false
+        }
+    }
+    
     
     // MARK: - Link Button Tapped methods
     func btnLink1ButtonTapped(){

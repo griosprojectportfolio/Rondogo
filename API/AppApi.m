@@ -134,7 +134,7 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
     }];
 }
 
-#pragma mark Update User
+#pragma mark- Update User
 
 - (AFHTTPRequestOperation *)updateUser:(NSDictionary *)aParams
                                success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
@@ -202,7 +202,7 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
     }];
 }
 
-#pragma mark - SignOut user
+#pragma mark- SignOut user
 
 - (AFHTTPRequestOperation *)signOutUser:(NSDictionary *)aParams
                                    success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
@@ -239,7 +239,7 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
 }
 
 
-#pragma mark Sync Call Methods
+#pragma mark- Sync Call Methods
 
 - (AFHTTPRequestOperation *)getAllObjects:(NSDictionary *)aParams
                                   success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
@@ -279,7 +279,7 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
     }];
 }
 
-#pragma mark Method to Downloading Media Data from server
+#pragma mark- Method to Downloading Media Data from server
 
 /*- (void)downloadMediaData:(NSDictionary *)aParams
                   success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
@@ -309,6 +309,7 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
                   success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
                   failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
   
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
   NSString *url = [aParams objectForKey:@"url"];
   NSArray *docDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
   NSString *strtemp = @"Temp";
@@ -325,9 +326,11 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
   
   [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
       NSLog(@"successful download to %@", mediaPath);
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
       [self fileRenameFunction:mediaPath];
       successBlock(operation, responseObject);
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     NSLog(@"Error: %@", error);
     NSLog(@"Error: %@", operation.responseString);
       failureBlock(operation, error);
