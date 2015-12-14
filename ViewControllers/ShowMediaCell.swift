@@ -35,6 +35,7 @@ class ShowMediaCell: UITableViewCell {
             if self.api.getDocumentDirectoryFileURL(dictTemp as [NSObject : AnyObject]) != nil{
                 var tempImageView : UIImageView!
                 tempImageView = UIImageView(frame: CGRectMake(self.frame.origin.x + 20, y, self.frame.size.width - 40, 150))
+                tempImageView.contentMode = .ScaleAspectFit
                 if(self.api.isMediaFileExistInDocumentDirectory(dictTemp as [NSObject : AnyObject])){
                     tempImageView.image = UIImage(data: NSData(contentsOfURL: self.api.getDocumentDirectoryFileURL(dictTemp as [NSObject : AnyObject]))!)
                 }
@@ -67,6 +68,7 @@ class ShowMediaCell: UITableViewCell {
             if self.api.generateThumbImage(dictTemp as [NSObject : AnyObject]) != nil{
                 var tempImageView : UIImageView!
                 tempImageView = UIImageView(frame: CGRectMake(self.frame.origin.x + 20, y, self.frame.size.width - 40, 150))
+                tempImageView.contentMode = .ScaleAspectFit
                 tempImageView.image = self.api.generateThumbImage(dictTemp as [NSObject : AnyObject])
                 self.contentView.addSubview(tempImageView)
             }

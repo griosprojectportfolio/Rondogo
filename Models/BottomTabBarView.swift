@@ -77,7 +77,7 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
     
     func addBottomViewWithShareOptions(){
         
-        var x : CGFloat = 25.0
+        var x : CGFloat = 0.0
         let width : CGFloat = self.frame.size.width / 4
         
         self.btnWhatsApp = UIButton(frame: CGRectMake(x, self.frame.size.height - 49 , width , 50))
@@ -87,17 +87,16 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
         self.btnWhatsApp.addTarget(self, action: "bottomTabBarButtonTapped:", forControlEvents:.TouchUpInside)
         self.addSubview(btnWhatsApp)
         
-        /*
         x = x + width
         
         self.btnViber = UIButton(frame: CGRectMake(x, self.frame.size.height - 49 , width , 50))
         self.btnViber.tag = 1
-        let imgViber = UIImage(named:"icon_viber.png") as UIImage?
+        let imgViber = UIImage(named:"icon_facebook.png") as UIImage?
         self.btnViber.setImage(imgViber, forState: .Normal)
         self.btnViber.addTarget(self, action: "bottomTabBarButtonTapped:", forControlEvents:.TouchUpInside)
         self.addSubview(btnViber)
-        */
-        x = x + width + 25
+
+        x = x + width
         
         self.btnDropBox = UIButton(frame: CGRectMake(x, self.frame.size.height - 49 , width , 50))
         self.btnDropBox.tag = 2
@@ -106,7 +105,7 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
         self.btnDropBox.addTarget(self, action: "bottomTabBarButtonTapped:", forControlEvents:.TouchUpInside)
         self.addSubview(btnDropBox)
         
-        x = x + width + 25
+        x = x + width
         
         self.btnWaze = UIButton(frame: CGRectMake(x, self.frame.size.height - 49 , width , 50))
         self.btnWaze.tag = 3

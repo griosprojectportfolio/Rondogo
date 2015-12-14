@@ -61,6 +61,7 @@
 		17C563C21AB849AC0046E714 /* icon_viber.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C563BE1AB849AC0046E714 /* icon_viber.png */; };
 		17C563C31AB849AC0046E714 /* icon_waze.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C563BF1AB849AC0046E714 /* icon_waze.png */; };
 		17C563C41AB849AC0046E714 /* icon_whatsApp.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C563C01AB849AC0046E714 /* icon_whatsApp.png */; };
+		17C7B2161C1EEDF400B18A6B /* icon_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C7B2151C1EEDF400B18A6B /* icon_facebook.png */; };
 		17C9CB301AB31DAB00BC5026 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C9CB2F1AB31DAB00BC5026 /* BaseViewController.swift */; };
 		76CD3F5D18940E114EC7D6A5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9682CC4131DC0937C00C7850 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -142,6 +143,7 @@
 		17C563BE1AB849AC0046E714 /* icon_viber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_viber.png; sourceTree = "<group>"; };
 		17C563BF1AB849AC0046E714 /* icon_waze.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_waze.png; sourceTree = "<group>"; };
 		17C563C01AB849AC0046E714 /* icon_whatsApp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_whatsApp.png; sourceTree = "<group>"; };
+		17C7B2151C1EEDF400B18A6B /* icon_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_facebook.png; sourceTree = "<group>"; };
 		17C9CB2D1AB31BC400BC5026 /* Rondogo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Rondogo-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		17C9CB2F1AB31DAB00BC5026 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		32CC896017D050A96C725ADE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 		1729C0E31AAEF318009FA46E /* NavigationBarImages */ = {
 			isa = PBXGroup;
 			children = (
+				17C7B2151C1EEDF400B18A6B /* icon_facebook.png */,
 				1729C0E41AAEF327009FA46E /* icon_share.png */,
 				1729C0E61AAEF427009FA46E /* icon_back.png */,
 				17C563BD1AB849AC0046E714 /* icon_dropBox.png */,
@@ -481,6 +484,7 @@
 			files = (
 				17C563C41AB849AC0046E714 /* icon_whatsApp.png in Resources */,
 				1729C0E71AAEF427009FA46E /* icon_back.png in Resources */,
+				17C7B2161C1EEDF400B18A6B /* icon_facebook.png in Resources */,
 				17C3855C1AB191D600B6B8FD /* Localizable.strings in Resources */,
 				174E7F3B1AA6D822000807C1 /* Main.storyboard in Resources */,
 				1750404C1AB9B7B90041AE2A /* icon_settings.png in Resources */,
@@ -798,6 +802,7 @@
 				INFOPLIST_FILE = RondogoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f4444aec-965e-4b35-ae82-2a511f6cdb23";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rondogo.app/Rondogo";
 			};
 			name = Debug;
@@ -813,6 +818,7 @@
 				INFOPLIST_FILE = RondogoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f4444aec-965e-4b35-ae82-2a511f6cdb23";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rondogo.app/Rondogo";
 			};
 			name = Release;
