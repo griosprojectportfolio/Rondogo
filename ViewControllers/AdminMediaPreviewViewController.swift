@@ -140,7 +140,7 @@ class AdminMediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
             bottomTabBar.btnWhatsAppTapped(sender as! NSDictionary)
             
         case 1 :
-            bottomTabBar.btnViberTapped(sender)
+            bottomTabBar.btnViberTapped(sender as! NSDictionary)
             
         case 2 :
             bottomTabBar.btnDropBoxTapped(sender as! NSDictionary, viewController: self)

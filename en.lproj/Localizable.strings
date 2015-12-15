@@ -81,3 +81,5 @@ CANCEL = "Cancel";
 
 There_is_no_data_for_english = "There is no data for english.";
 There_is_no_data_for_Hebrew = "There is no data for hebrew.";
+
+user_not_login = "Please login first.";

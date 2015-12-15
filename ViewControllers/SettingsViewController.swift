@@ -12,14 +12,10 @@ import Foundation
 class SettingsViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     var tblView : UITableView!
-    var loginItems: [String] = [NSLocalizedString("APPLICATION_LANGUAGES",comment: "Application Languages") ,
+    var Items: [String] = [NSLocalizedString("APPLICATION_LANGUAGES",comment: "Application Languages") ,
                                 NSLocalizedString("SYNC_APP",comment: "Sync App") ,
                                 NSLocalizedString("UPDATE_PROFILE",comment: "Update Profile"),
                                 NSLocalizedString("SIGN_OUT",comment: "Sign Out")]
-  
-    var normalItems: [String] = [NSLocalizedString("APPLICATION_LANGUAGES",comment: "Application Languages")]
-  
-    var items: [String] = []
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +24,6 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.title = NSLocalizedString("SETTINGS",comment:"Settings")
         self.addRightAndLeftNavItemOnView()
         self.applyDefaults()
-      
-        self.items = ( self.auth_token[0] == "") ? normalItems :loginItems
         tblView.tableFooterView = UIView(frame:CGRectZero)
     }
     
@@ -54,7 +48,7 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func applyDefaults(){
-        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.width,300 + 5))
+        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 64, self.view.frame.width,300 + 5))
         self.tblView.delegate = self
         self.tblView.dataSource = self
         self.tblView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -70,7 +64,7 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return Items.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -81,9 +75,18 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
       
         let cell : UITableViewCell! = self.tblView.dequeueReusableCellWithIdentifier("cell")
           self.tblView.separatorInset = UIEdgeInsetsZero
-        cell.textLabel!.text = items[indexPath.row]
+        cell.textLabel!.text = Items[indexPath.row]
         cell.backgroundColor = UIColor.clearColor()
         cell.textLabel!.textColor = UIColor.whiteColor()
+        switch indexPath.row {
+        case 2,3:
+            if self.auth_token[0] == "" {
+              cell.textLabel!.textColor = UIColor.lightGrayColor()
+            }
+            break
+        default:
+            break
+        }
         return cell
     
     }
@@ -107,14 +110,20 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
             self.tblView.deselectRowAtIndexPath(indexPath, animated: true)
             
         case 2 :
+            if self.auth_token[0] == "" {
+                self.showAlertMsg("", message:NSLocalizedString("user_not_login", comment: "Please login first"))
+            }else{
             let arrFetchedData : NSArray = User.MR_findAll()
             let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SignUp") as! SignUpViewController
             destinationViewController.arrUserObject = arrFetchedData
             self.navigationController?.pushViewController(destinationViewController, animated: true)
             self.tblView.deselectRowAtIndexPath(indexPath, animated: true)
+            }
             
         case 3 :
-            
+            if self.auth_token[0] == "" {
+                self.showAlertMsg("", message:NSLocalizedString("user_not_login", comment: "Please login first"))
+            }else{
             self.tblView.deselectRowAtIndexPath(indexPath, animated: true)
 
             let parameters : NSDictionary = ["auth_token" : self.auth_token[0]]
@@ -135,6 +144,7 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
                     self.activityIndicator.stopActivityIndicator(self)
                     self.showSuccessAlertToUser("Log out have some error")
             })
+            }
             
         default:
             print("Other link Button tapped")

@@ -95,4 +95,13 @@ class BaseViewController: UIViewController {
     func commonInitialization(){
         AppApi.sharedClient()
     }
+    
+    func showAlertMsg(title:String!,message:String!) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+            
+        }
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
 }

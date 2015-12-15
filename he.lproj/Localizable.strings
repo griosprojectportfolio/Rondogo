@@ -83,3 +83,5 @@ CANCEL = "לבטל";
 
 There_is_no_data_for_english = "אין נתונים לאנגלית.";
 There_is_no_data_for_Hebrew = "אין נתונים לעברית.";
+
+user_not_login = "בבקשה התחבר קודם.";

@@ -98,7 +98,7 @@ class MediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
                 bottomTabBar.btnWhatsAppTapped(socialShareDict)
                 
             case 1 :
-                bottomTabBar.btnViberTapped(sender)
+                bottomTabBar.btnViberTapped(socialShareDict)
                 
             case 2 :
                 bottomTabBar.btnDropBoxTapped(socialShareDict, viewController: self)

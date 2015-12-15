@@ -259,10 +259,8 @@ class HomePageViewController: BaseViewController {
     func showAndHideLoginAndSettingsButton() {
         if self.auth_token[0] == "" {
             self.btnLink1.hidden = false
-            self.btnLink3.hidden = true
         }else {
             self.btnLink1.hidden = true
-            self.btnLink3.hidden = false
         }
     }
     
@@ -281,14 +279,8 @@ class HomePageViewController: BaseViewController {
     }
     
     func btnLink3ButtonTapped(){
-        if self.auth_token[0] != "" {
-            let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SettingsView") as! SettingsViewController
-            self.navigationController?.pushViewController(destinationViewController, animated: true)
-        }else {
-            let alert:UIAlertView! = UIAlertView(title:"Login!", message:"Please login to change settings. ", delegate:nil, cancelButtonTitle:"OK")
-            alert.show()
-
-        }
+        let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SettingsView") as! SettingsViewController
+        self.navigationController?.pushViewController(destinationViewController, animated: true)
     }
     
 }

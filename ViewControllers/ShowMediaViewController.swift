@@ -134,7 +134,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
       }
       
         
-        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height-114))
+        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+64, self.view.frame.size.width, self.view.frame.size.height-114))
          tblView.tableFooterView = UIView(frame:CGRectZero)
         self.tblView.delegate = self
         self.tblView.dataSource = self
@@ -326,7 +326,13 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
                     self.showSuccessAlertToUser("You didn't selected any media", strMessage: "Please choose any file to share." )
                 }
                 
-            case 1 : self.bottomTabBar.btnViberTapped(sender)
+            case 1 : //self.bottomTabBar.btnViberTapped(sender as! NSDictionary)
+            if self.socialShareDict.count != 0 {
+                self.bottomTabBar.btnViberTapped(self.socialShareDict)
+                self.showSuccessAlertToUser("Successfully shared on Facebook app", strMessage: "" )
+            }else{
+                self.showSuccessAlertToUser("You didn't selected any media", strMessage: "Please choose any file to share." )
+                }
                 
             case 2 :
                 if self.socialShareDict.count != 0 {

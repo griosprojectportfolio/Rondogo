@@ -163,8 +163,44 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
     
     /* Viber App Button Tapped Method */
     
-    func btnViberTapped(sender: AnyObject){
-        //let btnSender = sender as! UIButton
+    func btnViberTapped(aParams: NSDictionary){
+        
+        let controller = UIDocumentInteractionController()
+        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)
+        let documentDir:NSString! = path[0]
+        
+        let mediaType : Int = aParams["type"] as! Int
+        
+        switch (mediaType){
+            
+        case 1 :
+            
+            //let imgPath = documentDir.stringByAppendingPathComponent(aParams["fileName"] as! String)
+            let imgPath = documentDir.stringByAppendingString(aParams["fileName"] as! String)
+            let imageURL = NSURL.fileURLWithPath(imgPath)
+            print("Image path :\(imageURL)")
+            
+            controller.delegate = self
+            controller.UTI = "public.image"
+            controller.URL = imageURL
+            controller.presentOpenInMenuFromRect(CGRectZero, inView:self, animated: true)
+            
+        case 3 :
+            
+            //let imgPath = documentDir.stringByAppendingPathComponent(aParams["fileName"] as! String)
+            let imgPath = documentDir.stringByAppendingString(aParams["fileName"] as! String)
+            let imageURL = NSURL.fileURLWithPath(imgPath)
+            print("Image path :\(imageURL)")
+            
+            controller.delegate = self
+            controller.UTI = "public.video"
+            controller.URL = imageURL
+            controller.presentOpenInMenuFromRect(CGRectZero, inView:self, animated: true)
+            
+        default:
+            print("Other link Button tapped")
+            
+        }
     }
     
     /* Dropbox Button Tapped Method */
