@@ -48,7 +48,7 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func applyDefaults(){
-        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 64, self.view.frame.width,300 + 5))
+        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y , self.view.frame.width,300 + 5))
         self.tblView.delegate = self
         self.tblView.dataSource = self
         self.tblView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -57,7 +57,8 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.view.addSubview(self.tblView)
     }
     
-    /* TableView Delegate and Data Source Method */
+    
+    // MARK: - TableView Delegate and Data Source Method
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -151,7 +152,8 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    /* Show pop up on success */
+    
+     // MARK: - Show pop up on success methods
     
     func showSuccessAlertToUser(strMessage : NSString){
         

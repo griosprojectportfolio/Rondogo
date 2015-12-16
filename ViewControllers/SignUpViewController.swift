@@ -75,7 +75,7 @@ class SignUpViewController: BaseViewController, UIScrollViewDelegate, UITextFiel
         self.signUpBtn = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, y, self.view.frame.size.width - 40, 50))
         
         
-        self.scrollView = UIScrollView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+64, self.view.frame.size.width, self.view.frame.size.height))
+        self.scrollView = UIScrollView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height))
         self.scrollView.contentSize = CGSizeMake(self.view.frame.width, 640)
         self.scrollView.backgroundColor = UIColor().appBackgroundColor()
         self.scrollView.delegate = self

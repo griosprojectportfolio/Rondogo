@@ -42,7 +42,7 @@ class SelectAppLanguageViewController: BaseViewController, UITableViewDelegate, 
     }
     
     func applyDefaults(){
-        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+64, self.view.frame.width, 185))
+        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.width, 185))
         self.tblView.delegate = self
         self.tblView.dataSource = self
         self.tblView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")

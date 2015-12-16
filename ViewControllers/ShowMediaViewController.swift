@@ -134,7 +134,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
       }
       
         
-        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+64, self.view.frame.size.width, self.view.frame.size.height-114))
+        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height-114))
          tblView.tableFooterView = UIView(frame:CGRectZero)
         self.tblView.delegate = self
         self.tblView.dataSource = self
@@ -244,7 +244,6 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         let tapIndex : Int = cell.tag
         
         let tappedObjectDict : NSDictionary = arrShowData.objectAtIndex(tapIndex) as! NSDictionary
-        socialShareDict = tappedObjectDict
         let mediaType : Int = tappedObjectDict.objectForKey("type") as! Int
         
         switch mediaType {
@@ -359,18 +358,11 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
     
     func showSuccessAlertToUser(strTittle : NSString ,strMessage : NSString){
         
-        let alertController = UIAlertController(title: strTittle as String, message:
-            strMessage as String, preferredStyle: UIAlertControllerStyle.Alert)
-        self.presentViewController(alertController, animated: true, completion: {
-            
-            let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(2.0 * Double(NSEC_PER_SEC)))
-            dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-                alertController.dismissViewControllerAnimated(true, completion: nil)
-            })
-        })
+        let alertController = UIAlertController(title: strTittle as String, message:strMessage as String, preferredStyle: UIAlertControllerStyle.Alert)
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
+        }
+        alertController.addAction(OKAction)
+        self.presentViewController(alertController, animated: true, completion:nil)
     }
     
-    
-    
-
 }
