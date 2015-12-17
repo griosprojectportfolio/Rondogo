@@ -94,17 +94,13 @@ class MediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
             
             switch btnSender.tag {
                 
-            case 0 :
-                bottomTabBar.btnWhatsAppTapped(socialShareDict)
+            case 0 : bottomTabBar.btnWhatsAppTapped(self.socialShareDict)
                 
-            case 1 :
-                bottomTabBar.btnViberTapped(socialShareDict)
+            case 1 : self.shareMediaOnFacebook(self.socialShareDict)
                 
-            case 2 :
-                bottomTabBar.btnDropBoxTapped(socialShareDict, viewController: self)
+            case 2 : bottomTabBar.btnDropBoxTapped(self.socialShareDict, viewController: self)
                 
-            case 3 :
-                bottomTabBar.btnWazeTapped(sender)
+            case 3 : bottomTabBar.btnWazeTapped(sender)
                 
             default:
                 print("Other Button Tapped")

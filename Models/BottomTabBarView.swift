@@ -165,42 +165,6 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
     
     func btnViberTapped(aParams: NSDictionary){
         
-        let controller = UIDocumentInteractionController()
-        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)
-        let documentDir:NSString! = path[0]
-        
-        let mediaType : Int = aParams["type"] as! Int
-        
-        switch (mediaType){
-            
-        case 1 :
-            
-            //let imgPath = documentDir.stringByAppendingPathComponent(aParams["fileName"] as! String)
-            let imgPath = documentDir.stringByAppendingString(aParams["fileName"] as! String)
-            let imageURL = NSURL.fileURLWithPath(imgPath)
-            print("Image path :\(imageURL)")
-            
-            controller.delegate = self
-            controller.UTI = "public.image"
-            controller.URL = imageURL
-            controller.presentOpenInMenuFromRect(CGRectZero, inView:self, animated: true)
-            
-        case 3 :
-            
-            //let imgPath = documentDir.stringByAppendingPathComponent(aParams["fileName"] as! String)
-            let imgPath = documentDir.stringByAppendingString(aParams["fileName"] as! String)
-            let imageURL = NSURL.fileURLWithPath(imgPath)
-            print("Image path :\(imageURL)")
-            
-            controller.delegate = self
-            controller.UTI = "public.video"
-            controller.URL = imageURL
-            controller.presentOpenInMenuFromRect(CGRectZero, inView:self, animated: true)
-            
-        default:
-            print("Other link Button tapped")
-            
-        }
     }
     
     /* Dropbox Button Tapped Method */
@@ -232,14 +196,12 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
     /* Waze Button Tapped Method */
     
     func btnWazeTapped(sender: AnyObject){
-        //let btnSender = sender as! UIButton
         
-        if UIApplication.sharedApplication().canOpenURL(NSURL(string: "waze://")!){
+        let urlString = NSString(format:"waze://?ll=%f,%f&navigate=yes", latitude, longitude) as String
+        
+        if UIApplication.sharedApplication().openURL(NSURL(string: urlString)!) {
             // Waze is installed. Launch Waze and start navigation
-            let urlString = NSString(format:"waze://?ll=%f,%f&navigate=yes", latitude, longitude) as String
-            UIApplication.sharedApplication().openURL(NSURL(string: urlString)!)
-        }
-        else {
+        }else {
             // Waze is not installed. Launch AppStore to install Waze app
             UIApplication.sharedApplication().openURL(NSURL(string: "http://itunes.apple.com/us/app/id323229106")!)
         }
@@ -251,31 +213,5 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
         bottomBarDelegate.sendTappedButtonTag(sender)
     }
     
-    
-    /*
-    func btnWhatsAppTapped(aParams: NSDictionary){
-        
-        // 1. Approach
-        var whatsappURL = NSURL(string: "whatsapp://send?text=Hello%2C%20World!")
-        if UIApplication.sharedApplication().canOpenURL(whatsappURL!) {
-            UIApplication.sharedApplication().openURL(whatsappURL!)
-        }
-        
-        // 2. Approach (https://www.whatsapp.com/faq/iphone/23559013)
-        
-        let controller = UIDocumentInteractionController()
-        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)
-        let documentDir = path[0] as String
-        
-        let imgPath = documentDir.stringByAppendingPathComponent("tmp_flag.png")
-        let imageURL = NSURL.fileURLWithPath(imgPath)
-        
-        println("Image path :\(imageURL)")
-        
-        controller.delegate = self
-        controller.UTI = "net.whatsapp.image"
-        controller.URL = imageURL!
-        controller.presentOpenInMenuFromRect(CGRectZero, inView:self, animated: true)
-    }*/
     
 }

@@ -325,12 +325,11 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
                     self.showSuccessAlertToUser("You didn't selected any media", strMessage: "Please choose any file to share." )
                 }
                 
-            case 1 : //self.bottomTabBar.btnViberTapped(sender as! NSDictionary)
-            if self.socialShareDict.count != 0 {
-                self.bottomTabBar.btnViberTapped(self.socialShareDict)
-                self.showSuccessAlertToUser("Successfully shared on Facebook app", strMessage: "" )
-            }else{
-                self.showSuccessAlertToUser("You didn't selected any media", strMessage: "Please choose any file to share." )
+            case 1 :
+                if self.socialShareDict.count != 0 {
+                    self.shareMediaOnFacebook(self.socialShareDict)
+                }else{
+                    self.showSuccessAlertToUser("You didn't selected any media", strMessage: "Please choose any file to share." )
                 }
                 
             case 2 :
