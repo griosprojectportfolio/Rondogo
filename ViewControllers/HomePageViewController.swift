@@ -17,6 +17,7 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
     var btnLink1            : UIButton!
     var btnLink2            : UIButton!
     var btnLink3            : UIButton!
+    var arrCategories       : NSArray = NSArray()
     
 
     // MARK: - Current view related methods
@@ -121,7 +122,7 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return self.arrCategories.count
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -200,7 +201,7 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
         
         let objSyncApp : SynchronizeApp = SynchronizeApp()
         objSyncApp.startSyncMethodCall(self, success: { (responseObject: AnyObject?) in
-            
+                self.getAllCategoriesDataFromLocalDB()
             }, failure: { (responseObject: AnyObject?) in
                 
         })
@@ -214,5 +215,11 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
         }
     }
 
+    func getAllCategoriesDataFromLocalDB() {
+        
+        let categoryFilter : NSPredicate = NSPredicate(format: "category_language = %d AND is_deleted = 0","English")
+        arrCategories = Categories.MR_findAllSortedBy("cat_sequence_no", ascending: true, withPredicate: categoryFilter)
+        
+    }
     
 }

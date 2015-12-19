@@ -40,6 +40,27 @@
     if (![[aDictionary objectForKey:@"category_id"] isKindOfClass:[NSNull class]]){
         
         Categories *obj = (Categories*)[self findOrCreateByID:[aDictionary objectForKey:@"category_id"] inContext:localContext];
+        
+        obj.category_id =[NSNumber numberWithInteger:[[aDictionary objectForKey:@"category_id"] integerValue]];
+        
+        if (![[aDictionary objectForKey:@"category_name"] isKindOfClass:[NSNull class]])
+            obj.category_name = [aDictionary objectForKey:@"category_name"];
+        
+        if (![[aDictionary objectForKey:@"category_language"] isKindOfClass:[NSNull class]])
+            obj.category_language = [aDictionary valueForKey:@"category_language"];
+        
+        if (![[aDictionary objectForKey:@"server_url"] isKindOfClass:[NSNull class]])
+            obj.cat_server_url = [aDictionary valueForKey:@"server_url"];
+        
+        if (![[aDictionary objectForKey:@"local_url"] isKindOfClass:[NSNull class]])
+            obj.cat_local_url = [aDictionary valueForKey:@"local_url"];
+        
+        if (![[aDictionary objectForKey:@"sequence_no"] isKindOfClass:[NSNull class]])
+            obj.cat_sequence_no =[NSNumber numberWithInteger:[[aDictionary objectForKey:@"sequence_no"] integerValue]];
+        
+        if (![[aDictionary objectForKey:@"is_deleted"] isKindOfClass:[NSNull class]])
+            obj.is_deleted =[NSNumber numberWithInteger:[[aDictionary objectForKey:@"is_deleted"] integerValue]];
+
         return obj;
     }
     

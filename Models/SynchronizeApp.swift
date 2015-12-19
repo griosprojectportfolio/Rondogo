@@ -11,8 +11,14 @@ import Foundation
 class SynchronizeApp: NSObject {
     
     var api : AppApi = AppApi.sharedClient()
-    var activityIndicator : ActivityIndicatorView!
-    var alertController: UIAlertController!
+    
+    let objWindow:UIWindow = UIApplication.sharedApplication().delegate!.window!!
+    let overlayView = UIView()
+    let grayBackgroundView = UIView()
+    let activityIndicator = UIActivityIndicatorView()
+    let lblLoading = UILabel()
+    
+    // MARK: - Start sync method call
     
     func startSyncMethodCall(viewController:UIViewController, success:((responseObject: AnyObject? ) -> Void)?, failure:((error: NSError? ) -> Void)? ){
         
@@ -48,30 +54,64 @@ class SynchronizeApp: NSObject {
     }
     
     
-    /* Methods to add UIActivityIndicator */
+    // MARK: - Start sync of all categories
+    func syncAllCategoriesFromServer() {
+        let parameters : NSMutableDictionary = NSMutableDictionary()
+        self.api.getAllCategories( parameters as [NSObject : AnyObject], success: { (operation: AFHTTPRequestOperation?, responseObject: AnyObject?) in
+                print(responseObject)
+            },
+            failure: { (operation: AFHTTPRequestOperation?, error: NSError? ) in
+                print(error)
+        })
+    }
     
+    // MARK: - Start sync of all sub_categories
+    func syncAllSubCategoriesFromServer() {
+        let parameters : NSMutableDictionary = NSMutableDictionary()
+        self.api.getAllSubCategories( parameters as [NSObject : AnyObject], success: { (operation: AFHTTPRequestOperation?, responseObject: AnyObject?) in
+                print(responseObject)
+            },
+            failure: { (operation: AFHTTPRequestOperation?, error: NSError? ) in
+                print(error)
+        })
+    }
+    
+    
+    // MARK: - Methods to add and remove UIActivityIndicator
     func showActivityIndicatory(viewController : UIViewController) {
         
-        /* Method to Add Custom UIActivityIndicatorView in current screen */
-        activityIndicator = ActivityIndicatorView(frame: viewController.view.frame)
-        activityIndicator.startActivityIndicator(viewController)
-
-        /*
-        alertController = UIAlertController(title: "App Synchronizing", message:
-            "Please wait...", preferredStyle: UIAlertControllerStyle.Alert)
+        grayBackgroundView.frame = viewController.view.bounds
+        grayBackgroundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
         
-        viewController.presentViewController(alertController, animated: true, completion: {
-            
-            var dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(2.0 * Double(NSEC_PER_SEC)))
-            dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-                self.alertController.dismissViewControllerAnimated(true, completion: nil)
-            })
-        })
-        */
+        overlayView.frame = CGRectMake(0, 0, 100, 100)
+        overlayView.center = viewController.view.center
+        overlayView.backgroundColor = UIColor.whiteColor()
+        overlayView.clipsToBounds = true
+        overlayView.layer.cornerRadius = 12
+        
+        activityIndicator.frame = CGRectMake(0, 0, 50, 50)
+        activityIndicator.activityIndicatorViewStyle = .WhiteLarge
+        activityIndicator.color = UIColor.blackColor()
+        activityIndicator.center = CGPointMake(overlayView.bounds.width / 2, (overlayView.bounds.height - 20) / 2)
+        
+        lblLoading.frame = CGRectMake(0, 60, 100, 20)
+        lblLoading.text = "Syncing.."
+        lblLoading.font = UIFont.systemFontOfSize(15.0)
+        lblLoading.textColor = UIColor.darkGrayColor()
+        lblLoading.textAlignment = .Center
+        overlayView.addSubview(lblLoading)
+        
+        overlayView.addSubview(activityIndicator)
+        
+        objWindow.addSubview(grayBackgroundView)
+        objWindow.addSubview(overlayView)
+        
+        activityIndicator.startAnimating()
     }
     
     func stopActivityIndicator(viewController : UIViewController){
-        self.activityIndicator.stopActivityIndicator(viewController)
-        //alertController.dismissViewControllerAnimated(true, completion: nil)
+        activityIndicator.stopAnimating()
+        overlayView.removeFromSuperview()
+        grayBackgroundView.removeFromSuperview()
     }
 }

@@ -8,6 +8,7 @@
 #import "MediaObject.h"
 #import "TimeStamp.h"
 #import "User.h"
+#import "Categories.h"
 #import "AppApi.h"
 
 /* API Constants */
@@ -340,55 +341,25 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
 }
 
 
-
-
-
-/* // Previous approach
-
-- (void)downloadMediaData:(NSDictionary *)aParams
-                  success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
-                  failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
-    
-    NSString *url = [aParams objectForKey:@"url"];
-    NSArray *docDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *mediaPath = [[docDirPath objectAtIndex:0] stringByAppendingPathComponent:[aParams objectForKey:@"fileName"]];
-    
-    AFHTTPRequestOperation *operation = [self GET:url
-                                       parameters:nil
-                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                              NSLog(@"successful download to %@", mediaPath);
-                                              successBlock(operation, responseObject);
-                                          }
-                                          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                              NSLog(@"Error: %@", error);
-                                              failureBlock(operation, error);
-                                          }];
-    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:mediaPath append:NO];
-     
-}
-*/
-
-#pragma mark - Upload media with Base64String
-
 -(void)fileRenameFunction:(NSString*)filePath {
-  NSString *strOldName = filePath.lastPathComponent;
-  NSString *strNewName = [strOldName substringWithRange:NSMakeRange(4,strOldName.length-4)];
-  NSArray *docDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-   NSString *mediaPath = [[docDirPath objectAtIndex:0] stringByAppendingPathComponent:strNewName];
-  NSFileManager * fm = [[NSFileManager alloc] init];
-  BOOL result = [fm moveItemAtPath:filePath toPath:mediaPath error:nil];
-  if (result){
-    NSLog(@"Success");
-  }else{
-    NSLog(@"fail");
-  }
-  
+    NSString *strOldName = filePath.lastPathComponent;
+    NSString *strNewName = [strOldName substringWithRange:NSMakeRange(4,strOldName.length-4)];
+    NSArray *docDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *mediaPath = [[docDirPath objectAtIndex:0] stringByAppendingPathComponent:strNewName];
+    NSFileManager * fm = [[NSFileManager alloc] init];
+    BOOL result = [fm moveItemAtPath:filePath toPath:mediaPath error:nil];
+    if (result){
+        NSLog(@"Success");
+    }else{
+        NSLog(@"fail");
+    }
+    
 }
 
 
 
 
-#pragma mark - Upload media with Base64String
+#pragma mark- Upload media with Base64String
 
 - (AFHTTPRequestOperation *)uploadMediaWithBase64String:(NSDictionary *)aParams
                                                 success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
@@ -422,7 +393,7 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
 }
 
 
-#pragma mark Methods to get :- File Path, Path Image, Generate Thumnil image ETC
+#pragma mark- Methods to get : File Path, Path Image, Generate Thumnil image ETC
 
 - (NSURL *)getDocumentDirectoryFileURL:(NSDictionary *)aParams {
     NSArray *docDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -473,7 +444,7 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
 }
 
 
-#pragma mark Delete All table record
+#pragma mark- Delete All table record
 
 - (void) deleteAllEntityObjects{
     
@@ -500,74 +471,6 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
 }
 
 
-#pragma mark - Some testing Methods
-
-// Method to Upload image in Multipart
-
-- (void)uploadImage:(NSDictionary *)aParams
-            success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
-            failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
-    
-    NSString *url = [NSString stringWithFormat:@"%@",[aParams objectForKey:@"url"]];
-    NSString *documentsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"image.png"];
-    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
-    
-    [self POST:url parameters:aParams constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        NSError *error;
-        BOOL success = [formData appendPartWithFileURL:fileURL name:@"image" fileName:filePath mimeType:@"image/png" error:&error];
-        if (!success)
-            NSLog(@"appendPartWithFileURL error: %@", error);
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Success: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
-}
-
-// Method to Upload Data ( UIImage + Video ) in Multipart
-
-- (void)uploadMediaData:(NSDictionary *)aParams
-                success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
-                failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
-    
-    NSURL *fileURL = [self getDocumentDirectoryFileURL:aParams];
-    
-    AFHTTPSessionManager *sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:self.baseURL];
-    
-    NSURL *requestUrl = [NSURL URLWithString:@"/post" relativeToURL:self.baseURL];
-    
-    __block BOOL completeBlockCalled = NO;
-    NSError *errorFormAppend;
-    __block NSError *errorPost;
-    
-    NSURLSessionDataTask *task = [sessionManager POST:requestUrl.absoluteString
-                                           parameters:nil
-                            constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                                NSError *error = errorFormAppend;
-                                [formData appendPartWithFileURL:fileURL name:@"test.txt" error:&error];
-                                
-                            } success:^(NSURLSessionDataTask *task, id responseObject) {
-                                completeBlockCalled = YES;
-                                
-                            } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                errorPost = error;
-                            }];
-}
-
-//[self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//self.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-
-//self.requestSerializer = [AFJSONRequestSerializer serializer];
-//self.requestSerializer = [AFHTTPRequestSerializer serializer];
-//self.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-//[self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-
-//[self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//[self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-// [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-
-
 #pragma mark - Fetch Categories and sub Categories
 
 - (AFHTTPRequestOperation *)getAllCategories:(NSDictionary *)aParams
@@ -581,7 +484,7 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
             @try {
                 NSMutableArray *arrResponse = [responseObject valueForKey:@"data"];
                 [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-                    [MediaObject entityFromArray:arrResponse inContext:localContext];
+                    [Categories entityFromArray:arrResponse inContext:localContext];
                 }];
                 successBlock(task, responseObject);
             }

@@ -50,6 +50,13 @@
                                                 success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
                                                 failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock;
 
+- (AFHTTPRequestOperation *)getAllCategories:(NSDictionary *)aParams
+                                     success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
+                                     failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock;
+
+- (AFHTTPRequestOperation *)getAllSubCategories:(NSDictionary *)aParams
+                                        success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
+                                        failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock;
 
 - (void)downloadMediaData:(NSDictionary *)aParams
                   success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock

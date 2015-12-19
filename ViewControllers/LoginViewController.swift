@@ -142,7 +142,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     func loginButtonTapped(){
         
         let parameters : NSDictionary = ["user[email]": userNameTxt.text!, "user[password]": passwordTxt.text!]
-        let objSyncApp : SynchronizeApp = SynchronizeApp()
         
         if isEnteredDataBlankOrInValid() {
             
@@ -161,13 +160,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
 
                 self.activityIndicator.stopActivityIndicator(self)
 
-                // Block method to start Sync Process
-                objSyncApp.startSyncMethodCall(self, success: { (responseObject: AnyObject?) in
-                    
-                    self.showSuccessAlertToUser("Successfully loged in")
-
-                    }, failure: { (responseObject: AnyObject?) in
-                })
+                self.showSuccessAlertToUser("Successfully loged in")
                 
                 },
                 failure: { (operation: AFHTTPRequestOperation?, error: NSError? ) in

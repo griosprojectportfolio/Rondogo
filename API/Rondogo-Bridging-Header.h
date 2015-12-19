@@ -7,5 +7,6 @@
 #import "User.h"
 #import "MediaObject.h"
 #import "TimeStamp.h"
+#import "Categories.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import <CoreData+MagicalRecord.h>

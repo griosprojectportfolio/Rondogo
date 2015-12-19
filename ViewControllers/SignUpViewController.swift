@@ -233,12 +233,8 @@ class SignUpViewController: BaseViewController, UIScrollViewDelegate, UITextFiel
                     self.auth_token = [token]
                     self.activityIndicator.stopActivityIndicator(self)
                     
-                    // Block method to start Sync Process
-                    objSyncApp.startSyncMethodCall(self, success: { (responseObject: AnyObject?) in
-                        let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HomePage") as! HomePageViewController
-                        self.navigationController?.pushViewController(destinationViewController, animated: true)
-                        }, failure: { (responseObject: AnyObject?) in
-                    })
+                    let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HomePage") as! HomePageViewController
+                    self.navigationController?.pushViewController(destinationViewController, animated: true)
                     
                     },
                     failure: { ( operation: AFHTTPRequestOperation?, error: NSError? ) in
