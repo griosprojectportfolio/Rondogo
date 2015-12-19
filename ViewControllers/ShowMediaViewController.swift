@@ -134,7 +134,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
       }
       
         
-        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height-114))
+        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height-50))
          tblView.tableFooterView = UIView(frame:CGRectZero)
         self.tblView.delegate = self
         self.tblView.dataSource = self
@@ -144,14 +144,14 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         self.view.addSubview(self.tblView)
 
         /* Method to Add Custom UIActivityIndicatorView in current screen */
-        activityIndicator = ActivityIndicatorView(frame: self.view.frame)
-        activityIndicator.startActivityIndicator(self)
+        //activityIndicator = ActivityIndicatorView(frame: self.view.frame)
+        //activityIndicator.startActivityIndicator(self)
         
         downlaodAllMediaDataInDocumentDirectory(arrShowData ,success: { (responseObject: AnyObject?) in
             self.tblView.reloadData()
-            self.activityIndicator.stopActivityIndicator(self)
+            //self.activityIndicator.stopActivityIndicator(self)
             },failure: { (responseObject: AnyObject?) in
-                self.activityIndicator.stopActivityIndicator(self)
+                //self.activityIndicator.stopActivityIndicator(self)
         })
         
         
@@ -257,8 +257,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
                 destinationViewController.socialShareDict = tappedObjectDict
                 self.navigationController?.pushViewController(destinationViewController, animated: true)
             }else{
-                let alert:UIAlertView! = UIAlertView(title:nil, message:"File not downloaded yet. ", delegate:nil, cancelButtonTitle:"OK")
-                alert.show()
+                 self.showAlertMsg("Downloading..", message: "Media downloading is in progress.")
             }
             
         case 2 :
@@ -270,8 +269,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
                 destinationViewController.socialShareDict = tappedObjectDict
                 self.navigationController?.pushViewController(destinationViewController, animated: true)
             }else{
-                let alert:UIAlertView! = UIAlertView(title:nil, message:"File not downloaded yet. ", delegate:nil, cancelButtonTitle:"OK")
-                alert.show()
+                 self.showAlertMsg("Downloading..", message: "Media downloading is in progress.")
             }
             
         case 3 :
@@ -283,8 +281,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
                 destinationViewController.socialShareDict = tappedObjectDict
                 self.navigationController?.pushViewController(destinationViewController, animated: true)
             }else{
-                let alert:UIAlertView! = UIAlertView(title:nil, message:"File not downloaded yet. ", delegate:nil, cancelButtonTitle:"OK")
-                alert.show()
+                 self.showAlertMsg("Downloading..", message: "Media downloading is in progress.")
             }
             
         default :
@@ -299,11 +296,16 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         preSelectedCell.setSelected(false, animated: true)
         
         let selectedCell : ShowMediaCell = sender.view as! ShowMediaCell
+        let tapIndex : Int = selectedCell.tag
         selectedIndexPath = NSIndexPath(forRow: selectedCell.tag, inSection: selectedIndexPath.section)
         
-        let tappedObjectDict : NSDictionary = arrShowData.objectAtIndex(selectedCell.tag) as! NSDictionary
-        socialShareDict = tappedObjectDict
-        selectedCell.setSelected(true, animated: true)
+        if self.api.isMediaFileExistInDocumentDirectory(arrShowData.objectAtIndex(tapIndex) as! [NSObject : AnyObject]){
+            let tappedObjectDict : NSDictionary = arrShowData.objectAtIndex(selectedCell.tag) as! NSDictionary
+            socialShareDict = tappedObjectDict
+            selectedCell.setSelected(true, animated: true)
+        }else{
+            self.showAlertMsg("Downloading..", message: "Media downloading is in progress.")
+        }
     }
     
     
@@ -320,24 +322,22 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
             case 0 :
                 if self.socialShareDict.count != 0 {
                     self.bottomTabBar.btnWhatsAppTapped(self.socialShareDict)
-                    self.showSuccessAlertToUser("Successfully shared on Whats app", strMessage: "" )
                 }else{
-                    self.showSuccessAlertToUser("You didn't selected any media", strMessage: "Please choose any file to share." )
+                    self.showAlertMsg("Choose Media !", message: "Please tap on any media to choose and share.")
                 }
                 
             case 1 :
                 if self.socialShareDict.count != 0 {
                     self.shareMediaOnFacebook(self.socialShareDict)
                 }else{
-                    self.showSuccessAlertToUser("You didn't selected any media", strMessage: "Please choose any file to share." )
+                    self.showAlertMsg("Choose Media !", message: "Please tap on any media to choose and share.")
                 }
                 
             case 2 :
                 if self.socialShareDict.count != 0 {
                     self.bottomTabBar.btnDropBoxTapped(self.socialShareDict , viewController: self)
-                    self.showSuccessAlertToUser("Successfully shared on Dropbox", strMessage: "" )
                 }else{
-                    self.showSuccessAlertToUser("You didn't selected any media", strMessage: "Please choose any file to share." )
+                    self.showAlertMsg("Choose Media !", message: "Please tap on any media to choose and share.")
                 }
                 
             case 3 : bottomTabBar.btnWazeTapped(sender)
@@ -346,22 +346,8 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
                 
             }
         }else {
-            let alert:UIAlertView! = UIAlertView(title:"Login!", message:"Please login to share media.", delegate:nil, cancelButtonTitle:"OK")
-            alert.show()
+            self.showAlertMsg("Login required !", message:"Please login to share media on socials.")
         }
-    }
-    
-    
-    
-     // MARK: - Current page common methods
-    
-    func showSuccessAlertToUser(strTittle : NSString ,strMessage : NSString){
-        
-        let alertController = UIAlertController(title: strTittle as String, message:strMessage as String, preferredStyle: UIAlertControllerStyle.Alert)
-        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action:UIAlertAction!) in
-        }
-        alertController.addAction(OKAction)
-        self.presentViewController(alertController, animated: true, completion:nil)
     }
     
 }

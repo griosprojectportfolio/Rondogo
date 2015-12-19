@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14A389" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15A284" minimumToolsVersion="Xcode 4.3">
+    <entity name="Categories" representedClassName="Categories" syncable="YES">
+        <attribute name="cat_local_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cat_sequence_no" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="cat_server_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="category_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="category_language" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="category_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="is_deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
+    </entity>
     <entity name="MediaObject" representedClassName="MediaObject" syncable="YES">
         <attribute name="category_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="is_deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -31,7 +40,8 @@
     </entity>
     <elements>
         <element name="MediaObject" positionX="-45" positionY="99" width="128" height="178"/>
-        <element name="User" positionX="-54" positionY="-9" width="128" height="178"/>
         <element name="TimeStamp" positionX="-45" positionY="108" width="128" height="60"/>
+        <element name="User" positionX="-54" positionY="-9" width="128" height="178"/>
+        <element name="Categories" positionX="-45" positionY="108" width="128" height="150"/>
     </elements>
 </model>

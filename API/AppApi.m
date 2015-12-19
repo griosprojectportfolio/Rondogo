@@ -568,4 +568,61 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
 // [self.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
 
 
+#pragma mark - Fetch Categories and sub Categories
+
+- (AFHTTPRequestOperation *)getAllCategories:(NSDictionary *)aParams
+                                  success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
+                                  failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
+    
+    NSString *url = [NSString stringWithFormat:@"%@/categories",kAppAPIBaseURLString];
+    
+    return [self GET:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
+        if(successBlock){
+            @try {
+                NSMutableArray *arrResponse = [responseObject valueForKey:@"data"];
+                [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                    [MediaObject entityFromArray:arrResponse inContext:localContext];
+                }];
+                successBlock(task, responseObject);
+            }
+            @catch (NSException *exception) {
+                [self processExceptionBlock:task blockException:exception];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *task, NSError *error) {
+        if(failureBlock){
+            [self processFailureBlock:task blockError:error];
+            failureBlock(task, error);
+        }
+    }];
+}
+
+- (AFHTTPRequestOperation *)getAllSubCategories:(NSDictionary *)aParams
+                                     success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
+                                     failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
+    
+    NSString *url = [NSString stringWithFormat:@"%@/sub_categories",kAppAPIBaseURLString];
+    
+    return [self GET:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
+        if(successBlock){
+            @try {
+                NSMutableArray *arrResponse = [responseObject valueForKey:@"data"];
+                [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                    [MediaObject entityFromArray:arrResponse inContext:localContext];
+                }];
+                successBlock(task, responseObject);
+            }
+            @catch (NSException *exception) {
+                [self processExceptionBlock:task blockException:exception];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *task, NSError *error) {
+        if(failureBlock){
+            [self processFailureBlock:task blockError:error];
+            failureBlock(task, error);
+        }
+    }];
+}
+
+
 @end

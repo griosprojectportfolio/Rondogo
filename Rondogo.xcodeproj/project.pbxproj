@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		171862B21C243F04004B704E /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171862B11C243F04004B704E /* CollectionCell.swift */; };
+		171862B81C244898004B704E /* Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 171862B61C244898004B704E /* Categories.m */; };
 		1729C0E21AAED20A009FA46E /* MediaPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729C0E11AAED209009FA46E /* MediaPreviewViewController.swift */; };
 		1729C0E51AAEF327009FA46E /* icon_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 1729C0E41AAEF327009FA46E /* icon_share.png */; };
 		1729C0E71AAEF427009FA46E /* icon_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1729C0E61AAEF427009FA46E /* icon_back.png */; };
 		1729C0EB1AAF083E009FA46E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729C0EA1AAF083E009FA46E /* SettingsViewController.swift */; };
-		17312DA91ABA9E1F002BA776 /* SyncClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17312DA81ABA9E1F002BA776 /* SyncClass.swift */; };
 		17312DAB1ABAC56C002BA776 /* SynchronizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17312DAA1ABAC56C002BA776 /* SynchronizeApp.swift */; };
 		17312DB21ABAE602002BA776 /* Rondogo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17312DB01ABAE602002BA776 /* Rondogo.xcdatamodeld */; };
 		17327B391AB6B5D30000D151 /* TicketBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17327B381AB6B5D30000D151 /* TicketBookingViewController.swift */; };
@@ -33,7 +34,6 @@
 		174E7F401AA6D822000807C1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 174E7F3E1AA6D822000807C1 /* LaunchScreen.xib */; };
 		174E7F4C1AA6D822000807C1 /* RondogoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174E7F4B1AA6D822000807C1 /* RondogoTests.swift */; };
 		174E7F5B1AA6D92B000807C1 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174E7F5A1AA6D92B000807C1 /* HomePageViewController.swift */; };
-		174E7F711AA72CC0000807C1 /* UploadMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174E7F701AA72CBF000807C1 /* UploadMediaViewController.swift */; };
 		174F77BE1AE4E49500AE51FE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174F77BB1AE4E49500AE51FE /* Default-568h@2x.png */; };
 		174F77BF1AE4E49500AE51FE /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174F77BC1AE4E49500AE51FE /* Default-667h@2x.png */; };
 		174F77C01AE4E49500AE51FE /* Default-1104h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174F77BD1AE4E49500AE51FE /* Default-1104h@2x.png */; };
@@ -77,12 +77,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		171862B11C243F04004B704E /* CollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
+		171862B51C244898004B704E /* Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Categories.h; sourceTree = "<group>"; };
+		171862B61C244898004B704E /* Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Categories.m; sourceTree = "<group>"; };
 		1729C0E11AAED209009FA46E /* MediaPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaPreviewViewController.swift; sourceTree = "<group>"; };
 		1729C0E41AAEF327009FA46E /* icon_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_share.png; sourceTree = "<group>"; };
 		1729C0E61AAEF427009FA46E /* icon_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_back.png; sourceTree = "<group>"; };
 		1729C0EA1AAF083E009FA46E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		1730A96F1AB4179300C8F0D0 /* Rondogo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Rondogo-Bridging-Header.h"; sourceTree = "<group>"; };
-		17312DA81ABA9E1F002BA776 /* SyncClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncClass.swift; sourceTree = "<group>"; };
 		17312DAA1ABAC56C002BA776 /* SynchronizeApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizeApp.swift; sourceTree = "<group>"; };
 		17312DB11ABAE602002BA776 /* Rondogo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rondogo.xcdatamodel; sourceTree = "<group>"; };
 		17327B381AB6B5D30000D151 /* TicketBookingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketBookingViewController.swift; sourceTree = "<group>"; };
@@ -112,7 +114,6 @@
 		174E7F4A1AA6D822000807C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		174E7F4B1AA6D822000807C1 /* RondogoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondogoTests.swift; sourceTree = "<group>"; };
 		174E7F5A1AA6D92B000807C1 /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
-		174E7F701AA72CBF000807C1 /* UploadMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadMediaViewController.swift; sourceTree = "<group>"; };
 		174F77BB1AE4E49500AE51FE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		174F77BC1AE4E49500AE51FE /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
 		174F77BD1AE4E49500AE51FE /* Default-1104h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-1104h@2x.png"; sourceTree = "<group>"; };
@@ -198,7 +199,6 @@
 				1730A96F1AB4179300C8F0D0 /* Rondogo-Bridging-Header.h */,
 				17327B861AB711870000D151 /* AppApi.h */,
 				17327B871AB711870000D151 /* AppApi.m */,
-				17312DA81ABA9E1F002BA776 /* SyncClass.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -308,6 +308,8 @@
 				1737604F1AC3EBBB00A6A0FD /* MediaObject.m */,
 				173A67701AC562FB00E40A53 /* TimeStamp.h */,
 				173A67711AC562FB00E40A53 /* TimeStamp.m */,
+				171862B51C244898004B704E /* Categories.h */,
+				171862B61C244898004B704E /* Categories.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -322,13 +324,13 @@
 				17BB2A261AB828E300044054 /* DetailViewController.swift */,
 				1749CC1E1AC9730300D8E8D6 /* ShowMediaViewController.swift */,
 				1749CC201AC9731F00D8E8D6 /* ShowMediaCell.swift */,
-				174E7F701AA72CBF000807C1 /* UploadMediaViewController.swift */,
 				1729C0E11AAED209009FA46E /* MediaPreviewViewController.swift */,
 				1729C0EA1AAF083E009FA46E /* SettingsViewController.swift */,
 				17C385561AB17D8C00B6B8FD /* SelectAppLanguageViewController.swift */,
 				17327B381AB6B5D30000D151 /* TicketBookingViewController.swift */,
 				17C0B8561AC00C0D0044D3B5 /* AdminPanelViewController.swift */,
 				173A676B1AC5419500E40A53 /* AdminMediaPreviewViewController.swift */,
+				171862B11C243F04004B704E /* CollectionCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -552,8 +554,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				173760531AC4112700A6A0FD /* User.m in Sources */,
-				17312DA91ABA9E1F002BA776 /* SyncClass.swift in Sources */,
 				17C385571AB17D8C00B6B8FD /* SelectAppLanguageViewController.swift in Sources */,
+				171862B21C243F04004B704E /* CollectionCell.swift in Sources */,
+				171862B81C244898004B704E /* Categories.m in Sources */,
 				1784303E1AE64825007A76E1 /* TextField.swift in Sources */,
 				17312DAB1ABAC56C002BA776 /* SynchronizeApp.swift in Sources */,
 				1749CC1F1AC9730300D8E8D6 /* ShowMediaViewController.swift in Sources */,
@@ -567,7 +570,6 @@
 				1729C0E21AAED20A009FA46E /* MediaPreviewViewController.swift in Sources */,
 				174A512D1AADA62F00B0A851 /* ForgotPasswordViewController.swift in Sources */,
 				173760501AC3EBBB00A6A0FD /* MediaObject.m in Sources */,
-				174E7F711AA72CC0000807C1 /* UploadMediaViewController.swift in Sources */,
 				17327B391AB6B5D30000D151 /* TicketBookingViewController.swift in Sources */,
 				174E7F361AA6D822000807C1 /* AppDelegate.swift in Sources */,
 				17C0B8571AC00C0D0044D3B5 /* AdminPanelViewController.swift in Sources */,
@@ -802,7 +804,7 @@
 				INFOPLIST_FILE = RondogoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f4444aec-965e-4b35-ae82-2a511f6cdb23";
+				PROVISIONING_PROFILE = "42faa782-d9fc-489d-91e7-49ec9a2026f8";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rondogo.app/Rondogo";
 			};
 			name = Debug;
@@ -818,7 +820,7 @@
 				INFOPLIST_FILE = RondogoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f4444aec-965e-4b35-ae82-2a511f6cdb23";
+				PROVISIONING_PROFILE = "42faa782-d9fc-489d-91e7-49ec9a2026f8";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rondogo.app/Rondogo";
 			};
 			name = Release;

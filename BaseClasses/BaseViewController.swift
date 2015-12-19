@@ -23,6 +23,7 @@ class BaseViewController: UIViewController {
     let api : AppApi = AppApi()
     var activityIndicator : ActivityIndicatorView!
     
+    // MARK: - Category and subCategory collection
     
     let arrEnTreasureHunt : NSArray = [ "En_TreasureHunt.png","En_TreasureBtn1.png","En_TreasureBtn2.png","En_TreasureBtn3.png",
         "En_TreasureBtn4.png","En_TreasureBtn5.png","En_TreasureBtn6.png","En_TreasureBtn7.png","En_TreasureBtn8.png","En_TreasureBtn9.png"]
@@ -56,6 +57,8 @@ class BaseViewController: UIViewController {
     let arrHeTimeLessRopes : NSArray = [ "He_TimeLessRopes.png"]
     
     
+    // MARK: - Access Token and Admin object
+    
     var auth_token : [NSString] {
         get {
             var returnValue: [NSString]? = NSUserDefaults.standardUserDefaults().objectForKey("auth_token") as? [NSString]
@@ -87,6 +90,8 @@ class BaseViewController: UIViewController {
         }
     }
 
+    // MARK: - Common methods
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.commonInitialization()
@@ -109,53 +114,34 @@ class BaseViewController: UIViewController {
 
     func shareMediaOnFacebook(aParams: NSDictionary) {
         
+        var activityVC : UIActivityViewController!
         let mediaType : Int = aParams["type"] as! Int
         
-        switch (mediaType){
-            
-        case 1 :
+        if mediaType == 1 {
             let shareImage : UIImage = self.api.getImageFromDocumentDirectoryFileURL(aParams as [NSObject : AnyObject])
             let objectsToShare : NSArray = [shareImage]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
-            activityVC.excludedActivityTypes =  [
-                UIActivityTypePostToTwitter,
-                UIActivityTypePostToWeibo,
-                UIActivityTypeMessage,
-                UIActivityTypeMail,
-                UIActivityTypePrint,
-                UIActivityTypeCopyToPasteboard,
-                UIActivityTypeAssignToContact,
-                UIActivityTypeSaveToCameraRoll,
-                UIActivityTypeAddToReadingList,
-                UIActivityTypePostToFlickr,
-                UIActivityTypePostToVimeo,
-                UIActivityTypePostToTencentWeibo
-            ]
-            self.presentViewController(activityVC, animated: true, completion: nil)
-         
-         case 3 :
-            
+            activityVC = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
+        }else {
             let objectsToShare : NSArray = [aParams["url"] as! String]
-            let activityVC = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
-            activityVC.excludedActivityTypes =  [
-                UIActivityTypePostToTwitter,
-                UIActivityTypePostToWeibo,
-                UIActivityTypeMessage,
-                UIActivityTypeMail,
-                UIActivityTypePrint,
-                UIActivityTypeCopyToPasteboard,
-                UIActivityTypeAssignToContact,
-                UIActivityTypeSaveToCameraRoll,
-                UIActivityTypeAddToReadingList,
-                UIActivityTypePostToFlickr,
-                UIActivityTypePostToVimeo,
-                UIActivityTypePostToTencentWeibo
-            ]
-            self.presentViewController(activityVC, animated: true, completion: nil)
-            
-        default:
-            print("Other link Button tapped")
+            activityVC = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
         }
+        
+        activityVC.excludedActivityTypes =  [
+            UIActivityTypePostToTwitter,
+            UIActivityTypePostToWeibo,
+            UIActivityTypeMessage,
+            UIActivityTypeMail,
+            UIActivityTypePrint,
+            UIActivityTypeCopyToPasteboard,
+            UIActivityTypeAssignToContact,
+            UIActivityTypeSaveToCameraRoll,
+            UIActivityTypeAddToReadingList,
+            UIActivityTypePostToFlickr,
+            UIActivityTypePostToVimeo,
+            UIActivityTypePostToTencentWeibo,
+            UIActivityTypeAirDrop
+        ]
+        self.presentViewController(activityVC, animated: true, completion: nil)
         
     }
     

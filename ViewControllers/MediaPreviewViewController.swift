@@ -106,7 +106,7 @@ class MediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
                 print("Other Button Tapped")
             }
         }else {
-            let alert:UIAlertView! = UIAlertView(title:"Login!", message:"Please login to share media. ", delegate:nil, cancelButtonTitle:"OK")
+            let alert:UIAlertView! = UIAlertView(title:"Login required !", message:"Please login to share media on socials.", delegate:nil, cancelButtonTitle:"OK")
             alert.show()
         }
     }

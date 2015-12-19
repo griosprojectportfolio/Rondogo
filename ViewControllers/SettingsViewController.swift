@@ -112,44 +112,46 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
             
         case 2 :
             if self.auth_token[0] == "" {
-                self.showAlertMsg("", message:NSLocalizedString("user_not_login", comment: "Please login first"))
+                self.showAlertMsg("Login required !", message:"Please login to unlock this feature..")
             }else{
-            let arrFetchedData : NSArray = User.MR_findAll()
-            let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SignUp") as! SignUpViewController
-            destinationViewController.arrUserObject = arrFetchedData
-            self.navigationController?.pushViewController(destinationViewController, animated: true)
-            self.tblView.deselectRowAtIndexPath(indexPath, animated: true)
+                let arrFetchedData : NSArray = User.MR_findAll()
+                let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SignUp") as! SignUpViewController
+                destinationViewController.arrUserObject = arrFetchedData
+                self.navigationController?.pushViewController(destinationViewController, animated: true)
+                self.tblView.deselectRowAtIndexPath(indexPath, animated: true)
             }
             
         case 3 :
             if self.auth_token[0] == "" {
-                self.showAlertMsg("", message:NSLocalizedString("user_not_login", comment: "Please login first"))
+                self.showAlertMsg("Login required !", message:"Please login to unlock this feature..")
             }else{
-            self.tblView.deselectRowAtIndexPath(indexPath, animated: true)
-
-            let parameters : NSDictionary = ["auth_token" : self.auth_token[0]]
-
-            /* Method to Add Custom UIActivityIndicatorView in current screen */
-            activityIndicator = ActivityIndicatorView(frame: self.view.frame)
-            activityIndicator.startActivityIndicator(self)
-            
-            self.api.signOutUser(parameters as [NSObject : AnyObject], success: { (operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
-                print(responseObject)
-                self.auth_token = [""]
-                self.is_Admin = [false]
-                self.activityIndicator.stopActivityIndicator(self)
-                self.showSuccessAlertToUser("You are successfully loged out")
-                },
-                failure: { (operation: AFHTTPRequestOperation?, error: NSError? ) in
-                    print(error)
+                self.tblView.deselectRowAtIndexPath(indexPath, animated: true)
+                
+                let parameters : NSDictionary = ["auth_token" : self.auth_token[0]]
+                
+                /* Method to Add Custom UIActivityIndicatorView in current screen */
+                activityIndicator = ActivityIndicatorView(frame: self.view.frame)
+                activityIndicator.startActivityIndicator(self)
+                
+                self.api.signOutUser(parameters as [NSObject : AnyObject], success: { (operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
+                    print(responseObject)
+                    self.auth_token = [""]
+                    self.is_Admin = [false]
                     self.activityIndicator.stopActivityIndicator(self)
-                    self.showSuccessAlertToUser("Log out have some error")
-            })
+                    self.showSuccessAlertToUser("You are successfully loged out")
+                    },
+                    failure: { (operation: AFHTTPRequestOperation?, error: NSError? ) in
+                        print(error)
+                        self.activityIndicator.stopActivityIndicator(self)
+                        self.showSuccessAlertToUser("Log out have some error")
+                })
             }
             
         default:
             print("Other link Button tapped")
         }
+        
+        self.tblView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     
