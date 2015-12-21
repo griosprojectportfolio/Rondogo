@@ -52,7 +52,7 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
     }
     
     
-    /* CLLocationManager Delegate Methods */
+    // MARK: - CLLocationManager Delegate Methods
     
 //    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
 //        locationManager.stopUpdatingLocation()
@@ -60,7 +60,7 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
 //            print(error, terminator: "")
 //        }
 //    }
-  
+    
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
           locationManager.stopUpdatingLocation()
     }
@@ -73,7 +73,8 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
         longitude = coord.longitude
     }
     
-    /*  Add Bottom bar Method */
+    
+    // MARK: -  Add Bottom bar Method
     
     func addBottomViewWithShareOptions(){
         
@@ -116,7 +117,7 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
     }
     
     
-    /* What App Button Tapped Method */
+    // MARK: - What App Button Tapped Method
     
     func btnWhatsAppTapped(aParams: NSDictionary){
         
@@ -161,13 +162,14 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
     }
     
     
-    /* Viber App Button Tapped Method */
+    // MARK: - Viber Button Tapped Method
     
     func btnViberTapped(aParams: NSDictionary){
         
     }
     
-    /* Dropbox Button Tapped Method */
+
+    // MARK: - Dropbox Button Tapped Method
     
     func btnDropBoxTapped(aParams: NSDictionary, viewController: UIViewController){
         
@@ -193,7 +195,7 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
     }
     
     
-    /* Waze Button Tapped Method */
+    // MARK: - Waze Button Tapped Method
     
     func btnWazeTapped(sender: AnyObject){
         

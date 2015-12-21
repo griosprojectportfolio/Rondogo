@@ -14,9 +14,8 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
     var logoImageView       : UIImageView!
     var collectionView      : UICollectionView!
     let flowLayout          : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-    var btnLink1            : UIButton!
-    var btnLink2            : UIButton!
-    var btnLink3            : UIButton!
+    var btnLogin            : UIButton!
+    var btnSettings         : UIButton!
     var arrCategories       : NSArray = NSArray()
     
 
@@ -47,38 +46,35 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
             
             if isiPhone4s{
                 self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 70, 40, 150, 150))
-                self.btnLink1 = UIButton(frame: CGRectMake(20, 390 , 80, 80))
-                self.btnLink3 = UIButton(frame: CGRectMake(220, 390 , 80, 80))
+                self.btnLogin = UIButton(frame: CGRectMake(20, 390 , 80, 80))
+                self.btnSettings = UIButton(frame: CGRectMake(220, 390 , 80, 80))
             }else{
                 self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 70, 40, 150, 150))
-                self.btnLink1 = UIButton(frame: CGRectMake(20, 420 + 20, 80, 80))
-                self.btnLink3 = UIButton(frame: CGRectMake(220, 420 + 20, 80, 80))
+                self.btnLogin = UIButton(frame: CGRectMake(20, 420 + 20, 80, 80))
+                self.btnSettings = UIButton(frame: CGRectMake(220, 420 + 20, 80, 80))
             }
             
         }else if isiPhone6{
             
             self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 90, 40, 180, 180))
-            self.btnLink1 = UIButton(frame: CGRectMake(20, 520, 100, 100))
-            self.btnLink3 = UIButton(frame: CGRectMake(260, 520, 100, 100))
+            self.btnLogin = UIButton(frame: CGRectMake(20, 520, 100, 100))
+            self.btnSettings = UIButton(frame: CGRectMake(260, 520, 100, 100))
             
         }else if isiPhone6plus{
             
             self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 90, 40, 200, 200))
-            self.btnLink1 = UIButton(frame: CGRectMake(20, 580, 100, 100))
-            self.btnLink3 = UIButton(frame: CGRectMake(280, 580, 100, 100))
+            self.btnLogin = UIButton(frame: CGRectMake(20, 580, 100, 100))
+            self.btnSettings = UIButton(frame: CGRectMake(280, 580, 100, 100))
             
         }else if isiPadAir2 {
             
             self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 110, 40, 200, 200))
-            self.btnLink1 = UIButton(frame: CGRectMake(20+170, 580, 100, 100))
-            self.btnLink3 = UIButton(frame: CGRectMake(280+170, 580, 100, 100))
-            
+            self.btnLogin = UIButton(frame: CGRectMake(20+170, 580, 100, 100))
+            self.btnSettings = UIButton(frame: CGRectMake(280+170, 580, 100, 100))
         }else{
-            
             self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 110, 40, 200, 200))
-            self.btnLink1 = UIButton(frame: CGRectMake(20+170, 580, 100, 100))
-            self.btnLink3 = UIButton(frame: CGRectMake(280+170, 580, 100, 100))
-            
+            self.btnLogin = UIButton(frame: CGRectMake(20+170, 580, 100, 100))
+            self.btnSettings = UIButton(frame: CGRectMake(280+170, 580, 100, 100))
         }
         
         self.logoImageView.image = UIImage (named: "HomePageLogo.png")
@@ -92,14 +88,14 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
         self.view.addSubview(collectionView!)
         
         let imgLogin = UIImage(named:  "icon_login.png") as UIImage?
-        self.btnLink1.setImage(imgLogin, forState: .Normal)
-        self.btnLink1.addTarget(self, action: "btnLink1ButtonTapped", forControlEvents:.TouchUpInside)
-        self.view.addSubview(self.btnLink1)
+        self.btnLogin.setImage(imgLogin, forState: .Normal)
+        self.btnLogin.addTarget(self, action: "btnLink1ButtonTapped", forControlEvents:.TouchUpInside)
+        self.view.addSubview(self.btnLogin)
         
         let imgSetings = UIImage(named:  "icon_settings.png") as UIImage?
-        self.btnLink3.setImage(imgSetings, forState: .Normal)
-        self.btnLink3.addTarget(self, action: "btnLink3ButtonTapped", forControlEvents:.TouchUpInside)
-        self.view.addSubview(self.btnLink3)
+        self.btnSettings.setImage(imgSetings, forState: .Normal)
+        self.btnSettings.addTarget(self, action: "btnLink3ButtonTapped", forControlEvents:.TouchUpInside)
+        self.view.addSubview(self.btnSettings)
         
     }
     
@@ -122,7 +118,7 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.arrCategories.count
+        return 6 //self.arrCategories.count
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -131,7 +127,7 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("categoryCell", forIndexPath: indexPath) as! CollectionCell
-        cell.backgroundColor = UIColor.orangeColor()
+        cell.configureCellAtIndexPath(cell.frame, indexPath: indexPath, strCurrLang: self.selectedLanguage as String)
         return cell
     }
     
@@ -209,15 +205,21 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
     
     func showAndHideLoginAndSettingsButton() {
         if self.auth_token[0] == "" {
-            self.btnLink1.hidden = false
+            self.btnLogin.hidden = false
         }else {
-            self.btnLink1.hidden = true
+            self.btnLogin.hidden = true
         }
     }
 
     func getAllCategoriesDataFromLocalDB() {
         
-        let categoryFilter : NSPredicate = NSPredicate(format: "category_language = %d AND is_deleted = 0","English")
+        var strLanguage : String = String()
+        if self.selectedLanguage == hebrew {
+            strLanguage = "Hebrew"
+        }else {
+            strLanguage = "English"
+        }
+        let categoryFilter : NSPredicate = NSPredicate(format: "category_language = %d AND is_deleted = 0",strLanguage)
         arrCategories = Categories.MR_findAllSortedBy("cat_sequence_no", ascending: true, withPredicate: categoryFilter)
         
     }
