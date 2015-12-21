@@ -122,7 +122,12 @@ class BaseViewController: UIViewController {
             let objectsToShare : NSArray = [shareImage]
             activityVC = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
         }else {
-            let objectsToShare : NSArray = [aParams["url"] as! String]
+            
+            let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)
+            let documentDir : NSString! = path[0]
+            let videoPath = documentDir.stringByAppendingString("/\(aParams["fileName"] as! String)")
+            let videoURL = NSURL.fileURLWithPath(videoPath)
+            let objectsToShare : NSArray = [videoURL]
             activityVC = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
         }
         

@@ -15,6 +15,7 @@ protocol BottomTabBarDelegate{
 
 class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionControllerDelegate {
     
+    var documentController: UIDocumentInteractionController!
     var btnWhatsApp   : UIButton!
     var btnViber : UIButton!
     var btnDropBox : UIButton!
@@ -118,14 +119,12 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
     
     
     // MARK: - What App Button Tapped Method
+    // Reference Url : (https://www.whatsapp.com/faq/iphone/23559013)
     
     func btnWhatsAppTapped(aParams: NSDictionary){
         
-        // Reference Url : (https://www.whatsapp.com/faq/iphone/23559013)
-        
-        let controller = UIDocumentInteractionController()
         let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)
-        let documentDir:NSString! = path[0]
+        let documentDir : NSString! = path[0]
         
         let mediaType : Int = aParams["type"] as! Int
 
@@ -133,27 +132,33 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
             
         case 1 :
             
-            //let imgPath = documentDir.stringByAppendingPathComponent(aParams["fileName"] as! String)
-            let imgPath = documentDir.stringByAppendingString(aParams["fileName"] as! String)
+            let imgPath = documentDir.stringByAppendingString("/\(aParams["fileName"] as! String)")
             let imageURL = NSURL.fileURLWithPath(imgPath)
             print("Image path :\(imageURL)")
+            documentController = UIDocumentInteractionController(URL: imageURL)
+            documentController.delegate = self
+            documentController.UTI = "net.whatsapp.image"
+            documentController.presentOpenInMenuFromRect(CGRectZero, inView:self, animated: true)
             
-            controller.delegate = self
-            controller.UTI = "net.whatsapp.image"
-            controller.URL = imageURL
-            controller.presentOpenInMenuFromRect(CGRectZero, inView:self, animated: true)
+        case 2 :
+            
+            let imgPath = documentDir.stringByAppendingString("/\(aParams["fileName"] as! String)")
+            let imageURL = NSURL.fileURLWithPath(imgPath)
+            print("Image path :\(imageURL)")
+            documentController = UIDocumentInteractionController(URL: imageURL)
+            documentController.delegate = self
+            documentController.UTI = "net.whatsapp.image"
+            documentController.presentOpenInMenuFromRect(CGRectZero, inView:self, animated: true)
 
         case 3 :
             
-            //let imgPath = documentDir.stringByAppendingPathComponent(aParams["fileName"] as! String)
-            let imgPath = documentDir.stringByAppendingString(aParams["fileName"] as! String)
-            let imageURL = NSURL.fileURLWithPath(imgPath)
-            print("Image path :\(imageURL)")
-            
-            controller.delegate = self
-            controller.UTI = "net.whatsapp.video"
-            controller.URL = imageURL
-            controller.presentOpenInMenuFromRect(CGRectZero, inView:self, animated: true)
+            let videoPath = documentDir.stringByAppendingString("/\(aParams["fileName"] as! String)")
+            let videoURL = NSURL.fileURLWithPath(videoPath)
+            print("videoURL path :\(videoURL)")
+            documentController = UIDocumentInteractionController(URL: videoURL)
+            documentController.delegate = self
+            documentController.UTI = "net.whatsapp.video"
+            documentController.presentOpenInMenuFromRect(CGRectZero, inView:self, animated: true)
 
         default:
             print("Other link Button tapped")

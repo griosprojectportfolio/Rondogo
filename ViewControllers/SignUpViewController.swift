@@ -195,7 +195,6 @@ class SignUpViewController: BaseViewController, UIScrollViewDelegate, UITextFiel
             "user[email]" : emailTxt.text!, "user[contact_no]" : contactNo.text!,
             "user[user_name]": userNameTxt.text!, "user[password]": passwordTxt.text!,"user[password_confirmation]" : confirmPasswordTxt.text!,
             "auth_token" : self.auth_token[0]]
-        let objSyncApp : SynchronizeApp = SynchronizeApp()
         
         if isEnteredDataBlankOrInValid(){
             
