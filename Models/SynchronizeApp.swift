@@ -51,6 +51,9 @@ class SynchronizeApp: NSObject {
                     self.stopActivityIndicator(viewController)
                 }
         })
+        
+        self.syncAllCategoriesFromServer()
+        self.syncAllSubCategoriesFromServer()
     }
     
     

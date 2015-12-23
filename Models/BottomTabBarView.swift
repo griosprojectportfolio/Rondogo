@@ -28,7 +28,7 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
     var longitude : Double!
     
     var bottomBarDelegate : BottomTabBarDelegate! = nil
-    
+    let api : AppApi = AppApi()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,13 +54,6 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
     
     
     // MARK: - CLLocationManager Delegate Methods
-    
-//    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-//        locationManager.stopUpdatingLocation()
-//        if ((error) != nil) {
-//            print(error, terminator: "")
-//        }
-//    }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
           locationManager.stopUpdatingLocation()
@@ -121,19 +114,15 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
     // MARK: - What App Button Tapped Method
     // Reference Url : (https://www.whatsapp.com/faq/iphone/23559013)
     
-    func btnWhatsAppTapped(aParams: NSDictionary){
+    func btnWhatsAppTapped(objMedia: MediaObject){
         
-        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)
-        let documentDir : NSString! = path[0]
-        
-        let mediaType : Int = aParams["type"] as! Int
+        let mediaType : Int = objMedia.object_type as Int
 
         switch (mediaType){
             
         case 1 :
             
-            let imgPath = documentDir.stringByAppendingString("/\(aParams["fileName"] as! String)")
-            let imageURL = NSURL.fileURLWithPath(imgPath)
+            let imageURL = self.api.getDocumentDirectoryFileURL(objMedia)
             print("Image path :\(imageURL)")
             documentController = UIDocumentInteractionController(URL: imageURL)
             documentController.delegate = self
@@ -142,8 +131,7 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
             
         case 2 :
             
-            let imgPath = documentDir.stringByAppendingString("/\(aParams["fileName"] as! String)")
-            let imageURL = NSURL.fileURLWithPath(imgPath)
+            let imageURL = self.api.getDocumentDirectoryFileURL(objMedia)
             print("Image path :\(imageURL)")
             documentController = UIDocumentInteractionController(URL: imageURL)
             documentController.delegate = self
@@ -152,8 +140,7 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
 
         case 3 :
             
-            let videoPath = documentDir.stringByAppendingString("/\(aParams["fileName"] as! String)")
-            let videoURL = NSURL.fileURLWithPath(videoPath)
+            let videoURL = self.api.getDocumentDirectoryFileURL(objMedia)
             print("videoURL path :\(videoURL)")
             documentController = UIDocumentInteractionController(URL: videoURL)
             documentController.delegate = self
@@ -164,6 +151,7 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
             print("Other link Button tapped")
             
         }
+
     }
     
     
@@ -176,18 +164,14 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
 
     // MARK: - Dropbox Button Tapped Method
     
-    func btnDropBoxTapped(aParams: NSDictionary, viewController: UIViewController){
-        
-        //DBAccountManager.sharedManager().linkFromController(self)
-        
-        print(aParams)
+    func btnDropBoxTapped(objMedia: MediaObject, viewController: UIViewController){
         
         if !DBSession.sharedSession().isLinked(){
             DBSession.sharedSession().linkFromController(viewController)
             
         } else {
             
-            let file : NSString = aParams["fileName"] as! NSString
+            let file : NSString = self.api.getFileName(objMedia)
             
             if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) {
                 let dir = dirs[0] //documents directory
@@ -197,6 +181,7 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
                 self.restClient.uploadFile(file as String, toPath: destDir as String, withParentRev:nil ,fromPath: path)
             }
         }
+        
     }
     
     
@@ -204,13 +189,14 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
     
     func btnWazeTapped(sender: AnyObject){
         
-        let urlString = NSString(format:"waze://?ll=%f,%f&navigate=yes", latitude, longitude) as String
-        
-        if UIApplication.sharedApplication().openURL(NSURL(string: urlString)!) {
-            // Waze is installed. Launch Waze and start navigation
-        }else {
-            // Waze is not installed. Launch AppStore to install Waze app
-            UIApplication.sharedApplication().openURL(NSURL(string: "http://itunes.apple.com/us/app/id323229106")!)
+        if let urlString : String = NSString(format:"waze://?ll=%f,%f&navigate=yes", latitude, longitude) as String {
+            
+            if UIApplication.sharedApplication().openURL(NSURL(string: urlString)!) {
+                // Waze is installed. Launch Waze and start navigation
+            }else {
+                // Waze is not installed. Launch AppStore to install Waze app
+                UIApplication.sharedApplication().openURL(NSURL(string: "http://itunes.apple.com/us/app/id323229106")!)
+            }
         }
     }
     

@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15A284" minimumToolsVersion="Xcode 4.3">
     <entity name="Categories" representedClassName="Categories" syncable="YES">
-        <attribute name="cat_local_url" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="cat_sequence_no" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="cat_server_url" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="category_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="category_language" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="category_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cat_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="cat_imageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cat_language" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cat_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cat_sequence" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="is_deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
     <entity name="MediaObject" representedClassName="MediaObject" syncable="YES">
-        <attribute name="category_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="is_deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="object_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="id"/>
             </userInfo>
         </attribute>
-        <attribute name="object_name_english" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="object_name_hebrew" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="object_server_url_english" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="object_server_url_hebrew" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="object_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="object_sequence" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="object_type" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="sub_category_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="object_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subCategory_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="SubCategories" representedClassName="SubCategories" syncable="YES">
+        <attribute name="cat_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="is_deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="subCat_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="subCat_imageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subCat_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subCat_sequence" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="TimeStamp" representedClassName="TimeStamp" syncable="YES">
         <attribute name="last_sync_date" optional="YES" attributeType="String" syncable="YES"/>
@@ -39,9 +44,10 @@
         <attribute name="user_name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MediaObject" positionX="-45" positionY="99" width="128" height="178"/>
+        <element name="Categories" positionX="-45" positionY="108" width="128" height="135"/>
+        <element name="MediaObject" positionX="-45" positionY="99" width="128" height="150"/>
         <element name="TimeStamp" positionX="-45" positionY="108" width="128" height="60"/>
         <element name="User" positionX="-54" positionY="-9" width="128" height="178"/>
-        <element name="Categories" positionX="-45" positionY="108" width="128" height="150"/>
+        <element name="SubCategories" positionX="-45" positionY="108" width="128" height="135"/>
     </elements>
 </model>

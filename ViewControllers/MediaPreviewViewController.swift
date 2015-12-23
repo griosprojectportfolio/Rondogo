@@ -20,7 +20,7 @@ class MediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
     var bottomTabBar         : BottomTabBarView!
     var moviePlayer          : MPMoviePlayerController!
     var tempWebView          : UIWebView!
-    var socialShareDict      : NSDictionary = NSDictionary()
+    var socialShareDict      : MediaObject!
 
     override func viewDidLoad() {
         

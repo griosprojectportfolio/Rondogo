@@ -112,21 +112,17 @@ class BaseViewController: UIViewController {
     
     // MARK: - Share media on Facebook
 
-    func shareMediaOnFacebook(aParams: NSDictionary) {
+    func shareMediaOnFacebook(objMedia: MediaObject) {
         
         var activityVC : UIActivityViewController!
-        let mediaType : Int = aParams["type"] as! Int
+        let mediaType : Int = objMedia.object_type as Int
         
         if mediaType == 1 {
-            let shareImage : UIImage = self.api.getImageFromDocumentDirectoryFileURL(aParams as [NSObject : AnyObject])
+            let shareImage : UIImage = self.api.getImageFromDocumentDirectoryFileURL(objMedia)
             let objectsToShare : NSArray = [shareImage]
             activityVC = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
         }else {
-            
-            let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)
-            let documentDir : NSString! = path[0]
-            let videoPath = documentDir.stringByAppendingString("/\(aParams["fileName"] as! String)")
-            let videoURL = NSURL.fileURLWithPath(videoPath)
+            let videoURL = self.api.getDocumentDirectoryFileURL(objMedia)
             let objectsToShare : NSArray = [videoURL]
             activityVC = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
         }

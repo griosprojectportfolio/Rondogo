@@ -17,7 +17,7 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
     var btnLogin            : UIButton!
     var btnSettings         : UIButton!
     var arrCategories       : NSArray = NSArray()
-    
+    var cellImageCache = [String:UIImage]()
 
     // MARK: - Current view related methods
     override func viewDidLoad() {
@@ -118,7 +118,7 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6 //self.arrCategories.count
+        return self.arrCategories.count
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -126,69 +126,52 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let objCategory : Categories = self.arrCategories[indexPath.row] as! Categories
+        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("categoryCell", forIndexPath: indexPath) as! CollectionCell
-        cell.configureCellAtIndexPath(cell.frame, indexPath: indexPath, strCurrLang: self.selectedLanguage as String)
+        cell.configureCellLayout(cell.frame)
+        let urlString : String = objCategory.cat_imageUrl
+        
+        cell.imageView.image = nil
+        // If this image is already cached, don't re-download
+        if let img = self.cellImageCache[urlString] {
+            cell.imageView?.image = img
+        }
+        else {
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                if let url = NSURL(string: urlString) {
+                    if let data = NSData(contentsOfURL: url){
+                        // Convert the downloaded data in to a UIImage object
+                        let image = UIImage(data: data)
+                        // Store the image in to our cache
+                        self.cellImageCache[urlString] = image
+                        // Update the cell
+                        dispatch_async(dispatch_get_main_queue(), {
+                            if let cellToUpdate : CollectionCell = self.collectionView!.cellForItemAtIndexPath(indexPath) as? CollectionCell {
+                                cellToUpdate.imageView.contentMode = UIViewContentMode.ScaleAspectFit
+                                cellToUpdate.imageView.image = image
+                            }
+                        })
+                    }
+                }
+            })
+        }
+        
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-         
+        
+        let objCategory : Categories = self.arrCategories[indexPath.row] as! Categories
+        let cellSelected : CollectionCell = self.collectionView!.cellForItemAtIndexPath(indexPath) as! CollectionCell
         self.collectionView.deselectItemAtIndexPath(indexPath, animated: false)
         
-        switch indexPath.row
-        {
-        case 0 :
-            let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailView") as! DetailViewController
-            destinationViewController.arrTempEnImages = self.arrEnTreasureHunt
-            destinationViewController.arrTempHeImages = self.arrHeTreasureHunt
-            destinationViewController.strNavigationTittle = NSLocalizedString("TREASURE_HUNT",comment:"Treasure Hunt")
-            destinationViewController.categoryId = 1
-            self.navigationController?.pushViewController(destinationViewController, animated: true)
-            
-        case 1 :
-            let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailView") as! DetailViewController
-            destinationViewController.arrTempEnImages = self.arrEnNightStar
-            destinationViewController.arrTempHeImages = self.arrHeNightStar
-            destinationViewController.strNavigationTittle = NSLocalizedString("NIGHT_STAR",comment:"Night Star")
-            destinationViewController.categoryId = 2
-            self.navigationController?.pushViewController(destinationViewController, animated: true)
-            
-        case 2 :
-            let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailView") as! DetailViewController
-            destinationViewController.arrTempEnImages = self.arrEnMissionPossible
-            destinationViewController.arrTempHeImages = self.arrHeMissionPossible
-            destinationViewController.strNavigationTittle = NSLocalizedString("MISSIONN_POSSIBLE",comment:"Missionn Possible")
-            destinationViewController.categoryId = 3
-            self.navigationController?.pushViewController(destinationViewController, animated: true)
-            
-        case 3 :
-            let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailView") as! DetailViewController
-            destinationViewController.arrTempEnImages = self.arrEnCopsAndRobbers
-            destinationViewController.arrTempHeImages = self.arrHeCopsAndRobbers
-            destinationViewController.strNavigationTittle = NSLocalizedString("COPS_AND_ROBBERS",comment:"Cops And Robbers")
-            destinationViewController.categoryId = 4
-            self.navigationController?.pushViewController(destinationViewController, animated: true)
-            
-        case 4 :
-            let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailView") as! DetailViewController
-            destinationViewController.arrTempEnImages = self.arrEnYourRace
-            destinationViewController.arrTempHeImages = self.arrHeYourRace
-            destinationViewController.strNavigationTittle = NSLocalizedString("YOUR_RACE",comment:"Your Race")
-            destinationViewController.categoryId = 5
-            self.navigationController?.pushViewController(destinationViewController, animated: true)
-            
-        case 5 :
-            let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailView") as! DetailViewController
-            destinationViewController.arrTempEnImages = self.arrEnTimeLessRopes
-            destinationViewController.arrTempHeImages = self.arrHeTimeLessRopes
-            destinationViewController.strNavigationTittle = NSLocalizedString("TIMELESS_ROPES",comment:"TimeLess Ropes")
-            destinationViewController.categoryId = 6
-            self.navigationController?.pushViewController(destinationViewController, animated: true)
-            
-        default:
-            print("Other link Button tapped")
-        }
-        
+        let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailView") as! DetailViewController
+        destinationViewController.strNavigationTittle = objCategory.cat_name
+        destinationViewController.categoryId = objCategory.cat_id as NSInteger
+        destinationViewController.categoryImage = cellSelected.imageView.image
+        self.navigationController?.pushViewController(destinationViewController, animated: true)
     }
     
     
@@ -197,9 +180,13 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
         
         let objSyncApp : SynchronizeApp = SynchronizeApp()
         objSyncApp.startSyncMethodCall(self, success: { (responseObject: AnyObject?) in
+            
+            let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(2.0 * Double(NSEC_PER_SEC)))
+            dispatch_after(dispatchTime, dispatch_get_main_queue(), {
                 self.getAllCategoriesDataFromLocalDB()
+            })
+            
             }, failure: { (responseObject: AnyObject?) in
-                
         })
     }
     
@@ -219,9 +206,9 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
         }else {
             strLanguage = "English"
         }
-        let categoryFilter : NSPredicate = NSPredicate(format: "category_language = %d AND is_deleted = 0",strLanguage)
-        arrCategories = Categories.MR_findAllSortedBy("cat_sequence_no", ascending: true, withPredicate: categoryFilter)
-        
+        let categoryFilter : NSPredicate = NSPredicate(format: "cat_language = %@ AND is_deleted = 0",strLanguage)
+        arrCategories = Categories.MR_findAllSortedBy("cat_sequence", ascending: true, withPredicate: categoryFilter)
+        self.collectionView.reloadData()
     }
     
 }

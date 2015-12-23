@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		170ED2EE1C2951C900C8736F /* Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 170ED2EC1C2951C900C8736F /* Categories.m */; };
+		170ED2F41C29523800C8736F /* SubCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 170ED2F21C29523800C8736F /* SubCategories.m */; };
 		171862B21C243F04004B704E /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171862B11C243F04004B704E /* CollectionCell.swift */; };
-		171862B81C244898004B704E /* Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 171862B61C244898004B704E /* Categories.m */; };
 		1729C0E21AAED20A009FA46E /* MediaPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729C0E11AAED209009FA46E /* MediaPreviewViewController.swift */; };
 		1729C0E51AAEF327009FA46E /* icon_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 1729C0E41AAEF327009FA46E /* icon_share.png */; };
 		1729C0E71AAEF427009FA46E /* icon_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1729C0E61AAEF427009FA46E /* icon_back.png */; };
@@ -77,9 +78,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		170ED2EB1C2951C900C8736F /* Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Categories.h; sourceTree = "<group>"; };
+		170ED2EC1C2951C900C8736F /* Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Categories.m; sourceTree = "<group>"; };
+		170ED2F11C29523800C8736F /* SubCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCategories.h; sourceTree = "<group>"; };
+		170ED2F21C29523800C8736F /* SubCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCategories.m; sourceTree = "<group>"; };
 		171862B11C243F04004B704E /* CollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
-		171862B51C244898004B704E /* Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Categories.h; sourceTree = "<group>"; };
-		171862B61C244898004B704E /* Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Categories.m; sourceTree = "<group>"; };
 		1729C0E11AAED209009FA46E /* MediaPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaPreviewViewController.swift; sourceTree = "<group>"; };
 		1729C0E41AAEF327009FA46E /* icon_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_share.png; sourceTree = "<group>"; };
 		1729C0E61AAEF427009FA46E /* icon_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_back.png; sourceTree = "<group>"; };
@@ -308,8 +311,10 @@
 				1737604F1AC3EBBB00A6A0FD /* MediaObject.m */,
 				173A67701AC562FB00E40A53 /* TimeStamp.h */,
 				173A67711AC562FB00E40A53 /* TimeStamp.m */,
-				171862B51C244898004B704E /* Categories.h */,
-				171862B61C244898004B704E /* Categories.m */,
+				170ED2EB1C2951C900C8736F /* Categories.h */,
+				170ED2EC1C2951C900C8736F /* Categories.m */,
+				170ED2F11C29523800C8736F /* SubCategories.h */,
+				170ED2F21C29523800C8736F /* SubCategories.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -553,10 +558,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				170ED2F41C29523800C8736F /* SubCategories.m in Sources */,
 				173760531AC4112700A6A0FD /* User.m in Sources */,
 				17C385571AB17D8C00B6B8FD /* SelectAppLanguageViewController.swift in Sources */,
 				171862B21C243F04004B704E /* CollectionCell.swift in Sources */,
-				171862B81C244898004B704E /* Categories.m in Sources */,
+				170ED2EE1C2951C900C8736F /* Categories.m in Sources */,
 				1784303E1AE64825007A76E1 /* TextField.swift in Sources */,
 				17312DAB1ABAC56C002BA776 /* SynchronizeApp.swift in Sources */,
 				1749CC1F1AC9730300D8E8D6 /* ShowMediaViewController.swift in Sources */,

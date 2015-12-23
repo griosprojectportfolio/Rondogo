@@ -131,7 +131,7 @@ class AdminMediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
     /* BottomTabBarDelegate Delegate Method */
     
     func sendTappedButtonTag(sender: AnyObject){
-        
+        /*
         let btnSender = sender as! UIButton
         
         switch btnSender.tag {
@@ -151,6 +151,7 @@ class AdminMediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
         default:
             print("Other Button Tapped")
         }
+*/
     }
     
     /*  ============== Method to upload Media Data on Server ================= */

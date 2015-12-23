@@ -23,12 +23,13 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
     var collectionView      : UICollectionView!
     let flowLayout          : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
 
-    var arrTempEnImages : NSArray!
-    var arrTempHeImages : NSArray!
     var strNavigationTittle : String!
-    
     var categoryId : NSInteger!
+    var categoryImage : UIImage!
     
+    var arrSubCategories     : NSArray = NSArray()
+    var cellImageCache = [String:UIImage]()
+
     // MARK: - View related methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,7 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
         super.viewWillAppear(animated)
         self.navigationController?.navigationBarHidden = false
         self.applyDefaults()
+        self.getAllSubCategoriesDataFromLocalDB()
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,7 +86,7 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
             self.categoryImageView = UIImageView(frame: CGRectMake(self.view.center.x - 110, 64, 200, 200))
         }
         
-        self.categoryImageView.image = UIImage(named: (self.selectedLanguage == hebrew ? arrTempHeImages.objectAtIndex(0) as! NSString : arrTempEnImages.objectAtIndex(0) as! NSString) as String)
+        self.categoryImageView.image = self.categoryImage
         self.view.addSubview(self.categoryImageView)
         
         collectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x + 20, categoryImageView.frame.height + 100, self.view.frame.size.width - 40, self.view.frame.size.height - (categoryImageView.frame.height + 150)), collectionViewLayout: flowLayout)
@@ -102,7 +104,7 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return self.arrSubCategories.count
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -110,19 +112,54 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let objSubCategory : SubCategories = self.arrSubCategories[indexPath.row] as! SubCategories
+        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("subCategoryCell", forIndexPath: indexPath) as! CollectionCell
-        let imgName : String = self.selectedLanguage == hebrew ? arrTempHeImages.objectAtIndex(indexPath.row + 1) as! String : arrTempEnImages.objectAtIndex(indexPath.row + 1) as! String
-        cell.applyDefaults(cell.frame, strImgName: imgName)
+        cell.configureCellLayout(cell.frame)
+        let urlString : String = objSubCategory.subCat_imageUrl
+        
+        cell.imageView.image = nil
+        // If this image is already cached, don't re-download
+        if let img = self.cellImageCache[urlString] {
+            cell.imageView?.image = img
+        }
+        else {
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                if let url = NSURL(string: urlString) {
+                    if let data = NSData(contentsOfURL: url){
+                        // Convert the downloaded data in to a UIImage object
+                        let image = UIImage(data: data)
+                        // Store the image in to our cache
+                        self.cellImageCache[urlString] = image
+                        // Update the cell
+                        dispatch_async(dispatch_get_main_queue(), {
+                            if let cellToUpdate : CollectionCell = self.collectionView!.cellForItemAtIndexPath(indexPath) as? CollectionCell {
+                                cellToUpdate.imageView.contentMode = UIViewContentMode.ScaleAspectFit
+                                cellToUpdate.imageView.image = image
+                            }
+                        })
+                    }
+                }
+            })
+        }
+        
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let objSubCategory : SubCategories = self.arrSubCategories[indexPath.row] as! SubCategories
         self.collectionView.deselectItemAtIndexPath(indexPath, animated: false)
         let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ShowMedia") as! ShowMediaViewController
         destinationViewController.categoryId = categoryId
-        destinationViewController.subCategoryId = indexPath.row + 1
+        destinationViewController.subCategoryId = objSubCategory.subCat_id as NSInteger
         self.navigationController?.pushViewController(destinationViewController, animated: true)
     }
     
-    
+    // MARK: - Some common methods
+    func getAllSubCategoriesDataFromLocalDB() {
+        let subCategoryFilter : NSPredicate = NSPredicate(format: "cat_id = %d AND is_deleted = 0",self.categoryId)
+        arrSubCategories = SubCategories.MR_findAllSortedBy("subCat_sequence", ascending: true, withPredicate: subCategoryFilter)
+        self.collectionView.reloadData()
+    }
 }

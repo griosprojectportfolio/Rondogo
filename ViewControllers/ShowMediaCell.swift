@@ -22,57 +22,57 @@ class ShowMediaCell: UITableViewCell {
     }
     
     
-    func configureShowMediaTableViewCell(cell:ShowMediaCell,dictTemp : NSDictionary) {
+    func configureShowMediaTableViewCell(cell:ShowMediaCell, objMedia: MediaObject) {
     
-        let mediaName : NSString = dictTemp.objectForKey("fileName") as! NSString
-        let mediaType : Int = dictTemp.objectForKey("type") as! Int
+        let mediaName : NSString = objMedia.object_name
+        let mediaType : Int = objMedia.object_type as Int
         
         let y : CGFloat = 10
         
         switch mediaType {
             
         case 1 :
-            if self.api.getDocumentDirectoryFileURL(dictTemp as [NSObject : AnyObject]) != nil{
+            if self.api.getDocumentDirectoryFileURL(objMedia) != nil{
                 var tempImageView : UIImageView!
                 tempImageView = UIImageView(frame: CGRectMake(self.frame.origin.x + 20, y, self.frame.size.width - 40, 150))
                 tempImageView.contentMode = .ScaleAspectFit
-                if(self.api.isMediaFileExistInDocumentDirectory(dictTemp as [NSObject : AnyObject])){
-                    tempImageView.image = UIImage(data: NSData(contentsOfURL: self.api.getDocumentDirectoryFileURL(dictTemp as [NSObject : AnyObject]))!)
+                if(self.api.isMediaFileExistInDocumentDirectory(objMedia)){
+                    tempImageView.image = UIImage(data: NSData(contentsOfURL: self.api.getDocumentDirectoryFileURL(objMedia))!)
                 }
                 self.contentView.addSubview(tempImageView)
             }
-            lblDesc = UILabel(frame : CGRectMake(self.frame.origin.x + 20, y + 150, self.frame.size.width - 40, 20))
+            lblDesc = UILabel(frame : CGRectMake(self.frame.origin.x + 20, y + 153, self.frame.size.width - 40, 20))
             lblDesc.text = mediaName as String
             lblDesc.textColor = UIColor.darkGrayColor()
             lblDesc.textAlignment = NSTextAlignment.Center
             self.contentView.addSubview(lblDesc)
             
         case 2 :
-            if self.api.getDocumentDirectoryFileURL(dictTemp as [NSObject : AnyObject]) != nil{
+            if self.api.getDocumentDirectoryFileURL(objMedia) != nil{
                 var tempWebView : UIWebView!
                 tempWebView = UIWebView(frame: CGRectMake(self.frame.origin.x + 20, y, self.frame.size.width - 40, 150))
                 tempWebView.userInteractionEnabled = false
-                if(self.api.isMediaFileExistInDocumentDirectory(dictTemp as [NSObject : AnyObject])){
-                    let urlRequest : NSURLRequest = NSURLRequest(URL: self.api.getDocumentDirectoryFileURL(dictTemp as [NSObject : AnyObject]))
+                if(self.api.isMediaFileExistInDocumentDirectory(objMedia)){
+                    let urlRequest : NSURLRequest = NSURLRequest(URL: self.api.getDocumentDirectoryFileURL(objMedia))
                     tempWebView.loadRequest(urlRequest)
                 }
                 self.contentView.addSubview(tempWebView)
             }
-            lblDesc = UILabel(frame : CGRectMake(self.frame.origin.x + 20, y + 150, self.frame.size.width - 40, 20))
+            lblDesc = UILabel(frame : CGRectMake(self.frame.origin.x + 20, y + 153, self.frame.size.width - 40, 20))
             lblDesc.text = mediaName as String
             lblDesc.textColor = UIColor.darkGrayColor()
             lblDesc.textAlignment = NSTextAlignment.Center
             self.contentView.addSubview(lblDesc)
             
         case 3 :
-            if self.api.generateThumbImage(dictTemp as [NSObject : AnyObject]) != nil{
+            if self.api.generateThumbImage(objMedia) != nil{
                 var tempImageView : UIImageView!
                 tempImageView = UIImageView(frame: CGRectMake(self.frame.origin.x + 20, y, self.frame.size.width - 40, 150))
                 tempImageView.contentMode = .ScaleAspectFit
-                tempImageView.image = self.api.generateThumbImage(dictTemp as [NSObject : AnyObject])
+                tempImageView.image = self.api.generateThumbImage(objMedia)
                 self.contentView.addSubview(tempImageView)
             }
-            lblDesc = UILabel(frame : CGRectMake(self.frame.origin.x + 20, y + 150, self.frame.size.width - 40, 20))
+            lblDesc = UILabel(frame : CGRectMake(self.frame.origin.x + 20, y + 153, self.frame.size.width - 40, 20))
             lblDesc.text = mediaName as String
             lblDesc.textColor = UIColor.darkGrayColor()
             lblDesc.textAlignment = NSTextAlignment.Center

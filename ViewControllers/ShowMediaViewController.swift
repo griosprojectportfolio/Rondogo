@@ -14,9 +14,8 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
     var tblView : UITableView!
     var bottomTabBar : BottomTabBarView!
     
-    let arrShowData : NSMutableArray = NSMutableArray()
-    var socialShareDict : NSDictionary = NSDictionary()
-    
+    var arrShowData : NSArray = NSArray()
+    var socialShareMedia : MediaObject!
     var categoryId : NSInteger!
     var subCategoryId : NSInteger!
     
@@ -83,77 +82,41 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
     // MARK: -  Fetching Data from core Data stack methods
     
     func refreshData(){
-        
-        let categoryFilter : NSPredicate = NSPredicate(format: "category_id = %d AND sub_category_id = %d AND is_deleted = 0",categoryId,subCategoryId)
-        let arrFetchedData : NSArray = MediaObject.MR_findAllWithPredicate(categoryFilter)
-        
-        if self.selectedLanguage == hebrew {
-            
-            for (index, element) in arrFetchedData.enumerate() {
-                
-                let objeMedia : MediaObject = element as! MediaObject
-                
-                if objeMedia.object_name_hebrew != "" && objeMedia.object_server_url_hebrew != "" {
-                    let localDict : NSDictionary = ["fileName": objeMedia.object_name_hebrew, "url": objeMedia.object_server_url_hebrew, "type" :objeMedia.object_type]
-                    arrShowData.addObject(localDict)
-                }
-            }
-            
-        }else{
-            for (index, element) in arrFetchedData.enumerate() {
-                
-                let objeMedia : MediaObject = element as! MediaObject
-                
-                if objeMedia.object_name_english != "" && objeMedia.object_server_url_english != nil {
-                    let localDict : NSDictionary = ["fileName": objeMedia.object_name_english, "url": objeMedia.object_server_url_english, "type" :objeMedia.object_type]
-                    arrShowData.addObject(localDict)
-                }
-            }
-        }
-        print(arrShowData)
+        let categoryFilter : NSPredicate = NSPredicate(format: "subCategory_id = %d AND is_deleted = 0",subCategoryId)
+        self.arrShowData = MediaObject.MR_findAllSortedBy("object_sequence", ascending: true, withPredicate: categoryFilter)
     }
     
     
     func applyDefaults(){
-      
-      if arrShowData.count == 0 {
         
-        let lblAlert:UILabel = UILabel(frame: CGRectMake((self.view.frame.width-250)/2,(self.view.frame.height-40)/2,250,40))
-        lblAlert.textAlignment = NSTextAlignment.Center
-        lblAlert.font = UIFont.systemFontOfSize(20.0)
-        lblAlert.textColor = UIColor.darkGrayColor()
-        self.view.addSubview(lblAlert)
-        self.view.bringSubviewToFront(lblAlert)
-        
-        if self.selectedLanguage == hebrew {
-          lblAlert.text = NSLocalizedString("There_is_no_data_for_Hebrew",comment: "There is no data")
-        }else{
-          lblAlert.text = NSLocalizedString("There_is_no_data_for_english",comment: "There is no data")
+        if arrShowData.count == 0 {
+            let lblAlert:UILabel = UILabel(frame: CGRectMake((self.view.frame.width-250)/2,(self.view.frame.height-40)/2,250,40))
+            lblAlert.textAlignment = NSTextAlignment.Center
+            lblAlert.font = UIFont.systemFontOfSize(20.0)
+            lblAlert.textColor = UIColor.darkGrayColor()
+            self.view.addSubview(lblAlert)
+            self.view.bringSubviewToFront(lblAlert)
+            
+            if self.selectedLanguage == hebrew {
+                lblAlert.text = NSLocalizedString("There_is_no_data_for_Hebrew",comment: "There is no data")
+            }else{
+                lblAlert.text = NSLocalizedString("There_is_no_data_for_english",comment: "There is no data")
+            }
         }
         
-      }
-      
-        
         self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height-50))
-         tblView.tableFooterView = UIView(frame:CGRectZero)
+        tblView.tableFooterView = UIView(frame:CGRectZero)
         self.tblView.delegate = self
         self.tblView.dataSource = self
         self.tblView.registerClass(ShowMediaCell.self,forCellReuseIdentifier:"Cell")
         self.tblView.backgroundColor = UIColor.clearColor()
         self.tblView.separatorColor = UIColor.whiteColor()
         self.view.addSubview(self.tblView)
-
-        /* Method to Add Custom UIActivityIndicatorView in current screen */
-        //activityIndicator = ActivityIndicatorView(frame: self.view.frame)
-        //activityIndicator.startActivityIndicator(self)
         
-        downlaodAllMediaDataInDocumentDirectory(arrShowData ,success: { (responseObject: AnyObject?) in
-            self.tblView.reloadData()
-            //self.activityIndicator.stopActivityIndicator(self)
+        downlaodAllMediaDataInDocumentDirectory(self.arrShowData ,success: { (responseObject: AnyObject?) in
+                self.tblView.reloadData()
             },failure: { (responseObject: AnyObject?) in
-                //self.activityIndicator.stopActivityIndicator(self)
         })
-        
         
         bottomTabBar = BottomTabBarView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.size.height - 50, self.view.frame.size.width ,50))
         bottomTabBar.bottomBarDelegate = self
@@ -164,13 +127,15 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
     
     // MARK: -  Custom Methods to Download Data methods
     
-    func downlaodAllMediaDataInDocumentDirectory(list:NSMutableArray, success:((responseObject: AnyObject? ) -> Void)?, failure:((error: NSError? ) -> Void)? ){
+    func downlaodAllMediaDataInDocumentDirectory(list: NSArray, success:((responseObject: AnyObject? ) -> Void)?, failure:((error: NSError? ) -> Void)? ){
         
-        for (index, element) in list.enumerate() {
+        for (index, _) in list.enumerate() {
             
-            if !self.api.isMediaFileExistInDocumentDirectory(list.objectAtIndex(index)as! [NSObject : AnyObject]){
+            let objMedia : MediaObject = list[index] as! MediaObject
+            
+            if !self.api.isMediaFileExistInDocumentDirectory(objMedia){
               
-                self.api.downloadMediaData(list.objectAtIndex(index) as! [NSObject : AnyObject], success: { (operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
+                self.api.downloadMediaData(objMedia, success: { (operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
                     
                     if index == list.count - 1 {
                         if let success = success {
@@ -222,6 +187,8 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
             cell.lblDesc.text = ""
         }
         
+        let objMedia : MediaObject = self.arrShowData[indexPath.row] as! MediaObject
+        
         leftSwipeGesture = UISwipeGestureRecognizer(target: self, action: "swipeGestureHandler:")
         leftSwipeGesture.direction = .Left
         cell.addGestureRecognizer(leftSwipeGesture)
@@ -231,7 +198,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         cell.addGestureRecognizer(singleTapGesture)
         
         cell.tag = indexPath.row
-        cell.configureShowMediaTableViewCell(cell, dictTemp: arrShowData.objectAtIndex(indexPath.row) as! NSDictionary)
+        cell.configureShowMediaTableViewCell(cell, objMedia: objMedia)
         return cell
     }
     
@@ -243,42 +210,42 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         let cell : ShowMediaCell = sender.view as! ShowMediaCell
         let tapIndex : Int = cell.tag
         
-        let tappedObjectDict : NSDictionary = arrShowData.objectAtIndex(tapIndex) as! NSDictionary
-        let mediaType : Int = tappedObjectDict.objectForKey("type") as! Int
+        let objMedia : MediaObject = self.arrShowData[tapIndex] as! MediaObject
+        let mediaType : Int = objMedia.object_type as Int
         
         switch mediaType {
             
         case 1 :
-            if self.api.isMediaFileExistInDocumentDirectory(arrShowData.objectAtIndex(tapIndex) as! [NSObject : AnyObject]){
+            if self.api.isMediaFileExistInDocumentDirectory(objMedia){
                 let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
-                destinationViewController.selectedImage = self.api.getImageFromDocumentDirectoryFileURL(tappedObjectDict as [NSObject : AnyObject])
+                destinationViewController.selectedImage = self.api.getImageFromDocumentDirectoryFileURL(objMedia)
                 destinationViewController.selectedVideoUrl = nil
-                destinationViewController.isMediaTypeImage = 1
-                destinationViewController.socialShareDict = tappedObjectDict
+                destinationViewController.isMediaTypeImage = objMedia.object_type as Int
+                destinationViewController.socialShareDict = objMedia
                 self.navigationController?.pushViewController(destinationViewController, animated: true)
             }else{
                  self.showAlertMsg("Downloading..", message: "Media downloading is in progress.")
             }
             
         case 2 :
-            if self.api.isMediaFileExistInDocumentDirectory(arrShowData.objectAtIndex(tapIndex) as! [NSObject : AnyObject]){
+            if self.api.isMediaFileExistInDocumentDirectory(objMedia){
                 let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
                 destinationViewController.selectedImage = nil
-                destinationViewController.selectedVideoUrl = self.api.getDocumentDirectoryFileURL(tappedObjectDict as [NSObject : AnyObject])
-                destinationViewController.isMediaTypeImage = 2
-                destinationViewController.socialShareDict = tappedObjectDict
+                destinationViewController.selectedVideoUrl = self.api.getDocumentDirectoryFileURL(objMedia)
+                destinationViewController.isMediaTypeImage = objMedia.object_type as Int
+                destinationViewController.socialShareDict = objMedia
                 self.navigationController?.pushViewController(destinationViewController, animated: true)
             }else{
                  self.showAlertMsg("Downloading..", message: "Media downloading is in progress.")
             }
             
         case 3 :
-            if self.api.isMediaFileExistInDocumentDirectory(arrShowData.objectAtIndex(tapIndex) as! [NSObject : AnyObject]){
+            if self.api.isMediaFileExistInDocumentDirectory(objMedia){
                 let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
                 destinationViewController.selectedImage = nil
-                destinationViewController.selectedVideoUrl = self.api.getDocumentDirectoryFileURL(tappedObjectDict as [NSObject : AnyObject])
-                destinationViewController.isMediaTypeImage = 3
-                destinationViewController.socialShareDict = tappedObjectDict
+                destinationViewController.selectedVideoUrl = self.api.getDocumentDirectoryFileURL(objMedia)
+                destinationViewController.isMediaTypeImage = objMedia.object_type as Int
+                destinationViewController.socialShareDict = objMedia
                 self.navigationController?.pushViewController(destinationViewController, animated: true)
             }else{
                  self.showAlertMsg("Downloading..", message: "Media downloading is in progress.")
@@ -299,9 +266,10 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         let tapIndex : Int = selectedCell.tag
         selectedIndexPath = NSIndexPath(forRow: selectedCell.tag, inSection: selectedIndexPath.section)
         
-        if self.api.isMediaFileExistInDocumentDirectory(arrShowData.objectAtIndex(tapIndex) as! [NSObject : AnyObject]){
-            let tappedObjectDict : NSDictionary = arrShowData.objectAtIndex(selectedCell.tag) as! NSDictionary
-            socialShareDict = tappedObjectDict
+        let objMedia : MediaObject = self.arrShowData[tapIndex] as! MediaObject
+        
+        if self.api.isMediaFileExistInDocumentDirectory(objMedia){
+            self.socialShareMedia = objMedia
             selectedCell.setSelected(true, animated: true)
         }else{
             self.showAlertMsg("Downloading..", message: "Media downloading is in progress.")
@@ -320,22 +288,22 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
             switch btnSender.tag {
                 
             case 0 :
-                if self.socialShareDict.count != 0 {
-                    self.bottomTabBar.btnWhatsAppTapped(self.socialShareDict)
+                if self.socialShareMedia != nil {
+                    self.bottomTabBar.btnWhatsAppTapped(self.socialShareMedia)
                 }else{
                     self.showAlertMsg("Choose Media !", message: "Please tap on any media to choose and share.")
                 }
                 
             case 1 :
-                if self.socialShareDict.count != 0 {
-                    self.shareMediaOnFacebook(self.socialShareDict)
+                if self.socialShareMedia != nil {
+                    self.shareMediaOnFacebook(self.socialShareMedia)
                 }else{
                     self.showAlertMsg("Choose Media !", message: "Please tap on any media to choose and share.")
                 }
                 
             case 2 :
-                if self.socialShareDict.count != 0 {
-                    self.bottomTabBar.btnDropBoxTapped(self.socialShareDict , viewController: self)
+                if self.socialShareMedia != nil {
+                    self.bottomTabBar.btnDropBoxTapped(self.socialShareMedia , viewController: self)
                 }else{
                     self.showAlertMsg("Choose Media !", message: "Please tap on any media to choose and share.")
                 }

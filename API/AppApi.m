@@ -5,10 +5,7 @@
 //  Created by GrepRuby3 on 14/03/15.
 //  Copyright (c) 2015 GrepRuby3. All rights reserved.
 //
-#import "MediaObject.h"
-#import "TimeStamp.h"
-#import "User.h"
-#import "Categories.h"
+
 #import "AppApi.h"
 
 /* API Constants */
@@ -246,13 +243,13 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
                                   success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
                                   failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
 
+    /*
     NSString *url = [NSString stringWithFormat:@"%@/download_media",kAppAPIBaseURLString];
     
     return [self POST:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
         if(successBlock){
             @try {
                 NSLog(@"getAllObjects");
-                /* Ref : http://stackoverflow.com/questions/14459321/magical-record-save-in-background */
                 
                 NSMutableArray *arrResponse = [responseObject valueForKey:@"data"];
                 
@@ -268,6 +265,37 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
 
                successBlock(task, responseObject);
             }
+            @catch (NSException *exception) {
+                [self processExceptionBlock:task blockException:exception];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *task, NSError *error) {
+        if(failureBlock){
+            [self processFailureBlock:task blockError:error];
+            failureBlock(task, error);
+        }
+    }];
+    */
+    
+    NSString *url = [NSString stringWithFormat:@"http://192.168.10.40:3000/api/v1/media_objects"];
+
+    return [self GET:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
+        if(successBlock){
+            @try {
+                
+                NSMutableArray *arrResponse = [responseObject valueForKey:@"data"];
+                
+                [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                    [MediaObject entityFromArray:arrResponse inContext:localContext];
+                }];
+                
+                [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                    NSString *strDate = [NSString stringWithFormat:@"%@",[NSDate date]];
+                    NSMutableArray *dictTimeStamp = [[NSMutableArray alloc] initWithArray:@[@{@"last_sync_date": strDate}]];
+                    [TimeStamp entityFromArray:dictTimeStamp inContext:localContext];
+                }];
+                
+                successBlock(task, responseObject);            }
             @catch (NSException *exception) {
                 [self processExceptionBlock:task blockException:exception];
             }
@@ -306,15 +334,15 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
     //[self.downloadQueue addOperation:operation];
 }*/
 
-- (void)downloadMediaData:(NSDictionary *)aParams
+- (void)downloadMediaData:(MediaObject *)objMedia
                   success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
                   failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
   
   [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-  NSString *url = [aParams objectForKey:@"url"];
+  NSString *url = objMedia.object_url;
   NSArray *docDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
   NSString *strtemp = @"Temp";
-  NSString *strTempName = [strtemp stringByAppendingString:[aParams objectForKey:@"fileName"]];
+  NSString *strTempName = [strtemp stringByAppendingString:[self getFileName:objMedia]];
   NSString *mediaPath = [[docDirPath objectAtIndex:0] stringByAppendingPathComponent:strTempName];
   
   //NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL  URLWithString:url]];
@@ -395,29 +423,29 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
 
 #pragma mark- Methods to get : File Path, Path Image, Generate Thumnil image ETC
 
-- (NSURL *)getDocumentDirectoryFileURL:(NSDictionary *)aParams {
+- (NSURL *)getDocumentDirectoryFileURL:(MediaObject *)objMeida {
     NSArray *docDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *filePath = [[docDirPath objectAtIndex:0] stringByAppendingPathComponent:[aParams objectForKey:@"fileName"]];
+    NSString *filePath = [[docDirPath objectAtIndex:0] stringByAppendingPathComponent:[self getFileName:objMeida]];
     return [NSURL fileURLWithPath:filePath];
 }
 
-- (BOOL)isMediaFileExistInDocumentDirectory:(NSDictionary *)aParams{
+- (BOOL)isMediaFileExistInDocumentDirectory:(MediaObject *)objMeida {
     NSArray *docDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *mediaPath = [[docDirPath objectAtIndex:0] stringByAppendingPathComponent:[aParams objectForKey:@"fileName"]];
+    NSString *mediaPath = [[docDirPath objectAtIndex:0] stringByAppendingPathComponent:[self getFileName:objMeida]];
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:mediaPath];
     return fileExists;
 }
 
-- (UIImage*)getImageFromDocumentDirectoryFileURL:(NSDictionary *)aParams{
+- (UIImage*)getImageFromDocumentDirectoryFileURL:(MediaObject *)objMeida {
     NSArray *docDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *mediaPath = [[docDirPath objectAtIndex:0] stringByAppendingPathComponent:[aParams objectForKey:@"fileName"]];
+    NSString *mediaPath = [[docDirPath objectAtIndex:0] stringByAppendingPathComponent:[self getFileName:objMeida]];
     UIImage* image = [UIImage imageWithContentsOfFile:mediaPath];
     return image;
 }
 
--(UIImage *)generateThumbImage:(NSDictionary *)aParams
+-(UIImage *)generateThumbImage:(MediaObject *)objMeida
 {
-    NSURL *url = [self getDocumentDirectoryFileURL:aParams];
+    NSURL *url = [self getDocumentDirectoryFileURL:objMeida];
     
     AVAsset *asset = [AVAsset assetWithURL:url];
     AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc]initWithAsset:asset];
@@ -430,6 +458,19 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
     return thumbnail;
 }
 
+-(NSString *)getFileName:(MediaObject *)objMedia {
+    
+    NSString *strFileName = @"";
+    if (objMedia.object_type.integerValue == 1) {
+        strFileName = [NSString stringWithFormat:@"%@.png",objMedia.object_id];
+    }else if (objMedia.object_type.integerValue == 2) {
+        strFileName = [NSString stringWithFormat:@"%@.pdf",objMedia.object_id];
+    }else {
+        strFileName = [NSString stringWithFormat:@"%@.mp4",objMedia.object_id];
+    }
+    return strFileName;
+}
+
 #pragma mark- Process Exception and Failure Block
 
 -(void)processExceptionBlock:(AFHTTPRequestOperation*)task blockException:(NSException*) exception{
@@ -437,8 +478,6 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
 }
 
 - (NSError*)processFailureBlock:(AFHTTPRequestOperation*) task blockError:(NSError*) error{
-    //Common Method for error handling
-    // Do some thing for error handling
     NSLog(@"Error :%@",error);
     return nil;
 }
@@ -477,7 +516,7 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
                                   success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
                                   failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
     
-    NSString *url = [NSString stringWithFormat:@"%@/categories",kAppAPIBaseURLString];
+    NSString *url = [NSString stringWithFormat:@"http://192.168.10.40:3000/api/v1/categories"];
     
     return [self GET:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
         if(successBlock){
@@ -504,14 +543,14 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
                                      success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
                                      failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
     
-    NSString *url = [NSString stringWithFormat:@"%@/sub_categories",kAppAPIBaseURLString];
-    
+    NSString *url = [NSString stringWithFormat:@"http://192.168.10.40:3000/api/v1/sub_categories"];
+
     return [self GET:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
         if(successBlock){
             @try {
                 NSMutableArray *arrResponse = [responseObject valueForKey:@"data"];
                 [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-                    [MediaObject entityFromArray:arrResponse inContext:localContext];
+                    [SubCategories entityFromArray:arrResponse inContext:localContext];
                 }];
                 successBlock(task, responseObject);
             }

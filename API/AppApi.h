@@ -12,6 +12,12 @@
 #import "AFHTTPSessionManager.h"
 #import "AFNetworkActivityIndicatorManager.h"
 
+#import "User.h"
+#import "Categories.h"
+#import "SubCategories.h"
+#import "TimeStamp.h"
+#import "MediaObject.h"
+
 @interface AppApi : AFHTTPRequestOperationManager
 
 @property (nonatomic, retain) NSOperationQueue *downloadQueue;
@@ -58,13 +64,14 @@
                                         success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
                                         failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock;
 
-- (void)downloadMediaData:(NSDictionary *)aParams
+- (void)downloadMediaData:(MediaObject *)objMedia
                   success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
                   failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock;
 
-- (NSURL *)getDocumentDirectoryFileURL:(NSDictionary *)aParams ;
-- (BOOL)isMediaFileExistInDocumentDirectory:(NSDictionary *)aParams;
-- (UIImage*)getImageFromDocumentDirectoryFileURL:(NSDictionary *)aParams;
--(UIImage *)generateThumbImage:(NSDictionary *)aParams;
+- (NSURL *)getDocumentDirectoryFileURL:(MediaObject *)objMeida;
+- (BOOL)isMediaFileExistInDocumentDirectory:(MediaObject *)objMeida;
+- (UIImage*)getImageFromDocumentDirectoryFileURL:(MediaObject *)objMeida;
+- (UIImage *)generateThumbImage:(MediaObject *)objMeida;
+- (NSString *)getFileName:(MediaObject *)objMedia;
 
 @end

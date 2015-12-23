@@ -12,15 +12,13 @@
 
 @interface MediaObject : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * category_id;
 @property (nonatomic, retain) NSNumber * object_id;
-@property (nonatomic, retain) NSNumber * is_deleted;
-@property (nonatomic, retain) NSString * object_name_english;
-@property (nonatomic, retain) NSString * object_name_hebrew;
-@property (nonatomic, retain) NSString * object_server_url_english;
-@property (nonatomic, retain) NSString * object_server_url_hebrew;
+@property (nonatomic, retain) NSString * object_url;
 @property (nonatomic, retain) NSNumber * object_type;
-@property (nonatomic, retain) NSNumber * sub_category_id;
+@property (nonatomic, retain) NSNumber * is_deleted;
+@property (nonatomic, retain) NSNumber * subCategory_id;
+@property (nonatomic, retain) NSString * object_name;
+@property (nonatomic, retain) NSNumber * object_sequence;
 
 + (void)entityFromArray:(NSArray *)aArray inContext:(NSManagedObjectContext*)localContext;
 + (id)entityFromDictionary:(NSDictionary *)aDictionary inContext:(NSManagedObjectContext *)localContext;
