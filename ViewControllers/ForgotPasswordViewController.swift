@@ -14,6 +14,8 @@ class ForgotPasswordViewController: BaseViewController,UITextFieldDelegate {
     var recoveryEmailIdTxt  : TextField!
     var forgotPasswordBtn   : UIButton!
     
+    // MARK: - View related methods
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -29,6 +31,12 @@ class ForgotPasswordViewController: BaseViewController,UITextFieldDelegate {
         self.navigationController?.navigationBarHidden = false
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    // MARK: - Navigation bar and their action methods
+    
     func addRightAndLeftNavItemOnView()
     {
         let buttonBack: UIButton = UIButton(type: UIButtonType.Custom)
@@ -42,6 +50,8 @@ class ForgotPasswordViewController: BaseViewController,UITextFieldDelegate {
     func leftNavBackButtonTapped(){
         self.navigationController?.popViewControllerAnimated(true)
     }
+
+    // MARK: - View layout setup methods
     
     func applyDefaults(){
         
@@ -66,7 +76,7 @@ class ForgotPasswordViewController: BaseViewController,UITextFieldDelegate {
         self.view.addSubview(self.forgotPasswordBtn)
     }
     
-    /* Text Field Delegate Methods */
+    // MARK: - Text Field Delegate Methods
     
     func textFieldDidBeginEditing(textField: UITextField) {
         
@@ -81,7 +91,7 @@ class ForgotPasswordViewController: BaseViewController,UITextFieldDelegate {
         return false
     }
     
-    /* Button Tapped method */
+    // MARK: - Forgot password Api call method
     
     func forgotPasswordButtonTapped(){
         
@@ -89,43 +99,38 @@ class ForgotPasswordViewController: BaseViewController,UITextFieldDelegate {
         
         if isEnteredEmailBlankOrInValid(){
             
-            /* Method to Add Custom UIActivityIndicatorView in current screen */
-            activityIndicator = ActivityIndicatorView(frame: self.view.frame)
-            activityIndicator.startActivityIndicator(self)
+            self.startLoadingIndicatorView("Recovering..")
             
             self.api.forgotPassword( parameters as [NSObject : AnyObject], success: { ( operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
                 print(responseObject)
                 let dictResponse : NSDictionary = responseObject as! NSDictionary
                 self.showSuccessAlertToUser(dictResponse.objectForKey("info") as! NSString)
-                self.activityIndicator.stopActivityIndicator(self)
+                self.stopLoadingIndicatorView()
                 },
                 failure: { ( operation: AFHTTPRequestOperation?, error: NSError? ) in
                     print(error)
-                    self.activityIndicator.stopActivityIndicator(self)
-                    self.showSuccessAlertToUser("Forgot Password have some error")
+                    self.stopLoadingIndicatorView()
+                    self.showAlertMsg("Forgot password !", message: "Forgot password have some error, please try again later.")
             })
         }
     }
     
-    // Checking Email Validation 
+    
+    // MARK: - Common method
     
     func isEnteredEmailBlankOrInValid() -> Bool {
     
-        var alertMessage : NSString = ""
+        var alertMessage : String = String()
         
         if recoveryEmailIdTxt.text == "" {
-            alertMessage = "Email can't be blank"
+            alertMessage = "Email can't be blank."
         }else if !CommonUtilities.isValidEmailAddress(recoveryEmailIdTxt.text!){
-            alertMessage = "Invalid Email Address"
+            alertMessage = "Please enter valid email address."
         }else {
              return true
         }
         
-        let alert = UIAlertController(title: "Alert!",
-            message: alertMessage as String,
-            preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK",comment:"Ok"), style: UIAlertActionStyle.Cancel, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.showAlertMsg("Forgot password !", message: alertMessage)
         
         return false
     }
@@ -135,7 +140,7 @@ class ForgotPasswordViewController: BaseViewController,UITextFieldDelegate {
     
     func showSuccessAlertToUser(strMessage : NSString){
         
-        let alert = UIAlertController(title: "Alert", message: strMessage as String, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Rondogo", message: strMessage as String, preferredStyle: UIAlertControllerStyle.Alert)
         self.presentViewController(alert, animated: true, completion: nil)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
@@ -154,8 +159,5 @@ class ForgotPasswordViewController: BaseViewController,UITextFieldDelegate {
 
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 
 }

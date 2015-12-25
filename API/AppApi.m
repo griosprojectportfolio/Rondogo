@@ -9,11 +9,10 @@
 #import "AppApi.h"
 
 /* API Constants */
-//static NSString * const kAppAPIBaseURLString = @"http://192.168.10.40:4000/api/v1";
-//static NSString * const kAppMediaBaseURLString = @"http://192.168.10.40:4000";
+static NSString * const kAppAPIBaseURLString = @"http://192.168.10.49:3000/api/v1";
+static NSString * const kAppMediaBaseURLString = @"http://192.168.10.49:3000";
 
-static NSString * const kAppAPIBaseURLString = @"https://rondogo.herokuapp.com/api/v1";
-static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com";
+//static NSString * const kAppAPIBaseURLString = @"https://rondogo.herokuapp.com/api/v1";
 
 @interface AppApi ()
 
@@ -61,15 +60,15 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
     self.downloadQueue.name = @"com.rondogo.app.downloadQueue";
 }
 
-#pragma mark- Login User
+#pragma mark- User login method
 
 - (AFHTTPRequestOperation *)loginUser:(NSDictionary *)aParams
-                                  success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
-                                  failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
+                              success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
+                              failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
     
     NSString *url = [NSString stringWithFormat:@"%@/sessions/login",kAppAPIBaseURLString];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-
+    
     return [self POST:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
         if(successBlock){
             @try {
@@ -95,18 +94,18 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
     }];
 }
 
-#pragma mark- SignUp User
+#pragma mark- User signup method
 
 - (AFHTTPRequestOperation *)signUpUser:(NSDictionary *)aParams
-                              success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
-                              failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
+                               success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
+                               failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
     
     NSMutableDictionary *dictParams = [[NSMutableDictionary alloc] initWithDictionary:aParams];
     [dictParams removeObjectForKey:@"auth_token"];
-
+    
     NSString *url = [NSString stringWithFormat:@"%@/registrations",kAppAPIBaseURLString];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-
+    
     return [self POST:url parameters:dictParams success:^(AFHTTPRequestOperation *task, id responseObject) {
         if(successBlock){
             @try {
@@ -132,7 +131,7 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
     }];
 }
 
-#pragma mark- Update User
+#pragma mark- Update user information method
 
 - (AFHTTPRequestOperation *)updateUser:(NSDictionary *)aParams
                                success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
@@ -171,15 +170,15 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
 }
 
 
-#pragma mark- Forgot password
+#pragma mark- Forgot password method
 
 - (AFHTTPRequestOperation *)forgotPassword:(NSDictionary *)aParams
-                               success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
-                               failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
+                                   success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
+                                   failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
     
     NSString *url = [NSString stringWithFormat:@"%@/forget_password",kAppAPIBaseURLString];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-
+    
     return [self POST:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
         if(successBlock){
             @try {
@@ -200,11 +199,11 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
     }];
 }
 
-#pragma mark- SignOut user
+#pragma mark- User log out method
 
 - (AFHTTPRequestOperation *)signOutUser:(NSDictionary *)aParams
-                                   success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
-                                   failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
+                                success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
+                                failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
     
     [self.requestSerializer setValue:[aParams valueForKey:@"auth_token"] forHTTPHeaderField:@"auth_token"];
     NSString *url = [NSString stringWithFormat:@"%@/sessions/logout",kAppAPIBaseURLString];
@@ -213,13 +212,13 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
     return [self DELETE:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
         if(successBlock){
             @try {
-                NSLog(@"logout");
+                NSLog(@"User successfully logged out.");
                 NSHTTPCookie *cookie;
                 NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
                 for (cookie in [storage cookies]) {
                     [storage deleteCookie:cookie];
                 }
-                //[self deleteAllEntityObjects];
+                [self deleteAllEntityObjects];
                 successBlock(task, responseObject);
                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             }
@@ -236,34 +235,22 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
     }];
 }
 
+#pragma mark - Fetch Categories and sub Categories
 
-#pragma mark- Sync Call Methods
-
-- (AFHTTPRequestOperation *)getAllObjects:(NSDictionary *)aParams
-                                  success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
-                                  failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
-
-    /*
-    NSString *url = [NSString stringWithFormat:@"%@/download_media",kAppAPIBaseURLString];
+- (AFHTTPRequestOperation *)getAllCategories:(NSDictionary *)aParams
+                                     success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
+                                     failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
     
-    return [self POST:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
+    NSString *url = [NSString stringWithFormat:@"%@/categories",kAppAPIBaseURLString];
+    
+    return [self GET:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
         if(successBlock){
             @try {
-                NSLog(@"getAllObjects");
-                
                 NSMutableArray *arrResponse = [responseObject valueForKey:@"data"];
-                
                 [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-                    [MediaObject entityFromArray:arrResponse inContext:localContext];
+                    [Categories entityFromArray:arrResponse inContext:localContext];
                 }];
-                
-                [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-                    NSString *strDate = [NSString stringWithFormat:@"%@",[NSDate date]];
-                    NSMutableArray *dictTimeStamp = [[NSMutableArray alloc] initWithArray:@[@{@"last_sync_date": strDate}]];
-                    [TimeStamp entityFromArray:dictTimeStamp inContext:localContext];
-                }];
-
-               successBlock(task, responseObject);
+                successBlock(task, responseObject);
             }
             @catch (NSException *exception) {
                 [self processExceptionBlock:task blockException:exception];
@@ -275,10 +262,44 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
             failureBlock(task, error);
         }
     }];
-    */
-    
-    NSString *url = [NSString stringWithFormat:@"http://192.168.10.40:3000/api/v1/media_objects"];
+}
 
+- (AFHTTPRequestOperation *)getAllSubCategories:(NSDictionary *)aParams
+                                        success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
+                                        failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
+    
+    NSString *url = [NSString stringWithFormat:@"%@/sub_categories",kAppAPIBaseURLString];
+    
+    return [self GET:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
+        if(successBlock){
+            @try {
+                NSMutableArray *arrResponse = [responseObject valueForKey:@"data"];
+                [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                    [SubCategories entityFromArray:arrResponse inContext:localContext];
+                }];
+                successBlock(task, responseObject);
+            }
+            @catch (NSException *exception) {
+                [self processExceptionBlock:task blockException:exception];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *task, NSError *error) {
+        if(failureBlock){
+            [self processFailureBlock:task blockError:error];
+            failureBlock(task, error);
+        }
+    }];
+}
+
+
+#pragma mark- Media objects method
+
+- (AFHTTPRequestOperation *)getAllObjects:(NSDictionary *)aParams
+                                  success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
+                                  failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
+    
+    NSString *url = [NSString stringWithFormat:@"%@/media_objects",kAppAPIBaseURLString];
+    
     return [self GET:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
         if(successBlock){
             @try {
@@ -295,7 +316,8 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
                     [TimeStamp entityFromArray:dictTimeStamp inContext:localContext];
                 }];
                 
-                successBlock(task, responseObject);            }
+                successBlock(task, responseObject);
+            }
             @catch (NSException *exception) {
                 [self processExceptionBlock:task blockException:exception];
             }
@@ -308,64 +330,64 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
     }];
 }
 
-#pragma mark- Method to Downloading Media Data from server
+#pragma mark- Downloading Media Data from server method
 
 /*- (void)downloadMediaData:(NSDictionary *)aParams
-                  success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
-                  failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
+ success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
+ failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
+ 
+ NSString *url = [aParams objectForKey:@"url"];
+ NSArray *docDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+ NSString *mediaPath = [[docDirPath objectAtIndex:0] stringByAppendingPathComponent:[aParams objectForKey:@"fileName"]];
+ 
+ NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL  URLWithString:url]];
+ [request setHTTPMethod:@"GET"];
+ [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
+ 
+ AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+ operation.outputStream = [[NSOutputStream alloc] initToFileAtPath:mediaPath append:NO];
+ 
+ [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+ NSLog(@"successful download to %@", mediaPath);
+ } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+ NSLog(@"Error: %@", error);
+ }];
+ 
+ //[self.downloadQueue addOperation:operation];
+ }*/
 
-    NSString *url = [aParams objectForKey:@"url"];
-    NSArray *docDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *mediaPath = [[docDirPath objectAtIndex:0] stringByAppendingPathComponent:[aParams objectForKey:@"fileName"]];
+- (void)downloadMediaData:(MediaObject *)objMedia
+                  success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
+                  failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock {
     
-    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL  URLWithString:url]];
-    [request setHTTPMethod:@"GET"];
-    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    NSString *url = objMedia.object_url;
+    NSArray *docDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *strtemp = @"Temp";
+    NSString *strTempName = [strtemp stringByAppendingString:[self getFileName:objMedia]];
+    NSString *mediaPath = [[docDirPath objectAtIndex:0] stringByAppendingPathComponent:strTempName];
+    
+    //NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL  URLWithString:url]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    //[request setHTTPMethod:@"GET"];
+    //[request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
     
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     operation.outputStream = [[NSOutputStream alloc] initToFileAtPath:mediaPath append:NO];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"successful download to %@", mediaPath);
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        [self fileRenameFunction:mediaPath];
+        successBlock(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         NSLog(@"Error: %@", error);
+        NSLog(@"Error: %@", operation.responseString);
+        failureBlock(operation, error);
     }];
-    
-    //[self.downloadQueue addOperation:operation];
-}*/
-
-- (void)downloadMediaData:(MediaObject *)objMedia
-                  success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
-                  failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
-  
-  [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-  NSString *url = objMedia.object_url;
-  NSArray *docDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-  NSString *strtemp = @"Temp";
-  NSString *strTempName = [strtemp stringByAppendingString:[self getFileName:objMedia]];
-  NSString *mediaPath = [[docDirPath objectAtIndex:0] stringByAppendingPathComponent:strTempName];
-  
-  //NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL  URLWithString:url]];
-  NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-  //[request setHTTPMethod:@"GET"];
-  //[request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
-  
-  AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-  operation.outputStream = [[NSOutputStream alloc] initToFileAtPath:mediaPath append:NO];
-  
-  [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-      NSLog(@"successful download to %@", mediaPath);
-      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-      [self fileRenameFunction:mediaPath];
-      successBlock(operation, responseObject);
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    NSLog(@"Error: %@", error);
-    NSLog(@"Error: %@", operation.responseString);
-      failureBlock(operation, error);
-  }];
-  //[operation start];
-  [self.downloadQueue addOperation:operation];
+    //[operation start];
+    [self.downloadQueue addOperation:operation];
 }
 
 
@@ -385,15 +407,13 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
 }
 
 
-
-
-#pragma mark- Upload media with Base64String
+#pragma mark- Upload media on server method
 
 - (AFHTTPRequestOperation *)uploadMediaWithBase64String:(NSDictionary *)aParams
                                                 success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
                                                 failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
     
-    NSString *url = [NSString stringWithFormat:@"%@/upload_media",kAppAPIBaseURLString];
+    NSString *url = [NSString stringWithFormat:@"%@/create_media_ios",kAppAPIBaseURLString];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     return [self POST:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
@@ -421,7 +441,7 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
 }
 
 
-#pragma mark- Methods to get : File Path, Path Image, Generate Thumnil image ETC
+#pragma mark- Common method
 
 - (NSURL *)getDocumentDirectoryFileURL:(MediaObject *)objMeida {
     NSArray *docDirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -489,7 +509,7 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
     
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
         
-        NSArray *arrEntities = [[NSArray alloc] initWithObjects:@"User", @"MediaObject",@"TimeStamp",nil];
+        NSArray *arrEntities = [[NSArray alloc] initWithObjects:@"User",@"MediaObject",@"TimeStamp",@"Categories",@"SubCategories",nil];
         
         for (int i=0; i < arrEntities.count; i++) {
             
@@ -505,63 +525,6 @@ static NSString * const kAppMediaBaseURLString = @"https://rondogo.herokuapp.com
             }
             if (![localContext save:&error]) {
             }
-        }
-    }];
-}
-
-
-#pragma mark - Fetch Categories and sub Categories
-
-- (AFHTTPRequestOperation *)getAllCategories:(NSDictionary *)aParams
-                                  success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
-                                  failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
-    
-    NSString *url = [NSString stringWithFormat:@"http://192.168.10.40:3000/api/v1/categories"];
-    
-    return [self GET:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
-        if(successBlock){
-            @try {
-                NSMutableArray *arrResponse = [responseObject valueForKey:@"data"];
-                [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-                    [Categories entityFromArray:arrResponse inContext:localContext];
-                }];
-                successBlock(task, responseObject);
-            }
-            @catch (NSException *exception) {
-                [self processExceptionBlock:task blockException:exception];
-            }
-        }
-    } failure:^(AFHTTPRequestOperation *task, NSError *error) {
-        if(failureBlock){
-            [self processFailureBlock:task blockError:error];
-            failureBlock(task, error);
-        }
-    }];
-}
-
-- (AFHTTPRequestOperation *)getAllSubCategories:(NSDictionary *)aParams
-                                     success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
-                                     failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
-    
-    NSString *url = [NSString stringWithFormat:@"http://192.168.10.40:3000/api/v1/sub_categories"];
-
-    return [self GET:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
-        if(successBlock){
-            @try {
-                NSMutableArray *arrResponse = [responseObject valueForKey:@"data"];
-                [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-                    [SubCategories entityFromArray:arrResponse inContext:localContext];
-                }];
-                successBlock(task, responseObject);
-            }
-            @catch (NSException *exception) {
-                [self processExceptionBlock:task blockException:exception];
-            }
-        }
-    } failure:^(AFHTTPRequestOperation *task, NSError *error) {
-        if(failureBlock){
-            [self processFailureBlock:task blockError:error];
-            failureBlock(task, error);
         }
     }];
 }

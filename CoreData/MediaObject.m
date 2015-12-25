@@ -45,7 +45,7 @@
         
         obj.object_id = [NSNumber numberWithInteger:[[aDictionary objectForKey:@"id"] integerValue]];
         
-        obj.object_url = [NSString stringWithFormat:@"http://192.168.10.40:3000%@",[[aDictionary objectForKey:@"object_data"] objectForKey:@"url"]];
+        obj.object_url = [NSString stringWithFormat:@"http://192.168.10.49:3000%@",[[aDictionary objectForKey:@"object_data"] objectForKey:@"url"]];
         
         if (![[aDictionary objectForKey:@"object_type"] isKindOfClass:[NSNull class]])
             obj.object_type = [NSNumber numberWithInteger:[[aDictionary objectForKey:@"object_type"] integerValue]];

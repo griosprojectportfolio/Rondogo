@@ -14,8 +14,9 @@ class SelectAppLanguageViewController: BaseViewController, UITableViewDelegate, 
     var tblView : UITableView!
     var items: [String] = ["English","עברית"]
     
+    // MARK: - View related methods
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         self.view.backgroundColor = UIColor().appBackgroundColor()
         self.title = NSLocalizedString("CHOOSE_LANGUAGE",comment:"Choose Language")
@@ -26,6 +27,12 @@ class SelectAppLanguageViewController: BaseViewController, UITableViewDelegate, 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    // MARK: - Navigation bar and their action methods
     
     func addRightAndLeftNavItemOnView()
     {
@@ -41,6 +48,8 @@ class SelectAppLanguageViewController: BaseViewController, UITableViewDelegate, 
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    // MARK: - View layout setup methods
+    
     func applyDefaults(){
         self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.width, 185))
         self.tblView.delegate = self
@@ -51,7 +60,7 @@ class SelectAppLanguageViewController: BaseViewController, UITableViewDelegate, 
         self.view.addSubview(self.tblView)
     }
     
-    /* TableView Delegate and Data Source Method */
+    // MARK: - TableView Delegate and Data Source Method
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -96,11 +105,11 @@ class SelectAppLanguageViewController: BaseViewController, UITableViewDelegate, 
         }
     }
     
+    // MARK: - Some common methods
+    
     func appTerminatePopUp(){
         
-        let alert = UIAlertController(title: "Alert!",
-            message:"App needs to be exit within 5 seconds",
-            preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Alert!", message:"App needs to be exit within 5 seconds", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK",comment:"Ok"), style: UIAlertActionStyle.Cancel, handler: nil))
         
         self.presentViewController(alert, animated: true, completion: {
@@ -112,8 +121,5 @@ class SelectAppLanguageViewController: BaseViewController, UITableViewDelegate, 
         })
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 
 }

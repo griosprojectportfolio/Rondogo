@@ -16,7 +16,6 @@
 		1729C0EB1AAF083E009FA46E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1729C0EA1AAF083E009FA46E /* SettingsViewController.swift */; };
 		17312DAB1ABAC56C002BA776 /* SynchronizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17312DAA1ABAC56C002BA776 /* SynchronizeApp.swift */; };
 		17312DB21ABAE602002BA776 /* Rondogo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17312DB01ABAE602002BA776 /* Rondogo.xcdatamodeld */; };
-		17327B391AB6B5D30000D151 /* TicketBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17327B381AB6B5D30000D151 /* TicketBookingViewController.swift */; };
 		17327B851AB710A80000D151 /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17327B841AB710A80000D151 /* UIColor+RGB.swift */; };
 		17327B881AB711870000D151 /* AppApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 17327B871AB711870000D151 /* AppApi.m */; };
 		173760501AC3EBBB00A6A0FD /* MediaObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1737604F1AC3EBBB00A6A0FD /* MediaObject.m */; };
@@ -64,6 +63,7 @@
 		17C563C41AB849AC0046E714 /* icon_whatsApp.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C563C01AB849AC0046E714 /* icon_whatsApp.png */; };
 		17C7B2161C1EEDF400B18A6B /* icon_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C7B2151C1EEDF400B18A6B /* icon_facebook.png */; };
 		17C9CB301AB31DAB00BC5026 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C9CB2F1AB31DAB00BC5026 /* BaseViewController.swift */; };
+		17F7F7821C2AC14C0011C709 /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F7F7811C2AC14C0011C709 /* LoadingOverlay.swift */; };
 		76CD3F5D18940E114EC7D6A5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9682CC4131DC0937C00C7850 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -90,7 +90,6 @@
 		1730A96F1AB4179300C8F0D0 /* Rondogo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Rondogo-Bridging-Header.h"; sourceTree = "<group>"; };
 		17312DAA1ABAC56C002BA776 /* SynchronizeApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizeApp.swift; sourceTree = "<group>"; };
 		17312DB11ABAE602002BA776 /* Rondogo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rondogo.xcdatamodel; sourceTree = "<group>"; };
-		17327B381AB6B5D30000D151 /* TicketBookingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketBookingViewController.swift; sourceTree = "<group>"; };
 		17327B841AB710A80000D151 /* UIColor+RGB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+RGB.swift"; sourceTree = "<group>"; };
 		17327B861AB711870000D151 /* AppApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppApi.h; sourceTree = "<group>"; };
 		17327B871AB711870000D151 /* AppApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppApi.m; sourceTree = "<group>"; };
@@ -150,6 +149,7 @@
 		17C7B2151C1EEDF400B18A6B /* icon_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_facebook.png; sourceTree = "<group>"; };
 		17C9CB2D1AB31BC400BC5026 /* Rondogo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Rondogo-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		17C9CB2F1AB31DAB00BC5026 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		17F7F7811C2AC14C0011C709 /* LoadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingOverlay.swift; sourceTree = "<group>"; };
 		32CC896017D050A96C725ADE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9682CC4131DC0937C00C7850 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5176062FAFC59BF09745485 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -332,7 +332,6 @@
 				1729C0E11AAED209009FA46E /* MediaPreviewViewController.swift */,
 				1729C0EA1AAF083E009FA46E /* SettingsViewController.swift */,
 				17C385561AB17D8C00B6B8FD /* SelectAppLanguageViewController.swift */,
-				17327B381AB6B5D30000D151 /* TicketBookingViewController.swift */,
 				17C0B8561AC00C0D0044D3B5 /* AdminPanelViewController.swift */,
 				173A676B1AC5419500E40A53 /* AdminMediaPreviewViewController.swift */,
 				171862B11C243F04004B704E /* CollectionCell.swift */,
@@ -345,6 +344,7 @@
 			children = (
 				17327B831AB710950000D151 /* Extensions */,
 				173AAFD01ABC1BB3000CF406 /* CommonUtilities.swift */,
+				17F7F7811C2AC14C0011C709 /* LoadingOverlay.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -576,11 +576,11 @@
 				1729C0E21AAED20A009FA46E /* MediaPreviewViewController.swift in Sources */,
 				174A512D1AADA62F00B0A851 /* ForgotPasswordViewController.swift in Sources */,
 				173760501AC3EBBB00A6A0FD /* MediaObject.m in Sources */,
-				17327B391AB6B5D30000D151 /* TicketBookingViewController.swift in Sources */,
 				174E7F361AA6D822000807C1 /* AppDelegate.swift in Sources */,
 				17C0B8571AC00C0D0044D3B5 /* AdminPanelViewController.swift in Sources */,
 				17327B881AB711870000D151 /* AppApi.m in Sources */,
 				173A676C1AC5419500E40A53 /* AdminMediaPreviewViewController.swift in Sources */,
+				17F7F7821C2AC14C0011C709 /* LoadingOverlay.swift in Sources */,
 				173A67721AC562FB00E40A53 /* TimeStamp.m in Sources */,
 				17312DB21ABAE602002BA776 /* Rondogo.xcdatamodeld in Sources */,
 				17327B851AB710A80000D151 /* UIColor+RGB.swift in Sources */,

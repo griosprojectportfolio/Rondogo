@@ -54,7 +54,7 @@
         if (![[aDictionary objectForKey:@"sequence_no"] isKindOfClass:[NSNull class]])
             obj.subCat_sequence =[NSNumber numberWithInteger:[[aDictionary objectForKey:@"sequence_no"] integerValue]];
         
-        obj.subCat_imageUrl = [NSString stringWithFormat:@"http://192.168.10.40:3000%@",[[aDictionary objectForKey:@"object_data"] objectForKey:@"url"]];
+        obj.subCat_imageUrl = [NSString stringWithFormat:@"http://192.168.10.49:3000%@",[[aDictionary objectForKey:@"object_data"] objectForKey:@"url"]];
         
         
         return obj;

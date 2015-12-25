@@ -18,6 +18,9 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     var signUpBtn           : UIButton!
     var forgotPasswordBtn   : UIButton!
 
+    
+    // MARK: - View related methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = NSLocalizedString("LOGIN",comment:"Log In")
@@ -32,6 +35,12 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         self.navigationController?.navigationBarHidden = false
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: - Navigation bar and their action methods
+    
     func addRightAndLeftNavItemOnView()
     {
         let buttonBack: UIButton = UIButton(type: UIButtonType.Custom)
@@ -45,6 +54,9 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     func leftNavBackButtonTapped(){
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+    
+    // MARK: - View layout setup methods
     
     func applyDefaults(){
         
@@ -119,7 +131,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         self.view.addSubview(self.forgotPasswordBtn)
     }
     
-    /* ======= Text Field Delegate Methods ======== */
+    
+    // MARK: - Text Field Delegate Methods
     
     func textFieldDidBeginEditing(textField: UITextField) {
         
@@ -134,10 +147,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         return false
     }
     
-    /* ===============================================*/
     
-    
-    /* Login Button Tapped method */
+    // MARK: - Login Api call method
     
     func loginButtonTapped(){
         
@@ -145,9 +156,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         
         if isEnteredDataBlankOrInValid() {
             
-            /* Method to Add Custom UIActivityIndicatorView in current screen */
-            activityIndicator = ActivityIndicatorView(frame: self.view.frame)
-            activityIndicator.startActivityIndicator(self)
+            self.startLoadingIndicatorView("Login..")
 
             self.api.loginUser(parameters as [NSObject : AnyObject], success: { (operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
                 
@@ -158,43 +167,41 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                 self.auth_token = [token]
                 self.is_Admin = [admin]
 
-                self.activityIndicator.stopActivityIndicator(self)
-
-                self.showSuccessAlertToUser("Successfully loged in")
+                self.stopLoadingIndicatorView()
+                self.showSuccessAlertToUser("Thanks, You have successfully logged in")
                 
                 },
                 failure: { (operation: AFHTTPRequestOperation?, error: NSError? ) in
                     print(error)
-                    self.activityIndicator.stopActivityIndicator(self)
-                    self.showSuccessAlertToUser("Login have some error")
+                    self.stopLoadingIndicatorView()
+                    self.showAlertMsg("Login !", message: "Sorry, There is some problem in login, please try again later.")
             })
         }
     }
     
+    
+    // MARK: - Common method
+    
     func isEnteredDataBlankOrInValid() -> Bool {
         
-        var alertMessage : NSString = ""
+        var alertMessage : String = String()
         
          if !CommonUtilities.isValidEmailAddress(userNameTxt.text!) || userNameTxt.text! == "" {
-            alertMessage = "Invalid Email Address \n"
+            alertMessage = "Please enter valid email address. \n"
         }else if passwordTxt.text == "" {
-            alertMessage = "Password can't be blank \n"
+            alertMessage = "Please enter valid password. \n"
         }else {
             return true
         }
         
-        let alert = UIAlertController(title: "Alert!", message: alertMessage as String, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK",comment:"Ok"), style: UIAlertActionStyle.Cancel, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.showAlertMsg("Login !", message: alertMessage)
         
         return false
     }
-
-    /* Show pop up on success */
     
     func showSuccessAlertToUser(strMessage : NSString){
         
-        let alert = UIAlertController(title: "Alert", message: strMessage as String, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Rondogo", message: strMessage as String, preferredStyle: UIAlertControllerStyle.Alert)
         self.presentViewController(alert, animated: true, completion: nil)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
@@ -213,23 +220,17 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         }))
     }
 
-    
-    /* Sign Up Button Tapped Method */
+    // MARK: - Other button tapped methods
     
     func signUpButtonTapped(){
         let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SignUp") as! SignUpViewController
         self.navigationController?.pushViewController(destinationViewController, animated: true)
     }
     
-    /*  Forgot Password Button Tapped */
-    
     func forgotPasswordButtonTapped(){
         let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ForgotPassword") as! ForgotPasswordViewController
         self.navigationController?.pushViewController(destinationViewController, animated: true)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 
 }

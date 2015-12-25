@@ -26,6 +26,9 @@ class SignUpViewController: BaseViewController, UIScrollViewDelegate, UITextFiel
     
     var arrUserObject       : NSArray = NSArray()
 
+    
+    // MARK: - View related methods
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -40,6 +43,13 @@ class SignUpViewController: BaseViewController, UIScrollViewDelegate, UITextFiel
         self.navigationController?.navigationBarHidden = false
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    
+    // MARK: - Navigation bar and their action methods
+    
     func addRightAndLeftNavItemOnView()
     {
         let buttonBack: UIButton = UIButton(type: UIButtonType.Custom)
@@ -53,6 +63,8 @@ class SignUpViewController: BaseViewController, UIScrollViewDelegate, UITextFiel
     func leftNavBackButtonTapped(){
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+    // MARK: - View layout setup methods
     
     func applyDefaults(){
         
@@ -163,7 +175,7 @@ class SignUpViewController: BaseViewController, UIScrollViewDelegate, UITextFiel
     }
     
     
-    /* Text Field Delegate Methods */
+    // MARK: - Text Field Delegate Methods
     
     func textFieldDidBeginEditing(textField: UITextField) {
         if textField == firstNameTxt {
@@ -187,7 +199,8 @@ class SignUpViewController: BaseViewController, UIScrollViewDelegate, UITextFiel
         return false
     }
     
-    /* Button Tapped method */
+    
+    // MARK: - Sign up Api call method
     
     func signUpButtonTapped(){
         
@@ -198,12 +211,10 @@ class SignUpViewController: BaseViewController, UIScrollViewDelegate, UITextFiel
         
         if isEnteredDataBlankOrInValid(){
             
-            /* Method to Add Custom UIActivityIndicatorView in current screen */
-            activityIndicator = ActivityIndicatorView(frame: self.view.frame)
-            activityIndicator.startActivityIndicator(self)
-            
             if  arrUserObject.count != 0 {
                 /* For User Update */
+                
+                self.startLoadingIndicatorView("Updating..")
                 
                 self.api.updateUser( parameters as [NSObject : AnyObject], success: { ( operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
                     
@@ -211,18 +222,20 @@ class SignUpViewController: BaseViewController, UIScrollViewDelegate, UITextFiel
                     let dictResponse : NSDictionary = responseObject as! NSDictionary
                     let token : NSString = (dictResponse.objectForKey("data") as! NSDictionary).objectForKey("auth_token") as! NSString
                     self.auth_token = [token]
-                    self.activityIndicator.stopActivityIndicator(self)
-                    self.showSuccessAlertToUser("Profile Successfully Updated")
+                    self.stopLoadingIndicatorView()
+                    self.showSuccessAlertToUser("Your profile has been updated successfully.")
 
                     },
                     failure: { ( operation: AFHTTPRequestOperation?, error: NSError? ) in
                         print(error)
-                        self.activityIndicator.stopActivityIndicator(self)
-                        self.showSuccessAlertToUser("Update have some error")
+                        self.stopLoadingIndicatorView()
+                        self.showAlertMsg("Updating !", message: "Profile updation have some error, please try again later.")
                 })
 
             }else{
                 /* For User Registration */
+                
+                self.startLoadingIndicatorView("Registering..")
                 
                 self.api.signUpUser( parameters as [NSObject : AnyObject], success: { ( operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
                     
@@ -230,72 +243,54 @@ class SignUpViewController: BaseViewController, UIScrollViewDelegate, UITextFiel
                     let dictResponse : NSDictionary = responseObject as! NSDictionary
                     let token : NSString = (dictResponse.objectForKey("data") as! NSDictionary).objectForKey("auth_token") as! NSString
                     self.auth_token = [token]
-                    self.activityIndicator.stopActivityIndicator(self)
-                    
-                    let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("HomePage") as! HomePageViewController
-                    self.navigationController?.pushViewController(destinationViewController, animated: true)
+                    self.stopLoadingIndicatorView()
+                    self.showSuccessAlertToUser("Your are successfully registered on Rondogo.")
                     
                     },
                     failure: { ( operation: AFHTTPRequestOperation?, error: NSError? ) in
                         print(error)
-                        self.activityIndicator.stopActivityIndicator(self)
-                        self.showSuccessAlertToUser("Registration have some error")
+                        self.stopLoadingIndicatorView()
+                        self.showAlertMsg("Registering !", message: "Profile registration have some error, please try again later.")
                 })
             }
         }
     }
     
-    // Checking Email Validation and other validations
+    
+    // MARK: - Common methods
     
     func isEnteredDataBlankOrInValid() -> Bool {
         
-        var alertMessage : NSString = ""
+        var alertMessage : String = String()
         
         if firstNameTxt.text == "" {
-            alertMessage = "First name can't be blank \n"
+            alertMessage = "First name can't be blank. \n"
         }else if lastNameTxt.text == "" {
-            alertMessage = "Last name can't be blank \n"
+            alertMessage = "Last name can't be blank. \n"
         }else if !CommonUtilities.isValidEmailAddress(emailTxt.text!) || emailTxt.text! == "" {
-            alertMessage = "Invalid Email Address \n"
+            alertMessage = "Please enter valid email address. \n"
         }else if contactNo.text == "" {
-            alertMessage = "Contact no can't be blank \n"
+            alertMessage = "Contact no can't be blank. \n"
         }else if userNameTxt.text == "" {
-            alertMessage = "User name can't be blank \n"
+            alertMessage = "User name can't be blank. \n"
         }else if passwordTxt.text == "" {
-            alertMessage = "Password can't be blank \n"
+            alertMessage = "Password can't be blank. \n"
         }else if confirmPasswordTxt.text == "" {
-            alertMessage = "Confirm password can't be blank \n"
+            alertMessage = "Confirm password can't be blank. \n"
         }else if passwordTxt.text != confirmPasswordTxt.text{
-            alertMessage = "Password and Confirm password dosen't match \n"
+            alertMessage = "Password and Confirm password dosen't match. \n"
         }else {
             return true
         }
         
-        let alert = UIAlertController(title: "Alert!",
-            message: alertMessage as String,
-            preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK",comment:"Ok"), style: UIAlertActionStyle.Cancel, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-
+        self.showAlertMsg("Register !", message: alertMessage)
+        
         return false
     }
-
-    
-    func animateCurrentViewUpAndDownSide(up:Bool, moveValue :CGFloat){
-        let movementDuration:NSTimeInterval = 0.3
-        let movement:CGFloat = ( up ? -moveValue : moveValue)
-        UIView.beginAnimations( "animateView", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(movementDuration )
-        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
-        UIView.commitAnimations()
-    }
-    
-    /* Show pop up on success */
     
     func showSuccessAlertToUser(strMessage : NSString){
         
-        let alert = UIAlertController(title: "Alert", message: strMessage as String, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Rondogo", message: strMessage as String, preferredStyle: UIAlertControllerStyle.Alert)
         self.presentViewController(alert, animated: true, completion: nil)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
@@ -313,8 +308,5 @@ class SignUpViewController: BaseViewController, UIScrollViewDelegate, UITextFiel
         }))
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 }
 

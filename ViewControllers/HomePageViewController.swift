@@ -179,15 +179,18 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
     func loadMediaDataFromServer(){
         
         let objSyncApp : SynchronizeApp = SynchronizeApp()
+        
         objSyncApp.startSyncMethodCall(self, success: { (responseObject: AnyObject?) in
             
             let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(2.0 * Double(NSEC_PER_SEC)))
             dispatch_after(dispatchTime, dispatch_get_main_queue(), {
                 self.getAllCategoriesDataFromLocalDB()
+                self.stopLoadingIndicatorView()
             })
-            
             }, failure: { (responseObject: AnyObject?) in
+                self.stopLoadingIndicatorView()
         })
+        self.startLoadingIndicatorView("Syncing...")
     }
     
     func showAndHideLoginAndSettingsButton() {

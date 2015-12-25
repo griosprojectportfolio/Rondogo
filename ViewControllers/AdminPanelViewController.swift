@@ -21,6 +21,8 @@ class AdminPanelViewController: BaseViewController,UIImagePickerControllerDelega
     var categoryId : NSInteger!
     var subCategoryId : NSInteger!
 
+    // MARK: - View related methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = NSLocalizedString("ADMIN_PANEL",comment: "Admin Panel")
@@ -29,6 +31,16 @@ class AdminPanelViewController: BaseViewController,UIImagePickerControllerDelega
         self.addRightAndLeftNavItemOnView()
         self.applyDefaults()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: - Navigation bar and their action methods
     
     func addRightAndLeftNavItemOnView()
     {
@@ -43,6 +55,8 @@ class AdminPanelViewController: BaseViewController,UIImagePickerControllerDelega
     func leftNavBackButtonTapped(){
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+    // MARK: - View layout setup methods
     
     func applyDefaults(){
     
@@ -95,7 +109,7 @@ class AdminPanelViewController: BaseViewController,UIImagePickerControllerDelega
 
     }
     
-    /* ============= Button Tapped method Start ===================== */
+    // MARK: - Button Tapped methods
     
     func uploadVideoButtonTapped(){
         let savedVideoPicker = UIImagePickerController()
@@ -115,11 +129,7 @@ class AdminPanelViewController: BaseViewController,UIImagePickerControllerDelega
     }
     
     func uploadPdfButtonTapped(){
-        let alert = UIAlertController(  title: "PDF",
-            message:NSLocalizedString("UPLOAD_PDF",comment:"Upload Pdf"),
-            preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK",comment:"Ok"), style: UIAlertActionStyle.Cancel, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.showAlertMsg("PDF", message:NSLocalizedString("UPLOAD_PDF",comment:"Upload Pdf"))
     }
     
     func captureImageButtonTapped(){
@@ -132,11 +142,7 @@ class AdminPanelViewController: BaseViewController,UIImagePickerControllerDelega
             captureImage.allowsEditing = false
             self.presentViewController(captureImage, animated: true, completion: nil)
         }else{
-            let alert = UIAlertController(  title: NSLocalizedString("ALERT",comment:"Alert"),
-                message: NSLocalizedString("CAMERA_NOT_AVAILABLE",comment:"Camera Not Available in Device"),
-                preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK",comment:"Ok"), style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.showAlertMsg(NSLocalizedString("ALERT",comment:"Alert"), message:NSLocalizedString("CAMERA_NOT_AVAILABLE",comment:"Camera Not Available in Device"))
         }
     }
     
@@ -151,17 +157,12 @@ class AdminPanelViewController: BaseViewController,UIImagePickerControllerDelega
             self.presentViewController(captureVideo, animated: false ) { () -> Void in  }
             
         }else{
-            let alert = UIAlertController(  title: NSLocalizedString("ALERT",comment:"Alert"),
-                message: NSLocalizedString("CAMERA_NOT_AVAILABLE",comment:"Camera Not Available in Device"),
-                preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK",comment:"Ok"), style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.showAlertMsg(NSLocalizedString("ALERT",comment:"Alert"), message:NSLocalizedString("CAMERA_NOT_AVAILABLE",comment:"Camera Not Available in Device"))
         }
     }
     
-    /* ============= Button Tapped method End  ===================== */
     
-    /*=================== MARK: UIImagePickerController Delegates start =============*/
+    // MARK: - UIImagePickerController Delegate methods
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
@@ -195,12 +196,6 @@ class AdminPanelViewController: BaseViewController,UIImagePickerControllerDelega
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    /*=================== MARK: UIImagePickerController Delegates End =============*/
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 
 }

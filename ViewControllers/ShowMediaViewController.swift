@@ -56,14 +56,14 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         let leftBarButtonItemback: UIBarButtonItem = UIBarButtonItem(customView: buttonBack)
         self.navigationItem.setLeftBarButtonItem(leftBarButtonItemback, animated: false)
         
-        if self.is_Admin[0] {
+        //if self.is_Admin[0] {
             let buttonShare: UIButton = UIButton(type: UIButtonType.Custom)
             buttonShare.frame = CGRectMake(0, 0, 35, 35)
             buttonShare.setImage(UIImage(named:"icon_admin.png"), forState: UIControlState.Normal)
             buttonShare.addTarget(self, action: "rightNavShareButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
             let rightBarButtonItemShare: UIBarButtonItem = UIBarButtonItem(customView: buttonShare)
             self.navigationItem.setRightBarButtonItem(rightBarButtonItemShare, animated: false)
-        }
+        //}
     }
     
     func leftNavBackButtonTapped(){
@@ -218,9 +218,6 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         case 1 :
             if self.api.isMediaFileExistInDocumentDirectory(objMedia){
                 let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
-                destinationViewController.selectedImage = self.api.getImageFromDocumentDirectoryFileURL(objMedia)
-                destinationViewController.selectedVideoUrl = nil
-                destinationViewController.isMediaTypeImage = objMedia.object_type as Int
                 destinationViewController.socialShareDict = objMedia
                 self.navigationController?.pushViewController(destinationViewController, animated: true)
             }else{
@@ -230,9 +227,6 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         case 2 :
             if self.api.isMediaFileExistInDocumentDirectory(objMedia){
                 let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
-                destinationViewController.selectedImage = nil
-                destinationViewController.selectedVideoUrl = self.api.getDocumentDirectoryFileURL(objMedia)
-                destinationViewController.isMediaTypeImage = objMedia.object_type as Int
                 destinationViewController.socialShareDict = objMedia
                 self.navigationController?.pushViewController(destinationViewController, animated: true)
             }else{
@@ -242,9 +236,6 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         case 3 :
             if self.api.isMediaFileExistInDocumentDirectory(objMedia){
                 let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
-                destinationViewController.selectedImage = nil
-                destinationViewController.selectedVideoUrl = self.api.getDocumentDirectoryFileURL(objMedia)
-                destinationViewController.isMediaTypeImage = objMedia.object_type as Int
                 destinationViewController.socialShareDict = objMedia
                 self.navigationController?.pushViewController(destinationViewController, animated: true)
             }else{

@@ -55,7 +55,7 @@
         if (![[aDictionary objectForKey:@"is_deleted"] isKindOfClass:[NSNull class]])
             obj.is_deleted =[NSNumber numberWithInteger:[[aDictionary objectForKey:@"is_deleted"] integerValue]];
         
-        obj.cat_imageUrl = [NSString stringWithFormat:@"http://192.168.10.40:3000%@",[[aDictionary objectForKey:@"object_data"] objectForKey:@"url"]];
+        obj.cat_imageUrl = [NSString stringWithFormat:@"http://192.168.10.49:3000%@",[[aDictionary objectForKey:@"object_data"] objectForKey:@"url"]];
 
         return obj;
     }

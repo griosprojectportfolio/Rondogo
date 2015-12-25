@@ -17,6 +17,8 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
                                 NSLocalizedString("UPDATE_PROFILE",comment: "Update Profile"),
                                 NSLocalizedString("SIGN_OUT",comment: "Sign Out")]
   
+    // MARK: - View related methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBarHidden = false
@@ -33,6 +35,13 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
       
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    
+    // MARK: - Navigation bar and their action methods
+    
     func addRightAndLeftNavItemOnView()
     {
         let buttonBack: UIButton = UIButton(type: UIButtonType.Custom)
@@ -46,6 +55,8 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
     func leftNavBackButtonTapped(){
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+    // MARK: - View layout setup methods
     
     func applyDefaults(){
         self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y , self.view.frame.width,300 + 5))
@@ -104,16 +115,17 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
         case 1 :
             let objSyncApp : SynchronizeApp = SynchronizeApp()
             objSyncApp.startSyncMethodCall(self, success: { (responseObject: AnyObject?) in
-                
+                    self.stopLoadingIndicatorView()
                 }, failure: { (responseObject: AnyObject?) in
-                    
+                    self.stopLoadingIndicatorView()
             })
+            self.startLoadingIndicatorView("Syncing...")
             self.tblView.deselectRowAtIndexPath(indexPath, animated: true)
             
         case 2 :
             if self.auth_token[0] == "" {
                 self.showAlertMsg("Login required !", message:"Please login to unlock this feature..")
-            }else{
+            }else {
                 let arrFetchedData : NSArray = User.MR_findAll()
                 let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SignUp") as! SignUpViewController
                 destinationViewController.arrUserObject = arrFetchedData
@@ -126,25 +138,7 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
                 self.showAlertMsg("Login required !", message:"Please login to unlock this feature..")
             }else{
                 self.tblView.deselectRowAtIndexPath(indexPath, animated: true)
-                
-                let parameters : NSDictionary = ["auth_token" : self.auth_token[0]]
-                
-                /* Method to Add Custom UIActivityIndicatorView in current screen */
-                activityIndicator = ActivityIndicatorView(frame: self.view.frame)
-                activityIndicator.startActivityIndicator(self)
-                
-                self.api.signOutUser(parameters as [NSObject : AnyObject], success: { (operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
-                    print(responseObject)
-                    self.auth_token = [""]
-                    self.is_Admin = [false]
-                    self.activityIndicator.stopActivityIndicator(self)
-                    self.showSuccessAlertToUser("You are successfully loged out")
-                    },
-                    failure: { (operation: AFHTTPRequestOperation?, error: NSError? ) in
-                        print(error)
-                        self.activityIndicator.stopActivityIndicator(self)
-                        self.showSuccessAlertToUser("Log out have some error")
-                })
+                self.signOutButtonTapped()
             }
             
         default:
@@ -155,11 +149,34 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     
-     // MARK: - Show pop up on success methods
+    // MARK: - Sign out Api call method
+    
+    func signOutButtonTapped(){
+    
+        let parameters : NSDictionary = ["auth_token" : self.auth_token[0]]
+        self.startLoadingIndicatorView("Logout...")
+        
+        self.api.signOutUser(parameters as [NSObject : AnyObject], success: { (operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
+            print(responseObject)
+            self.auth_token = [""]
+            self.is_Admin = [false]
+            self.stopLoadingIndicatorView()
+            self.showSuccessAlertToUser("You are successfully loged out")
+            },
+            failure: { (operation: AFHTTPRequestOperation?, error: NSError? ) in
+                print(error)
+                self.stopLoadingIndicatorView()
+                self.showAlertMsg("Logout !", message: "Logout have some error, please try again later.")
+        })
+        
+    }
+    
+    
+    // MARK: - Common methods
     
     func showSuccessAlertToUser(strMessage : NSString){
         
-        let alert = UIAlertController(title: "Alert", message: strMessage as String, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Rondogo", message: strMessage as String, preferredStyle: UIAlertControllerStyle.Alert)
         self.presentViewController(alert, animated: true, completion: nil)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
@@ -177,8 +194,5 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
         }))
     }
     
-     override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 
 }

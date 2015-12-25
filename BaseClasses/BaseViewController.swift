@@ -101,14 +101,41 @@ class BaseViewController: UIViewController {
         AppApi.sharedClient()
     }
     
+    func animateCurrentViewUpAndDownSide(up:Bool, moveValue :CGFloat){
+        let movementDuration:NSTimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+        UIView.commitAnimations()
+    }
+
+    // MARK: - Show common alert method
+    
     func showAlertMsg(title:String!,message:String!) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+        let okAction = UIAlertAction(title: NSLocalizedString("OK",comment:"Ok"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
             
         }
         alertController.addAction(okAction)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
+    
+    // MARK: - Loading View Add/Remove method
+    
+    func startLoadingIndicatorView(loadMsg: String){
+        dispatch_async(dispatch_get_main_queue(),{
+            QistLoadingOverlay.shared.showOverlay(self.view, lblText: loadMsg)
+        })
+    }
+    
+    func stopLoadingIndicatorView(){
+        dispatch_async(dispatch_get_main_queue(),{
+            QistLoadingOverlay.shared.hideOverlayView()
+        })
+    }
+    
     
     // MARK: - Share media on Facebook
 

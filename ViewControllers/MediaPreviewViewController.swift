@@ -13,28 +13,31 @@ import MediaPlayer
 class MediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
     
     var imagePreview         : UIImageView!
-    var isMediaTypeImage     : Int!
-    var selectedImage        : UIImage!
-    var selectedVideoUrl     : NSURL!
-    
-    var bottomTabBar         : BottomTabBarView!
     var moviePlayer          : MPMoviePlayerController!
     var tempWebView          : UIWebView!
     var socialShareDict      : MediaObject!
+    var bottomTabBar         : BottomTabBarView!
 
+    
+    // MARK: - View related methods
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         self.view.backgroundColor = UIColor().appBackgroundColor()
         self.title =  NSLocalizedString("PREVIEW",comment:"Preview")
         self.addRightAndLeftNavItemOnView()
-        //print(selectedVideoUrl, terminator: "")
         self.applyDefaults()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    // MARK: - Navigation bar and their action methods
     
     func addRightAndLeftNavItemOnView()
     {
@@ -50,27 +53,34 @@ class MediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
         self.navigationController?.popViewControllerAnimated(true)
     }
 
+    // MARK: - View layout setup methods
+    
     func applyDefaults(){
         
-        if isMediaTypeImage == 1 {
-            self.imagePreview = UIImageView(frame: CGRectMake(self.view.frame.origin.x + 10,70, self.view.frame.size.width - 20, 400))
-            self.imagePreview.contentMode = .ScaleAspectFit
-            self.imagePreview.image = selectedImage
-            self.view.addSubview(self.imagePreview)
-        }else if isMediaTypeImage == 3 {
+        let mediaType : Int = self.socialShareDict.object_type as Int
+        
+        if mediaType == 1 {
             
-            var url : NSURL = selectedVideoUrl
-            moviePlayer = MPMoviePlayerController(contentURL: selectedVideoUrl)
+            self.imagePreview = UIImageView(frame: CGRectMake(self.view.frame.origin.x + 10,70, self.view.frame.size.width - 20, self.view.frame.size.height - 130))
+            self.imagePreview.contentMode = .ScaleAspectFit
+            self.imagePreview.image = self.api.getImageFromDocumentDirectoryFileURL(self.socialShareDict)
+            self.view.addSubview(self.imagePreview)
+            
+        }else if mediaType == 3 {
+            
+            let url : NSURL = self.api.getDocumentDirectoryFileURL(self.socialShareDict)
+            moviePlayer = MPMoviePlayerController(contentURL: url)
             moviePlayer.view.frame = CGRect(x: self.view.frame.origin.x + 10, y: 70, width: self.view.frame.size.width - 20, height: 400)
             self.view.addSubview(moviePlayer.view)
             moviePlayer.fullscreen = true
-            //moviePlayer.play()
-            //moviePlayer.controlStyle = MPMovieControlStyle.Embedded
+            moviePlayer.play()
+            moviePlayer.controlStyle = MPMovieControlStyle.Embedded
             moviePlayer.shouldAutoplay = false
-        }else if isMediaTypeImage == 2{
             
-            let url : NSURL = selectedVideoUrl
-            tempWebView = UIWebView(frame: CGRectMake(self.view.frame.origin.x + 10, 70, self.view.frame.size.width - 20, 400))
+        }else if mediaType == 2{
+            
+            let url : NSURL = self.api.getDocumentDirectoryFileURL(self.socialShareDict)
+            tempWebView = UIWebView(frame: CGRectMake(self.view.frame.origin.x + 10, 70, self.view.frame.size.width - 20, self.view.frame.size.height - 130))
             let urlRequest : NSURLRequest = NSURLRequest(URL: url)
             tempWebView.loadRequest(urlRequest)
             self.view.addSubview(tempWebView)
@@ -84,7 +94,7 @@ class MediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
 
     }
     
-    /* BottomTabBarDelegate Delegate Method */
+    // MARK: - BottomTabBarDelegate Delegate Method
     
     func sendTappedButtonTag(sender: AnyObject){
         
@@ -106,13 +116,9 @@ class MediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
                 print("Other Button Tapped")
             }
         }else {
-            let alert:UIAlertView! = UIAlertView(title:"Login required !", message:"Please login to share media on socials.", delegate:nil, cancelButtonTitle:"OK")
-            alert.show()
+            self.showAlertMsg("Login required !", message:"Please login to share media on socials.")
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 
 }
