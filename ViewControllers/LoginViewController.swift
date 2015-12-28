@@ -168,7 +168,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                 self.is_Admin = [admin]
 
                 self.stopLoadingIndicatorView()
-                self.showSuccessAlertToUser("Thanks, You have successfully logged in")
+                self.showSuccessAlertToUser("Welcome,You have successfully logged in.")
                 
                 },
                 failure: { (operation: AFHTTPRequestOperation?, error: NSError? ) in

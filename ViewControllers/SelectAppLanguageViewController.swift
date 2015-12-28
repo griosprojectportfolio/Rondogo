@@ -109,12 +109,12 @@ class SelectAppLanguageViewController: BaseViewController, UITableViewDelegate, 
     
     func appTerminatePopUp(){
         
-        let alert = UIAlertController(title: "Alert!", message:"App needs to be exit within 5 seconds", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Rondogo !", message:"App needs to be exit/quit within 3 seconds", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK",comment:"Ok"), style: UIAlertActionStyle.Cancel, handler: nil))
         
         self.presentViewController(alert, animated: true, completion: {
         
-            let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(5.0 * Double(NSEC_PER_SEC)))
+            let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(3.0 * Double(NSEC_PER_SEC)))
             dispatch_after(dispatchTime, dispatch_get_main_queue(), {
                 exit(0)
             })

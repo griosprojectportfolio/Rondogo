@@ -220,8 +220,9 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
     
     func singleTapHandler(sender: UITapGestureRecognizer) {
         
-        let preSelectedCell : ShowMediaCell = self.tblView.cellForRowAtIndexPath(selectedIndexPath) as! ShowMediaCell
-        preSelectedCell.setSelected(false, animated: true)
+        if let preSelectedCell : ShowMediaCell = self.tblView.cellForRowAtIndexPath(selectedIndexPath) as? ShowMediaCell {
+            preSelectedCell.setSelected(false, animated: true)
+        }
         
         let selectedCell : ShowMediaCell = sender.view as! ShowMediaCell
         let tapIndex : Int = selectedCell.tag

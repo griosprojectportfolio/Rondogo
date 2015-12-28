@@ -161,7 +161,7 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
             self.auth_token = [""]
             self.is_Admin = [false]
             self.stopLoadingIndicatorView()
-            self.showSuccessAlertToUser("You are successfully loged out")
+            self.showSuccessAlertToUser("You are successfully logged out.")
             },
             failure: { (operation: AFHTTPRequestOperation?, error: NSError? ) in
                 print(error)
