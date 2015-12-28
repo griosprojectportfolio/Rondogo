@@ -56,14 +56,14 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         let leftBarButtonItemback: UIBarButtonItem = UIBarButtonItem(customView: buttonBack)
         self.navigationItem.setLeftBarButtonItem(leftBarButtonItemback, animated: false)
         
-        //if self.is_Admin[0] {
+        if self.is_Admin[0] {
             let buttonShare: UIButton = UIButton(type: UIButtonType.Custom)
             buttonShare.frame = CGRectMake(0, 0, 35, 35)
             buttonShare.setImage(UIImage(named:"icon_admin.png"), forState: UIControlState.Normal)
             buttonShare.addTarget(self, action: "rightNavShareButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
             let rightBarButtonItemShare: UIBarButtonItem = UIBarButtonItem(customView: buttonShare)
             self.navigationItem.setRightBarButtonItem(rightBarButtonItemShare, animated: false)
-        //}
+        }
     }
     
     func leftNavBackButtonTapped(){
@@ -183,8 +183,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         
         var cell : ShowMediaCell!
         if cell == nil {
-            cell  = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ShowMediaCell
-            cell.lblDesc.text = ""
+            cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ShowMediaCell
         }
         
         let objMedia : MediaObject = self.arrShowData[indexPath.row] as! MediaObject
@@ -208,44 +207,15 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
     func swipeGestureHandler(sender: UISwipeGestureRecognizer) {
         
         let cell : ShowMediaCell = sender.view as! ShowMediaCell
-        let tapIndex : Int = cell.tag
+        let objMedia : MediaObject = self.arrShowData[cell.tag] as! MediaObject
         
-        let objMedia : MediaObject = self.arrShowData[tapIndex] as! MediaObject
-        let mediaType : Int = objMedia.object_type as Int
-        
-        switch mediaType {
-            
-        case 1 :
-            if self.api.isMediaFileExistInDocumentDirectory(objMedia){
-                let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
-                destinationViewController.socialShareDict = objMedia
-                self.navigationController?.pushViewController(destinationViewController, animated: true)
-            }else{
-                 self.showAlertMsg("Downloading..", message: "Media downloading is in progress.")
-            }
-            
-        case 2 :
-            if self.api.isMediaFileExistInDocumentDirectory(objMedia){
-                let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
-                destinationViewController.socialShareDict = objMedia
-                self.navigationController?.pushViewController(destinationViewController, animated: true)
-            }else{
-                 self.showAlertMsg("Downloading..", message: "Media downloading is in progress.")
-            }
-            
-        case 3 :
-            if self.api.isMediaFileExistInDocumentDirectory(objMedia){
-                let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
-                destinationViewController.socialShareDict = objMedia
-                self.navigationController?.pushViewController(destinationViewController, animated: true)
-            }else{
-                 self.showAlertMsg("Downloading..", message: "Media downloading is in progress.")
-            }
-            
-        default :
-            print("Default button Tapped")
+        if self.api.isMediaFileExistInDocumentDirectory(objMedia){
+            let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MediaPreview") as! MediaPreviewViewController
+            destinationViewController.socialShareDict = objMedia
+            self.navigationController?.pushViewController(destinationViewController, animated: true)
+        }else{
+            self.showAlertMsg("Downloading..", message: "Media downloading is in progress.")
         }
-        
     }
     
     func singleTapHandler(sender: UITapGestureRecognizer) {

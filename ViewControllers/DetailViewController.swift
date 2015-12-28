@@ -71,11 +71,7 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
     func applyDefaults(){
         
         if isiPhone5orLower {
-            if isiPhone4s {
-                self.categoryImageView = UIImageView(frame: CGRectMake(self.view.center.x - 60, 70, 120, 120))
-            }else{
-                self.categoryImageView = UIImageView(frame: CGRectMake(self.view.center.x - 70, 70, 150, 150))
-            }
+            self.categoryImageView = UIImageView(frame: CGRectMake(self.view.center.x - 70, 70, 150, 150))
         }else if isiPhone6 {
             self.categoryImageView = UIImageView(frame: CGRectMake(self.view.center.x - 90, 70, 180, 180))
         }else if isiPhone6plus {
@@ -89,7 +85,7 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
         self.categoryImageView.image = self.categoryImage
         self.view.addSubview(self.categoryImageView)
         
-        collectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x + 20, categoryImageView.frame.height + 100, self.view.frame.size.width - 40, self.view.frame.size.height - (categoryImageView.frame.height + 150)), collectionViewLayout: flowLayout)
+        collectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x + 20, categoryImageView.frame.height + 90, self.view.frame.size.width - 40, self.view.frame.size.height - (categoryImageView.frame.height + 110)), collectionViewLayout: flowLayout)
         collectionView?.registerClass(CollectionCell.self, forCellWithReuseIdentifier: "subCategoryCell")
         collectionView?.delegate = self
         collectionView?.dataSource = self
@@ -158,8 +154,15 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
     
     // MARK: - Some common methods
     func getAllSubCategoriesDataFromLocalDB() {
-        let subCategoryFilter : NSPredicate = NSPredicate(format: "cat_id = %d AND is_deleted = 0",self.categoryId)
-        arrSubCategories = SubCategories.MR_findAllSortedBy("subCat_sequence", ascending: true, withPredicate: subCategoryFilter)
-        self.collectionView.reloadData()
+        
+        self.startLoadingIndicatorView("Loading...")
+        
+        let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            let subCategoryFilter : NSPredicate = NSPredicate(format: "cat_id = %d AND is_deleted = 0",self.categoryId)
+            self.arrSubCategories = SubCategories.MR_findAllSortedBy("subCat_sequence", ascending: true, withPredicate: subCategoryFilter)
+            self.collectionView.reloadData()
+            self.stopLoadingIndicatorView()
+        })
     }
 }

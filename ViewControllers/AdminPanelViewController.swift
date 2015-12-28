@@ -85,12 +85,14 @@ class AdminPanelViewController: BaseViewController,UIImagePickerControllerDelega
         
         self.btnUploadVideo.setTitle(NSLocalizedString("UPLOAD_VIDEO",comment:"Upload Video"), forState: .Normal)
         self.btnUploadVideo.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        self.btnUploadVideo.titleLabel?.font = UIFont.boldSystemFontOfSize(17.0)
         self.btnUploadVideo.setBackgroundImage(imgButtonBGImage, forState: .Normal)
         self.btnUploadVideo.addTarget(self, action: "uploadVideoButtonTapped", forControlEvents:.TouchUpInside)
         self.view.addSubview(self.btnUploadVideo)
         
         self.btnUploadImages.setTitle(NSLocalizedString("UPLOAD_IMAGE",comment:"Upload Image"), forState: .Normal)
         self.btnUploadImages.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        self.btnUploadImages.titleLabel?.font = UIFont.boldSystemFontOfSize(17.0)
         self.btnUploadImages.setBackgroundImage(imgButtonBGImage, forState: .Normal)
         self.btnUploadImages.addTarget(self, action: "uploadImageButtonTapped", forControlEvents:.TouchUpInside)
         self.view.addSubview(self.btnUploadImages)
@@ -98,12 +100,14 @@ class AdminPanelViewController: BaseViewController,UIImagePickerControllerDelega
         self.btnCaptureVideo.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         self.btnCaptureVideo.setTitle(NSLocalizedString("CAPTURE_VIDEO",comment:"Capture Video"), forState: .Normal)
         self.btnCaptureVideo.setBackgroundImage(imgButtonBGImage, forState: .Normal)
+        self.btnCaptureVideo.titleLabel?.font = UIFont.boldSystemFontOfSize(17.0)
         self.btnCaptureVideo.addTarget(self, action: "captureVideoButtonTapped", forControlEvents:.TouchUpInside)
         self.view.addSubview(self.btnCaptureVideo)
 
         self.btnCaptureImage.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         self.btnCaptureImage.setTitle(NSLocalizedString("CAPTURE_IMAGE",comment:"Capture Image"), forState: .Normal)
         self.btnCaptureImage.setBackgroundImage(imgButtonBGImage, forState: .Normal)
+        self.btnCaptureImage.titleLabel?.font = UIFont.boldSystemFontOfSize(17.0)
         self.btnCaptureImage.addTarget(self, action: "captureImageButtonTapped", forControlEvents:.TouchUpInside)
         self.view.addSubview(self.btnCaptureImage)
 

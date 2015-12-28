@@ -44,43 +44,33 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
         
         if isiPhone5orLower{
             
-            if isiPhone4s{
-                self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 70, 40, 150, 150))
-                self.btnLogin = UIButton(frame: CGRectMake(20, 390 , 80, 80))
-                self.btnSettings = UIButton(frame: CGRectMake(220, 390 , 80, 80))
-            }else{
-                self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 70, 40, 150, 150))
-                self.btnLogin = UIButton(frame: CGRectMake(20, 420 + 20, 80, 80))
-                self.btnSettings = UIButton(frame: CGRectMake(220, 420 + 20, 80, 80))
-            }
+            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 70, 40, 150, 150))
+            self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 85, 80, 80))
+            self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 100, self.view.frame.size.height - 85, 80, 80))
             
         }else if isiPhone6{
             
             self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 90, 40, 180, 180))
-            self.btnLogin = UIButton(frame: CGRectMake(20, 520, 100, 100))
-            self.btnSettings = UIButton(frame: CGRectMake(260, 520, 100, 100))
+            self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 105, 100, 100))
+            self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 120, self.view.frame.size.height - 105, 100, 100))
             
         }else if isiPhone6plus{
             
             self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 90, 40, 200, 200))
-            self.btnLogin = UIButton(frame: CGRectMake(20, 580, 100, 100))
-            self.btnSettings = UIButton(frame: CGRectMake(280, 580, 100, 100))
+            self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 105, 100, 100))
+            self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 120, self.view.frame.size.height - 105, 100, 100))
             
-        }else if isiPadAir2 {
+        }else {
             
             self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 110, 40, 200, 200))
-            self.btnLogin = UIButton(frame: CGRectMake(20+170, 580, 100, 100))
-            self.btnSettings = UIButton(frame: CGRectMake(280+170, 580, 100, 100))
-        }else{
-            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 110, 40, 200, 200))
-            self.btnLogin = UIButton(frame: CGRectMake(20+170, 580, 100, 100))
-            self.btnSettings = UIButton(frame: CGRectMake(280+170, 580, 100, 100))
+            self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 105, 100, 100))
+            self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 120, self.view.frame.size.height - 105, 100, 100))
         }
         
         self.logoImageView.image = UIImage (named: "HomePageLogo.png")
         self.view.addSubview(self.logoImageView)
         
-        collectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x + 20, self.logoImageView.frame.size.height + 80, self.view.frame.size.width - 40, 250), collectionViewLayout: flowLayout)
+        collectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x + 20, self.logoImageView.frame.size.height + 60, self.view.frame.size.width - 40, self.view.frame.size.height - (self.logoImageView.frame.size.height + 70 + self.btnLogin.frame.size.height)), collectionViewLayout: flowLayout)
         collectionView?.registerClass(CollectionCell.self, forCellWithReuseIdentifier: "categoryCell")
         collectionView?.delegate = self
         collectionView?.dataSource = self
@@ -190,7 +180,7 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
             }, failure: { (responseObject: AnyObject?) in
                 self.stopLoadingIndicatorView()
         })
-        self.startLoadingIndicatorView("Syncing...")
+        self.startLoadingIndicatorView("Loading...")
     }
     
     func showAndHideLoginAndSettingsButton() {

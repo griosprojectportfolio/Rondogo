@@ -124,7 +124,7 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
             
         case 2 :
             if self.auth_token[0] == "" {
-                self.showAlertMsg("Login required !", message:"Please login to unlock this feature..")
+                self.showAlertMsg("Login required !", message:"Please login to unlock this feature.")
             }else {
                 let arrFetchedData : NSArray = User.MR_findAll()
                 let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SignUp") as! SignUpViewController
@@ -135,7 +135,7 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
             
         case 3 :
             if self.auth_token[0] == "" {
-                self.showAlertMsg("Login required !", message:"Please login to unlock this feature..")
+                self.showAlertMsg("Login required !", message:"Please login to unlock this feature.")
             }else{
                 self.tblView.deselectRowAtIndexPath(indexPath, animated: true)
                 self.signOutButtonTapped()

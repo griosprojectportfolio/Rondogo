@@ -22,9 +22,9 @@ class SynchronizeApp: NSObject {
         
         if arrFetchedData.count != 0 {
             let timeStampObject : TimeStamp = arrFetchedData.objectAtIndex(0) as! TimeStamp
-            parameters["object_info[time]"] = timeStampObject.last_sync_date
+            parameters["time"] = timeStampObject.last_sync_date
         }else{
-            parameters["object_info[time]"] = ""
+            parameters["time"] = ""
         }
         
         // To get All object of Object Table during sync Sync

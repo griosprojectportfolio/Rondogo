@@ -425,11 +425,11 @@ static NSString * const kAppMediaBaseURLString = @"http://192.168.10.49:3000";
                     [MediaObject entityFromArray:arrResponse inContext:localContext];
                 }];
                 successBlock(task, responseObject);
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             }
             @catch (NSException *exception) {
                 [self processExceptionBlock:task blockException:exception];
             }
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }
     } failure:^(AFHTTPRequestOperation *task, NSError *error) {
         if(failureBlock){
