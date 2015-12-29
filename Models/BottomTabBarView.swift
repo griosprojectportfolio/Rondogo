@@ -175,10 +175,14 @@ class BottomTabBarView: UIView,CLLocationManagerDelegate, UIDocumentInteractionC
             
             if let dirs : [String] = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) {
                 let dir = dirs[0] //documents directory
-                let path = dir.stringByAppendingString(file as String);
+                let path = dir.stringByAppendingString("/\(file as String)");
                 
                 let destDir : NSString = "/"
                 self.restClient.uploadFile(file as String, toPath: destDir as String, withParentRev:nil ,fromPath: path)
+                
+                let alert : UIAlertView = UIAlertView( title: "Dropbox", message: "Successfully shared on Dropbox.", delegate: nil, cancelButtonTitle: "Ok")
+                alert.show()
+
             }
         }
         

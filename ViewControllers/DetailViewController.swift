@@ -36,13 +36,13 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
         self.title = strNavigationTittle
         self.navigationController?.navigationBarHidden = false
         self.addRightAndLeftNavItemOnView()
+        self.applyDefaults()
+        self.getAllSubCategoriesDataFromLocalDB()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBarHidden = false
-        self.applyDefaults()
-        self.getAllSubCategoriesDataFromLocalDB()
     }
     
     override func didReceiveMemoryWarning() {
