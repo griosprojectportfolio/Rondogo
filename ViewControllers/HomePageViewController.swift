@@ -17,7 +17,6 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
     var btnLogin            : UIButton!
     var btnSettings         : UIButton!
     var arrCategories       : NSArray = NSArray()
-    var cellImageCache = [String:UIImage]()
 
     // MARK: - Current view related methods
     override func viewDidLoad() {
@@ -123,33 +122,12 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
         cell.configureCellLayout(cell.frame)
         let urlString : String = objCategory.cat_imageUrl
         
-        cell.imageView.image = nil
-        // If this image is already cached, don't re-download
-        if let img = self.cellImageCache[urlString] {
-            cell.imageView?.image = img
-        }
-        else {
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                if let url = NSURL(string: urlString) {
-                    if let data = NSData(contentsOfURL: url){
-                        // Convert the downloaded data in to a UIImage object
-                        let image = UIImage(data: data)
-                        // Store the image in to our cache
-                        self.cellImageCache[urlString] = image
-                        // Update the cell
-                        dispatch_async(dispatch_get_main_queue(), {
-                            if let cellToUpdate : CollectionCell = self.collectionView!.cellForItemAtIndexPath(indexPath) as? CollectionCell {
-                                cellToUpdate.imageView.contentMode = UIViewContentMode.ScaleAspectFit
-                                cellToUpdate.imageView.image = image
-                            }
-                            if self.arrCategories.count == indexPath.row + 1 {
-                                self.stopLoadingIndicatorView()
-                            }
-                        })
-                    }
-                }
-            })
-        }
+        //cell.imageView.image = nil
+        cell.imageView.sd_setImageWithURL(NSURL(string: urlString), placeholderImage: nil , completed:{(image: UIImage?, error: NSError?, cacheType: SDImageCacheType!, imageURL: NSURL?) in
+            if self.arrCategories.count == indexPath.row + 1 {
+                self.stopLoadingIndicatorView()
+            }
+        })
         
         return cell
     }
@@ -202,8 +180,12 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
             strLanguage = "English"
         }
         let categoryFilter : NSPredicate = NSPredicate(format: "cat_language = %@ AND is_deleted = 0",strLanguage)
-        arrCategories = Categories.MR_findAllSortedBy("cat_sequence", ascending: true, withPredicate: categoryFilter)
-        self.collectionView.reloadData()
+        self.arrCategories = Categories.MR_findAllSortedBy("cat_sequence", ascending: true, withPredicate: categoryFilter)
+        if self.arrCategories.count != 0 {
+            self.collectionView.reloadData()
+        }else {
+            self.stopLoadingIndicatorView()
+        }
     }
     
 }

@@ -28,7 +28,6 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
     var categoryImage : UIImage!
     
     var arrSubCategories     : NSArray = NSArray()
-    var cellImageCache = [String:UIImage]()
 
     // MARK: - View related methods
     override func viewDidLoad() {
@@ -116,32 +115,11 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
         let urlString : String = objSubCategory.subCat_imageUrl
         
         //cell.imageView.image = nil
-        // If this image is already cached, don't re-download
-        if let img = self.cellImageCache[urlString] {
-            cell.imageView?.image = img
-        }
-        else {
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                if let url = NSURL(string: urlString) {
-                    if let data = NSData(contentsOfURL: url){
-                        // Convert the downloaded data in to a UIImage object
-                        let image = UIImage(data: data)
-                        // Store the image in to our cache
-                        self.cellImageCache[urlString] = image
-                        // Update the cell
-                        dispatch_async(dispatch_get_main_queue(), {
-                            if let cellToUpdate : CollectionCell = self.collectionView!.cellForItemAtIndexPath(indexPath) as? CollectionCell {
-                                cellToUpdate.imageView.contentMode = UIViewContentMode.ScaleAspectFit
-                                cellToUpdate.imageView.image = image
-                            }
-                            if self.arrSubCategories.count == indexPath.row + 1 {
-                                self.stopLoadingIndicatorView()
-                            }
-                        })
-                    }
-                }
-            })
-        }
+        cell.imageView.sd_setImageWithURL(NSURL(string: urlString), placeholderImage: nil , completed:{(image: UIImage?, error: NSError?, cacheType: SDImageCacheType!, imageURL: NSURL?) in
+            if self.arrSubCategories.count == indexPath.row + 1 {
+                self.stopLoadingIndicatorView()
+            }
+        })
         
         return cell
     }
@@ -160,6 +138,10 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
         self.startLoadingIndicatorView("Loading...")
         let subCategoryFilter : NSPredicate = NSPredicate(format: "cat_id = %d AND is_deleted = 0",self.categoryId)
         self.arrSubCategories = SubCategories.MR_findAllSortedBy("subCat_sequence", ascending: true, withPredicate: subCategoryFilter)
-        self.collectionView.reloadData()
+        if self.arrSubCategories.count != 0 {
+            self.collectionView.reloadData()
+        }else {
+            self.stopLoadingIndicatorView()
+        }
     }
 }
