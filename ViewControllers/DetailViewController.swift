@@ -115,7 +115,7 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
         cell.configureCellLayout(cell.frame)
         let urlString : String = objSubCategory.subCat_imageUrl
         
-        cell.imageView.image = nil
+        //cell.imageView.image = nil
         // If this image is already cached, don't re-download
         if let img = self.cellImageCache[urlString] {
             cell.imageView?.image = img
@@ -133,6 +133,9 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
                             if let cellToUpdate : CollectionCell = self.collectionView!.cellForItemAtIndexPath(indexPath) as? CollectionCell {
                                 cellToUpdate.imageView.contentMode = UIViewContentMode.ScaleAspectFit
                                 cellToUpdate.imageView.image = image
+                            }
+                            if self.arrSubCategories.count == indexPath.row + 1 {
+                                self.stopLoadingIndicatorView()
                             }
                         })
                     }
@@ -154,15 +157,9 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
     
     // MARK: - Some common methods
     func getAllSubCategoriesDataFromLocalDB() {
-        
         self.startLoadingIndicatorView("Loading...")
-        
-        let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC)))
-        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-            let subCategoryFilter : NSPredicate = NSPredicate(format: "cat_id = %d AND is_deleted = 0",self.categoryId)
-            self.arrSubCategories = SubCategories.MR_findAllSortedBy("subCat_sequence", ascending: true, withPredicate: subCategoryFilter)
-            self.collectionView.reloadData()
-            self.stopLoadingIndicatorView()
-        })
+        let subCategoryFilter : NSPredicate = NSPredicate(format: "cat_id = %d AND is_deleted = 0",self.categoryId)
+        self.arrSubCategories = SubCategories.MR_findAllSortedBy("subCat_sequence", ascending: true, withPredicate: subCategoryFilter)
+        self.collectionView.reloadData()
     }
 }

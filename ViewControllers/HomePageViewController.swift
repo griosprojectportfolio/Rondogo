@@ -142,6 +142,9 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
                                 cellToUpdate.imageView.contentMode = UIViewContentMode.ScaleAspectFit
                                 cellToUpdate.imageView.image = image
                             }
+                            if self.arrCategories.count == indexPath.row + 1 {
+                                self.stopLoadingIndicatorView()
+                            }
                         })
                     }
                 }
@@ -175,7 +178,6 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
             let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(2.0 * Double(NSEC_PER_SEC)))
             dispatch_after(dispatchTime, dispatch_get_main_queue(), {
                 self.getAllCategoriesDataFromLocalDB()
-                self.stopLoadingIndicatorView()
             })
             }, failure: { (responseObject: AnyObject?) in
                 self.stopLoadingIndicatorView()

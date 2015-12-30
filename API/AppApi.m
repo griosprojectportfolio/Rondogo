@@ -9,10 +9,10 @@
 #import "AppApi.h"
 
 /* API Constants */
-static NSString * const kAppAPIBaseURLString = @"http://192.168.10.49:3000/api/v1";
-static NSString * const kAppMediaBaseURLString = @"http://192.168.10.49:3000";
+//static NSString * const kAppAPIBaseURLString = @"http://192.168.10.49:3000/api/v1";
+//static NSString * const kAppMediaBaseURLString = @"http://192.168.10.49:3000";
 
-//static NSString * const kAppAPIBaseURLString = @"https://rondogo.herokuapp.com/api/v1";
+static NSString * const kAppAPIBaseURLString = @"https://rondogo.herokuapp.com/api/v1";
 
 @interface AppApi ()
 
@@ -79,11 +79,11 @@ static NSString * const kAppMediaBaseURLString = @"http://192.168.10.49:3000";
                     [User entityFromArray:[NSArray arrayWithArray:arrResponse] inContext:localContext];
                 }];
                 successBlock(task, responseObject);
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             }
             @catch (NSException *exception) {
                 [self processExceptionBlock:task blockException:exception];
             }
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }
     } failure:^(AFHTTPRequestOperation *task, NSError *error) {
         if(failureBlock){
@@ -116,11 +116,11 @@ static NSString * const kAppMediaBaseURLString = @"http://192.168.10.49:3000";
                     [User entityFromArray:[NSArray arrayWithArray:arrResponse] inContext:localContext];
                 }];
                 successBlock(task, responseObject);
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             }
             @catch (NSException *exception) {
                 [self processExceptionBlock:task blockException:exception];
             }
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }
     } failure:^(AFHTTPRequestOperation *task, NSError *error) {
         if(failureBlock){
@@ -154,11 +154,11 @@ static NSString * const kAppMediaBaseURLString = @"http://192.168.10.49:3000";
                     [User entityFromArray:[NSArray arrayWithArray:arrResponse] inContext:localContext];
                 }];
                 successBlock(task, responseObject);
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             }
             @catch (NSException *exception) {
                 [self processExceptionBlock:task blockException:exception];
             }
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }
     } failure:^(AFHTTPRequestOperation *task, NSError *error) {
         if(failureBlock){
@@ -184,11 +184,11 @@ static NSString * const kAppMediaBaseURLString = @"http://192.168.10.49:3000";
             @try {
                 NSLog(@"forget_password");
                 successBlock(task, responseObject);
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             }
             @catch (NSException *exception) {
                 [self processExceptionBlock:task blockException:exception];
             }
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }
     } failure:^(AFHTTPRequestOperation *task, NSError *error) {
         if(failureBlock){
@@ -220,11 +220,11 @@ static NSString * const kAppMediaBaseURLString = @"http://192.168.10.49:3000";
                 }
                 [self deleteAllEntityObjects];
                 successBlock(task, responseObject);
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             }
             @catch (NSException *exception) {
                 [self processExceptionBlock:task blockException:exception];
             }
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }
     } failure:^(AFHTTPRequestOperation *task, NSError *error) {
         if(failureBlock){
@@ -240,7 +240,8 @@ static NSString * const kAppMediaBaseURLString = @"http://192.168.10.49:3000";
 - (AFHTTPRequestOperation *)getAllCategories:(NSDictionary *)aParams
                                      success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
                                      failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
-    
+
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSString *url = [NSString stringWithFormat:@"%@/categories",kAppAPIBaseURLString];
     
     return [self GET:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
@@ -255,11 +256,13 @@ static NSString * const kAppMediaBaseURLString = @"http://192.168.10.49:3000";
             @catch (NSException *exception) {
                 [self processExceptionBlock:task blockException:exception];
             }
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }
     } failure:^(AFHTTPRequestOperation *task, NSError *error) {
         if(failureBlock){
             [self processFailureBlock:task blockError:error];
             failureBlock(task, error);
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }
     }];
 }
@@ -268,6 +271,7 @@ static NSString * const kAppMediaBaseURLString = @"http://192.168.10.49:3000";
                                         success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
                                         failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
     
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSString *url = [NSString stringWithFormat:@"%@/sub_categories",kAppAPIBaseURLString];
     
     return [self GET:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
@@ -282,11 +286,13 @@ static NSString * const kAppMediaBaseURLString = @"http://192.168.10.49:3000";
             @catch (NSException *exception) {
                 [self processExceptionBlock:task blockException:exception];
             }
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }
     } failure:^(AFHTTPRequestOperation *task, NSError *error) {
         if(failureBlock){
             [self processFailureBlock:task blockError:error];
             failureBlock(task, error);
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }
     }];
 }
@@ -298,6 +304,7 @@ static NSString * const kAppMediaBaseURLString = @"http://192.168.10.49:3000";
                                   success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
                                   failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
     
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSString *url = [NSString stringWithFormat:@"%@/media_objects",kAppAPIBaseURLString];
     
     return [self GET:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
@@ -321,11 +328,13 @@ static NSString * const kAppMediaBaseURLString = @"http://192.168.10.49:3000";
             @catch (NSException *exception) {
                 [self processExceptionBlock:task blockException:exception];
             }
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }
     } failure:^(AFHTTPRequestOperation *task, NSError *error) {
         if(failureBlock){
             [self processFailureBlock:task blockError:error];
             failureBlock(task, error);
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }
     }];
 }
