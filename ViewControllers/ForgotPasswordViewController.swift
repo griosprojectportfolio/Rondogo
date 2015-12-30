@@ -62,6 +62,7 @@ class ForgotPasswordViewController: BaseViewController,UITextFieldDelegate {
         self.recoveryEmailIdTxt.attributedPlaceholder = emailPlaceholder;
         self.recoveryEmailIdTxt.autocapitalizationType = UITextAutocapitalizationType.None
         self.recoveryEmailIdTxt.delegate = self
+        self.recoveryEmailIdTxt.keyboardType = .EmailAddress
         self.recoveryEmailIdTxt.layer.cornerRadius = 3
         self.recoveryEmailIdTxt.backgroundColor = UIColor.lightGrayColor()
         self.view.addSubview(self.recoveryEmailIdTxt)

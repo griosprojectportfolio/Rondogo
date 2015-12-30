@@ -113,6 +113,7 @@ class SignUpViewController: BaseViewController, UIScrollViewDelegate, UITextFiel
         self.emailTxt.attributedPlaceholder = emailPlaceholder
         self.emailTxt.autocapitalizationType = UITextAutocapitalizationType.None
         self.emailTxt.delegate = self
+        self.emailTxt.keyboardType = .EmailAddress
         self.emailTxt.layer.cornerRadius = 3
         self.emailTxt.backgroundColor = UIColor.lightGrayColor()
         self.scrollView.addSubview(self.emailTxt)
