@@ -96,6 +96,8 @@ class ForgotPasswordViewController: BaseViewController,UITextFieldDelegate {
     
     func forgotPasswordButtonTapped(){
         
+        self.recoveryEmailIdTxt.resignFirstResponder()
+        
         let parameters : NSDictionary = [ "user[email]" : recoveryEmailIdTxt.text! ]
         
         if isEnteredEmailBlankOrInValid(){

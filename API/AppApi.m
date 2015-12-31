@@ -387,7 +387,9 @@ static NSString * const kAppAPIBaseURLString = @"https://rondogo.herokuapp.com/a
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"successful download to %@", mediaPath);
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        [self fileRenameFunction:mediaPath];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self fileRenameFunction:mediaPath];
+        });
         successBlock(operation, responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;

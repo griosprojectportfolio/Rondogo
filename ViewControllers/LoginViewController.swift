@@ -152,6 +152,9 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     func loginButtonTapped(){
         
+        self.userNameTxt.resignFirstResponder()
+        self.passwordTxt.resignFirstResponder()
+        
         let parameters : NSDictionary = ["user[email]": userNameTxt.text!, "user[password]": passwordTxt.text!]
         
         if isEnteredDataBlankOrInValid() {
