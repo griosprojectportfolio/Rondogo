@@ -81,8 +81,15 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
         self.btnLogin.addTarget(self, action: "btnLink1ButtonTapped", forControlEvents:.TouchUpInside)
         self.view.addSubview(self.btnLogin)
         
-        let imgSetings = UIImage(named:  "icon_settings.png") as UIImage?
-        self.btnSettings.setImage(imgSetings, forState: .Normal)
+        if selectedLanguage.isEqualToString(hebrew) {
+            let imgSetings = UIImage(named:  "icon_settings_hebrew") as UIImage?
+            self.btnSettings.setImage(imgSetings, forState: .Normal)
+        }else{
+            let imgSetings = UIImage(named:  "icon_settings_english") as UIImage?
+            self.btnSettings.setImage(imgSetings, forState: .Normal)
+        }
+        //let imgSetings = UIImage(named:  "icon_settings.png") as UIImage?
+        
         self.btnSettings.addTarget(self, action: "btnLink3ButtonTapped", forControlEvents:.TouchUpInside)
         self.view.addSubview(self.btnSettings)
         

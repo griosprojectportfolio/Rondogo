@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A4704121C524B1B00500F8C /* icon_settings_english.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4704101C524B1B00500F8C /* icon_settings_english.png */; };
+		0A4704131C524B1B00500F8C /* icon_settings_hebrew.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4704111C524B1B00500F8C /* icon_settings_hebrew.png */; };
 		170ED2EE1C2951C900C8736F /* Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 170ED2EC1C2951C900C8736F /* Categories.m */; };
 		170ED2F41C29523800C8736F /* SubCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 170ED2F21C29523800C8736F /* SubCategories.m */; };
 		1717143D1C34021400006305 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1717141D1C34021400006305 /* MKAnnotationView+WebCache.m */; };
@@ -94,6 +96,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A4704101C524B1B00500F8C /* icon_settings_english.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_settings_english.png; sourceTree = "<group>"; };
+		0A4704111C524B1B00500F8C /* icon_settings_hebrew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_settings_hebrew.png; sourceTree = "<group>"; };
 		170ED2EB1C2951C900C8736F /* Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Categories.h; sourceTree = "<group>"; };
 		170ED2EC1C2951C900C8736F /* Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Categories.m; sourceTree = "<group>"; };
 		170ED2F11C29523800C8736F /* SubCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCategories.h; sourceTree = "<group>"; };
@@ -452,6 +456,8 @@
 		1750404A1AB9B7A80041AE2A /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				0A4704101C524B1B00500F8C /* icon_settings_english.png */,
+				0A4704111C524B1B00500F8C /* icon_settings_hebrew.png */,
 				1750404B1AB9B7B90041AE2A /* icon_settings.png */,
 				1750404D1AB9BAF70041AE2A /* icon_bookTicket.png */,
 				1750404F1AB9C0860041AE2A /* icon_login.png */,
@@ -583,6 +589,7 @@
 				1729C0E71AAEF427009FA46E /* icon_back.png in Resources */,
 				17C7B2161C1EEDF400B18A6B /* icon_facebook.png in Resources */,
 				17C3855C1AB191D600B6B8FD /* Localizable.strings in Resources */,
+				0A4704131C524B1B00500F8C /* icon_settings_hebrew.png in Resources */,
 				174E7F3B1AA6D822000807C1 /* Main.storyboard in Resources */,
 				1750404C1AB9B7B90041AE2A /* icon_settings.png in Resources */,
 				174137C51AC693B9003126BD /* icon_admin.png in Resources */,
@@ -597,6 +604,7 @@
 				174F77C01AE4E49500AE51FE /* Default-1104h@2x.png in Resources */,
 				17C0B8591AC01F380044D3B5 /* icon_adminPanel.png in Resources */,
 				1750404E1AB9BAF70041AE2A /* icon_bookTicket.png in Resources */,
+				0A4704121C524B1B00500F8C /* icon_settings_english.png in Resources */,
 				174E7F3D1AA6D822000807C1 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
