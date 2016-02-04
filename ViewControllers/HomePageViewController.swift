@@ -43,25 +43,25 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
         
         if isiPhone5orLower{
             
-            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 70, 40, 150, 150))
+            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 125, 40, 250, 150))
             self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 85, 80, 80))
             self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 100, self.view.frame.size.height - 85, 80, 80))
             
         }else if isiPhone6{
             
-            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 90, 40, 180, 180))
+            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 140, 40, 280, 180))
             self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 105, 100, 100))
             self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 120, self.view.frame.size.height - 105, 100, 100))
             
         }else if isiPhone6plus{
             
-            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 90, 40, 200, 200))
+            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 150, 40, 300, 200))
             self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 105, 100, 100))
             self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 120, self.view.frame.size.height - 105, 100, 100))
             
         }else {
             
-            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 110, 40, 200, 200))
+            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 165, 40, 300, 200))
             self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 105, 100, 100))
             self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 120, self.view.frame.size.height - 105, 100, 100))
         }
@@ -84,9 +84,13 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
         if selectedLanguage.isEqualToString(hebrew) {
             let imgSetings = UIImage(named:  "icon_settings_hebrew") as UIImage?
             self.btnSettings.setImage(imgSetings, forState: .Normal)
+            let imgLogin = UIImage(named:  "hebrew_login_icon") as UIImage?
+            self.btnLogin.setImage(imgLogin, forState: .Normal)
         }else{
             let imgSetings = UIImage(named:  "icon_settings_english") as UIImage?
             self.btnSettings.setImage(imgSetings, forState: .Normal)
+            let imgLogin = UIImage(named:  "icon_login.png") as UIImage?
+            self.btnLogin.setImage(imgLogin, forState: .Normal)
         }
         //let imgSetings = UIImage(named:  "icon_settings.png") as UIImage?
         
@@ -132,6 +136,9 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
         //cell.imageView.image = nil
         cell.imageView.sd_setImageWithURL(NSURL(string: urlString), placeholderImage: nil , completed:{(image: UIImage?, error: NSError?, cacheType: SDImageCacheType!, imageURL: NSURL?) in
             if self.arrCategories.count == indexPath.row + 1 {
+                self.stopLoadingIndicatorView()
+            }
+            if self.isiPhone4s{
                 self.stopLoadingIndicatorView()
             }
         })

@@ -63,14 +63,14 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         if isiPhone5orLower{
             
             if isiPhone4s {
-                self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 60, 75, 120, 120))
+                self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 110, 75, 220, 120))
                 self.userNameTxt = TextField(frame: CGRectMake(0, 230 , self.view.frame.size.width, 50))
                 self.passwordTxt = TextField(frame: CGRectMake(0, 281 , self.view.frame.size.width, 50))
                 self.loginBtn = UIButton(frame: CGRectMake(0, 340 , self.view.frame.size.width, 50))
                 self.signUpBtn = UIButton(frame: CGRectMake(0, 400 , self.view.frame.size.width, 50))
                 
             }else{
-                self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 75, 75, 150, 150))
+                self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 125, 75, 250, 150))
                 self.userNameTxt = TextField(frame: CGRectMake(0, 230 + 30, self.view.frame.size.width, 50))
                 self.passwordTxt = TextField(frame: CGRectMake(0, 281  + 30, self.view.frame.size.width, 50))
                 self.loginBtn = UIButton(frame: CGRectMake(0, 340  + 30, self.view.frame.size.width, 50))
@@ -78,14 +78,14 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             }
             
         }else if isiPhone6{
-            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 90, 90, 180, 180))
+            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 140, 90, 280, 180))
             self.userNameTxt = TextField(frame: CGRectMake(0, 300 + 30, self.view.frame.size.width, 50))
             self.passwordTxt = TextField(frame: CGRectMake(0, 351 + 30, self.view.frame.size.width, 50))
             self.loginBtn = UIButton(frame: CGRectMake(0, 410 + 30, self.view.frame.size.width, 50))
             self.signUpBtn = UIButton(frame: CGRectMake(0, 470 + 30, self.view.frame.size.width, 50))
             
         }else{
-            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 90, 90, 200, 200))
+            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 150, 90, 300, 200))
             self.userNameTxt = TextField(frame: CGRectMake(0, 370 + 30, self.view.frame.size.width, 50))
             self.passwordTxt = TextField(frame: CGRectMake(0, 421 + 30, self.view.frame.size.width, 50))
             self.loginBtn = UIButton(frame: CGRectMake(0, 480 + 30, self.view.frame.size.width, 50))
