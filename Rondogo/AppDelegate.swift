@@ -12,10 +12,12 @@ import CoreData
  let apiKey : NSString = "69kfq4gc62233vv"
  let apiSecret : NSString = "2iwlc4h77t4pq0k"
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var restricRotation : Bool = true
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -53,6 +55,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         self.saveContext()
+    }
+
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+        if restricRotation {
+            return UIInterfaceOrientationMask.Portrait
+        }else{
+            return UIInterfaceOrientationMask.Landscape
+        }
+
     }
  
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {

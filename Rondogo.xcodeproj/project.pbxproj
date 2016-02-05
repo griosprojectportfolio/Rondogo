@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0A4704121C524B1B00500F8C /* icon_settings_english.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4704101C524B1B00500F8C /* icon_settings_english.png */; };
 		0A4704131C524B1B00500F8C /* icon_settings_hebrew.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A4704111C524B1B00500F8C /* icon_settings_hebrew.png */; };
+		0A6A526A1C6358830016D44E /* hebrew_login_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6A52691C6358830016D44E /* hebrew_login_icon.png */; };
+		0A6A526E1C6381BE0016D44E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6A526B1C6381BE0016D44E /* Default-568h@2x.png */; };
+		0A6A526F1C6381BE0016D44E /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6A526C1C6381BE0016D44E /* Default-667h@2x.png */; };
+		0A6A52701C6381BE0016D44E /* Default-1104h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6A526D1C6381BE0016D44E /* Default-1104h@2x.png */; };
 		170ED2EE1C2951C900C8736F /* Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 170ED2EC1C2951C900C8736F /* Categories.m */; };
 		170ED2F41C29523800C8736F /* SubCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 170ED2F21C29523800C8736F /* SubCategories.m */; };
 		1717143D1C34021400006305 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1717141D1C34021400006305 /* MKAnnotationView+WebCache.m */; };
@@ -52,9 +56,6 @@
 		174E7F401AA6D822000807C1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 174E7F3E1AA6D822000807C1 /* LaunchScreen.xib */; };
 		174E7F4C1AA6D822000807C1 /* RondogoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174E7F4B1AA6D822000807C1 /* RondogoTests.swift */; };
 		174E7F5B1AA6D92B000807C1 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174E7F5A1AA6D92B000807C1 /* HomePageViewController.swift */; };
-		174F77BE1AE4E49500AE51FE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174F77BB1AE4E49500AE51FE /* Default-568h@2x.png */; };
-		174F77BF1AE4E49500AE51FE /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174F77BC1AE4E49500AE51FE /* Default-667h@2x.png */; };
-		174F77C01AE4E49500AE51FE /* Default-1104h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 174F77BD1AE4E49500AE51FE /* Default-1104h@2x.png */; };
 		175040371AB948C80041AE2A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175040361AB948C80041AE2A /* CFNetwork.framework */; };
 		175040391AB948D80041AE2A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175040381AB948D80041AE2A /* Security.framework */; };
 		1750403B1AB948E90041AE2A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1750403A1AB948E90041AE2A /* SystemConfiguration.framework */; };
@@ -98,6 +99,10 @@
 /* Begin PBXFileReference section */
 		0A4704101C524B1B00500F8C /* icon_settings_english.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_settings_english.png; sourceTree = "<group>"; };
 		0A4704111C524B1B00500F8C /* icon_settings_hebrew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_settings_hebrew.png; sourceTree = "<group>"; };
+		0A6A52691C6358830016D44E /* hebrew_login_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hebrew_login_icon.png; sourceTree = "<group>"; };
+		0A6A526B1C6381BE0016D44E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		0A6A526C1C6381BE0016D44E /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
+		0A6A526D1C6381BE0016D44E /* Default-1104h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-1104h@2x.png"; sourceTree = "<group>"; };
 		170ED2EB1C2951C900C8736F /* Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Categories.h; sourceTree = "<group>"; };
 		170ED2EC1C2951C900C8736F /* Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Categories.m; sourceTree = "<group>"; };
 		170ED2F11C29523800C8736F /* SubCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCategories.h; sourceTree = "<group>"; };
@@ -169,9 +174,6 @@
 		174E7F4A1AA6D822000807C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		174E7F4B1AA6D822000807C1 /* RondogoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RondogoTests.swift; sourceTree = "<group>"; };
 		174E7F5A1AA6D92B000807C1 /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
-		174F77BB1AE4E49500AE51FE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		174F77BC1AE4E49500AE51FE /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
-		174F77BD1AE4E49500AE51FE /* Default-1104h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-1104h@2x.png"; sourceTree = "<group>"; };
 		175040361AB948C80041AE2A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		175040381AB948D80041AE2A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1750403A1AB948E90041AE2A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -446,9 +448,9 @@
 		174F77BA1AE4E48100AE51FE /* SplashImages */ = {
 			isa = PBXGroup;
 			children = (
-				174F77BB1AE4E49500AE51FE /* Default-568h@2x.png */,
-				174F77BC1AE4E49500AE51FE /* Default-667h@2x.png */,
-				174F77BD1AE4E49500AE51FE /* Default-1104h@2x.png */,
+				0A6A526B1C6381BE0016D44E /* Default-568h@2x.png */,
+				0A6A526C1C6381BE0016D44E /* Default-667h@2x.png */,
+				0A6A526D1C6381BE0016D44E /* Default-1104h@2x.png */,
 			);
 			path = SplashImages;
 			sourceTree = "<group>";
@@ -456,6 +458,7 @@
 		1750404A1AB9B7A80041AE2A /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				0A6A52691C6358830016D44E /* hebrew_login_icon.png */,
 				0A4704101C524B1B00500F8C /* icon_settings_english.png */,
 				0A4704111C524B1B00500F8C /* icon_settings_hebrew.png */,
 				1750404B1AB9B7B90041AE2A /* icon_settings.png */,
@@ -593,15 +596,16 @@
 				174E7F3B1AA6D822000807C1 /* Main.storyboard in Resources */,
 				1750404C1AB9B7B90041AE2A /* icon_settings.png in Resources */,
 				174137C51AC693B9003126BD /* icon_admin.png in Resources */,
-				174F77BF1AE4E49500AE51FE /* Default-667h@2x.png in Resources */,
 				17C563C11AB849AC0046E714 /* icon_dropBox.png in Resources */,
 				174E7F401AA6D822000807C1 /* LaunchScreen.xib in Resources */,
 				17C563C21AB849AC0046E714 /* icon_viber.png in Resources */,
 				17C563C31AB849AC0046E714 /* icon_waze.png in Resources */,
-				174F77BE1AE4E49500AE51FE /* Default-568h@2x.png in Resources */,
 				175040501AB9C0860041AE2A /* icon_login.png in Resources */,
+				0A6A52701C6381BE0016D44E /* Default-1104h@2x.png in Resources */,
+				0A6A526E1C6381BE0016D44E /* Default-568h@2x.png in Resources */,
 				1729C0E51AAEF327009FA46E /* icon_share.png in Resources */,
-				174F77C01AE4E49500AE51FE /* Default-1104h@2x.png in Resources */,
+				0A6A526A1C6358830016D44E /* hebrew_login_icon.png in Resources */,
+				0A6A526F1C6381BE0016D44E /* Default-667h@2x.png in Resources */,
 				17C0B8591AC01F380044D3B5 /* icon_adminPanel.png in Resources */,
 				1750404E1AB9BAF70041AE2A /* icon_bookTicket.png in Resources */,
 				0A4704121C524B1B00500F8C /* icon_settings_english.png in Resources */,
