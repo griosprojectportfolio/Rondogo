@@ -1,6 +1,6 @@
 //
-//  QistSocials.swift
-//  Qist
+//  RondogoSocials.swift
+//  Rondogo
 //
 //  Created by GrepRuby3 on 17/09/15.
 //  Copyright (c) 2015 GrepRuby3. All rights reserved.
@@ -23,7 +23,7 @@ protocol twitterDataDelegate{
     func failedToGettwitterUserData(errorMessage : String)
 }
 
-class QistSocials : NSObject {
+class RondogoSocials : NSObject {
     
     var acAcount : ACAccount = ACAccount()
     var accountStore : ACAccountStore  = ACAccountStore()
@@ -33,16 +33,18 @@ class QistSocials : NSObject {
     var fbDelegate : facebookDataDelegate?
     var twDelegate : twitterDataDelegate?
     
+    
     // MARK: - Facebook User's basic Information
+    
     func getFacebookUsersBasicInformation(){
         
         print(SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook))
         
-        /*if !SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
+        if !SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
             
             self.fbDelegate?.failedToGetFacebookUserData("The accounts must be setup under settings. After login from settings again tapped this button to connect through Facebook via app.")
             
-        }else{*/
+        }else{
             
             let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierFacebook)
             print(accountType)
@@ -84,10 +86,12 @@ class QistSocials : NSObject {
                 
             })
             
-        //}
+        }
     }
     
+    
     // MARK: - Twitter User's basic Information
+    
     func getTwittweUsersBasicInformation(){
         
         if !SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){

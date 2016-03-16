@@ -9,12 +9,13 @@
 import UIKit
 import Foundation
 
-class HomePageViewController: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class HomePageViewController: BaseViewController, facebookDataDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     var logoImageView       : UIImageView!
     var collectionView      : UICollectionView!
     let flowLayout          : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     var btnLogin            : UIButton!
+    var btnFbLogin          : UIButton!
     var btnSettings         : UIButton!
     var arrCategories       : NSArray = NSArray()
 
@@ -24,7 +25,7 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
         self.applyDefaults()
         self.loadMediaDataFromServer()
         self.navigationController?.navigationBarHidden = true
-
+        self.social.fbDelegate = self
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -63,24 +64,28 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
 
             self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 125, 40, 250, 150))
             self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 85, 80, 80))
+            self.btnFbLogin = UIButton(frame: CGRectMake(self.view.center.x - 40, self.view.frame.size.height - 105, 80, 80))
             self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 100, self.view.frame.size.height - 85, 80, 80))
 
         }else if isiPhone6{
 
             self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 140, 40, 280, 180))
             self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 105, 100, 100))
+            self.btnFbLogin = UIButton(frame: CGRectMake(self.view.center.x - 50, self.view.frame.size.height - 105, 100, 100))
             self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 120, self.view.frame.size.height - 105, 100, 100))
 
         }else if isiPhone6plus{
 
             self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 150, 40, 300, 200))
             self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 105, 100, 100))
+            self.btnFbLogin = UIButton(frame: CGRectMake(self.view.center.x - 50, self.view.frame.size.height - 105, 100, 100))
             self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 120, self.view.frame.size.height - 105, 100, 100))
 
         }else {
 
             self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 165, 40, 300, 200))
             self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 105, 100, 100))
+            self.btnFbLogin = UIButton(frame: CGRectMake(self.view.center.x - 50, self.view.frame.size.height - 105, 100, 100))
             self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 120, self.view.frame.size.height - 105, 100, 100))
         }
 
@@ -111,7 +116,11 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
             self.btnLogin.setImage(imgLogin, forState: .Normal)
         }
         //let imgSetings = UIImage(named:  "icon_settings.png") as UIImage?
-
+        
+        self.btnFbLogin.addTarget(self, action: "loginViaFacebookButtonTapped:", forControlEvents:.TouchUpInside)
+        self.btnFbLogin.setBackgroundImage(UIImage(named: "icon_fb_login") as UIImage?, forState: .Normal)
+        self.view.addSubview(self.btnFbLogin)
+        
         self.btnSettings.addTarget(self, action: "btnLink3ButtonTapped", forControlEvents:.TouchUpInside)
         self.view.addSubview(self.btnSettings)
 
@@ -129,6 +138,12 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
         self.navigationController?.pushViewController(destinationViewController, animated: true)
     }
 
+    
+    // MARK: -  Social Integration Methods
+    @IBAction func loginViaFacebookButtonTapped(sender: UIButton) {
+        self.startLoadingIndicatorView("Registering..")
+        self.social.getFacebookUsersBasicInformation()
+    }
 
     // MARK: - Collection view Delegate method
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -177,8 +192,59 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
         self.navigationController?.pushViewController(destinationViewController, animated: true)
     }
 
+    
+    // MARK: - facebookDataDelegate Delegate Methods
+    
+    func currentFacebookUserData(dictResponse: NSDictionary) {
+        
+        let parameters : NSMutableDictionary = self.getFilteredParamsForLoginViaFacebook(dictResponse)
+        
+        self.api.signViaFacebook(parameters as [NSObject : AnyObject], success: { ( operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
+            
+                let dictResponse : NSDictionary = responseObject as! NSDictionary
+                let token : NSString = (dictResponse.objectForKey("data") as! NSDictionary).objectForKey("auth_token") as! NSString
+                self.auth_token = [token]
+                self.stopLoadingIndicatorView()
+                self.showAndHideLoginAndSettingsButton()
+                self.showAlertMsg("Facebook !", message: "Your are successfully logged in.")
+            },
+            failure: { ( operation: AFHTTPRequestOperation?, error: NSError? ) in
+                print(error)
+                self.stopLoadingIndicatorView()
+                self.showAlertMsg("Facebook !", message: "Login via Facebook have some error, please try again later.")
+        })
+    }
+    
+    func failedToGetFacebookUserData(errorMessage:String) {
+        self.stopLoadingIndicatorView()
+        self.showAlertMsg("Facebook !", message: errorMessage)
+    }
+    
+    func getFilteredParamsForLoginViaFacebook(dictProfile: NSDictionary) -> NSMutableDictionary {
+        
+        let dictParams : NSMutableDictionary = ["user[first_name]": "", "user[last_name]": "", "user[email]": "", "user[password]": "", "user[confirm_password]": ""]
+        
+        if let facebook_id : String = dictProfile["id"] as? String {
+            dictParams["user[facebook_id]"] = facebook_id
+            dictParams["user[password]"] = facebook_id
+            dictParams["user[confirm_password]"] = facebook_id
+        }
+        if let first_name : String = dictProfile["first_name"] as? String {
+            dictParams["user[first_name]"] = first_name
+        }
+        if let last_name : String = dictProfile["last_name"] as? String {
+            dictParams["user[last_name]"] = last_name
+        }
+        if let email : String = dictProfile["email"] as? String {
+            dictParams["user[email]"] = email
+        }else {
+            dictParams["user[email]"] = "\(dictProfile["id"] as! String)@rondogo.com"
+        }
+        return dictParams
+    }
 
     // MARK: - Some common methods
+    
     func loadMediaDataFromServer(){
 
         let objSyncApp : SynchronizeApp = SynchronizeApp()
@@ -198,8 +264,10 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
     func showAndHideLoginAndSettingsButton() {
         if self.auth_token[0] == "" {
             self.btnLogin.hidden = false
+            self.btnFbLogin.hidden = false
         }else {
             self.btnLogin.hidden = true
+            self.btnFbLogin.hidden = true
         }
     }
 
@@ -219,5 +287,5 @@ class HomePageViewController: BaseViewController, UICollectionViewDataSource, UI
             self.stopLoadingIndicatorView()
         }
     }
-    
+
 }

@@ -257,12 +257,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
                     self.showAlertMsg("Choose Media !", message: "Please tap on any media to choose and share.")
                 }
                 
-            case 1 :
-                if self.socialShareMedia != nil {
-                    self.shareMediaOnFacebook(self.socialShareMedia)
-                }else{
-                    self.showAlertMsg("Choose Media !", message: "Please tap on any media to choose and share.")
-                }
+            case 1 : self.openDefaultFacebookPage()
                 
             case 2 :
                 if self.socialShareMedia != nil {

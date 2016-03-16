@@ -124,7 +124,7 @@ class MediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
 
             case 0 : bottomTabBar.btnWhatsAppTapped(self.socialShareDict)
 
-            case 1 : self.shareMediaOnFacebook(self.socialShareDict)
+            case 1 : self.openDefaultFacebookPage()
 
             case 2 : bottomTabBar.btnDropBoxTapped(self.socialShareDict, viewController: self)
 

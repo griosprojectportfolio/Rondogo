@@ -131,6 +131,43 @@ static NSString * const kAppAPIBaseURLString = @"https://rondogo.herokuapp.com/a
     }];
 }
 
+
+
+#pragma mark- Signup via Facebook method
+
+- (AFHTTPRequestOperation *)signViaFacebook:(NSDictionary *)aParams
+                               success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
+                               failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock{
+    
+    NSString *url = [NSString stringWithFormat:@"%@/sessions/fb_login",kAppAPIBaseURLString];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    return [self POST:url parameters:aParams success:^(AFHTTPRequestOperation *task, id responseObject) {
+        if(successBlock){
+            @try {
+                NSLog(@"Signup via Facebook");
+                NSMutableArray *arrResponse = [[NSMutableArray alloc] init];
+                [arrResponse addObject:[responseObject valueForKey:@"user"]];
+                [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                    [User entityFromArray:[NSArray arrayWithArray:arrResponse] inContext:localContext];
+                }];
+                successBlock(task, responseObject);
+            }
+            @catch (NSException *exception) {
+                [self processExceptionBlock:task blockException:exception];
+            }
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        }
+    } failure:^(AFHTTPRequestOperation *task, NSError *error) {
+        if(failureBlock){
+            [self processFailureBlock:task blockError:error];
+            failureBlock(task, error);
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        }
+    }];
+}
+
+
 #pragma mark- Update user information method
 
 - (AFHTTPRequestOperation *)updateUser:(NSDictionary *)aParams

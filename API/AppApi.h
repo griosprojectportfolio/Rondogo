@@ -35,6 +35,10 @@
                               success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
                               failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock;
 
+- (AFHTTPRequestOperation *)signViaFacebook:(NSDictionary *)aParams
+                                    success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
+                                    failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock;
+
 - (AFHTTPRequestOperation *)updateUser:(NSDictionary *)aParams
                                success:(void (^)(AFHTTPRequestOperation *task, id responseObject))successBlock
                                failure:(void (^)(AFHTTPRequestOperation *task, NSError *error))failureBlock;

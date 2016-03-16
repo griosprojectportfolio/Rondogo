@@ -20,6 +20,7 @@ class BaseViewController: UIViewController {
     let hebrew : String     =   "he"
     let selectedLanguage : NSString = NSLocale.preferredLanguages()[0] as NSString
     
+    let social : RondogoSocials = RondogoSocials()
     let api : AppApi = AppApi()
     
     
@@ -137,6 +138,12 @@ class BaseViewController: UIViewController {
         ]
         self.presentViewController(activityVC, animated: true, completion: nil)
         
+    }
+    
+    func openDefaultFacebookPage() {
+        if let url : NSURL = NSURL(string: "https://www.facebook.com/groups/mysterious.figure/")! {
+            UIApplication.sharedApplication().openURL(url)
+        }
     }
     
 }
