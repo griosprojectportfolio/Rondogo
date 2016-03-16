@@ -20,6 +20,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
     var subCategoryId : NSInteger!
     
     var singleTapGesture : UITapGestureRecognizer!
+    var doubleTapGesture : UITapGestureRecognizer!
     var leftSwipeGesture : UISwipeGestureRecognizer!
     var selectedIndexPath : NSIndexPath = NSIndexPath( forRow: 0, inSection: 0)
     
@@ -187,10 +188,10 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         }
         
         let objMedia : MediaObject = self.arrShowData[indexPath.row] as! MediaObject
-        
-        leftSwipeGesture = UISwipeGestureRecognizer(target: self, action: "swipeGestureHandler:")
-        leftSwipeGesture.direction = .Left
-        cell.addGestureRecognizer(leftSwipeGesture)
+
+        doubleTapGesture = UITapGestureRecognizer(target: self, action: "doubleTapHandler:")
+        doubleTapGesture.numberOfTapsRequired = 2
+        cell.addGestureRecognizer(doubleTapGesture)
 
         singleTapGesture = UITapGestureRecognizer(target: self, action: "singleTapHandler:")
         singleTapGesture.numberOfTapsRequired = 1
@@ -204,7 +205,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
     
     // MARK: - Cell Tap Gesture and Swipe Gesture methods
     
-    func swipeGestureHandler(sender: UISwipeGestureRecognizer) {
+    func doubleTapHandler(sender: UITapGestureRecognizer) {
         
         let cell : ShowMediaCell = sender.view as! ShowMediaCell
         let objMedia : MediaObject = self.arrShowData[cell.tag] as! MediaObject

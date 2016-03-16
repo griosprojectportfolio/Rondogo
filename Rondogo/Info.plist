@@ -26,6 +26,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>db-69kfq4gc62233vv</string>
+				<string>viber://</string>
 			</array>
 		</dict>
 	</array>
