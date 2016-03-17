@@ -8,8 +8,90 @@
 
 /* Navigation Tittles */
 
+/* Old
+
 REGISTER = "הרשמה";
 TREASURE_HUNT = "אוצר היסט)ו(רי";
+NIGHT_STAR = "כוכב לערב אחד";
+MISSIONN_POSSIBLE = "אקשן. המשימה... אפשרית!";
+COPS_AND_ROBBERS = "שוטרים וגנבים";
+YOUR_RACE = "במרוץ שלכם";
+TIMELESS_ROPES = "חֶבֶל על הזמן";
+ADMIN_PANEL = "פנל ניהול";
+UPLOAD = "העלאה";
+PREVIEW = "תצוגה מקדימה";
+SETTINGS = "הגדרות";
+CHOOSE_LANGUAGE = "בחר את השפה";
+TICKET_BOOKING = "הזמנת כרטיסים";
+ALL_MEDIA = "כל המדיה";
+
+// UIAlertView Strings
+
+OK = "אוקי";
+ALERT = "התראה";
+CAMERA_NOT_AVAILABLE = "מצלמה לא זמינה בהתקן";
+UPLOAD_ON_SERVER = "להעלות לשרת";
+
+// Login Page Strings
+
+USER_NAME = "שם משתמש";
+PASSWORD = "סיסמא";
+SIGNIN = "כניסה";
+LOGIN = "Log In";
+LOGIN_WITH_FACEBOOK = "התחבר עם פייסבוק";
+SIGNUP = "הירשם";
+FORGOT_PASSWORD = "שכחת את סיסמא";
+
+// Sign Up page Strings
+
+FIRST_NAME = "שם פרטים";
+LAST_NAME = "שם משפחה";
+EMAIL = "דוא";
+CONTACT_NUMBER = "צור קשר עם מספר";
+CONFIRM_PASSWORD = "אשר סיסמא";
+SIGNUP_WITH_FACEBOOK = "הרשמה דרך פייסבוק";
+UPDATE = "עדכון";
+
+// Settings Page Strings
+
+APPLICATION_LANGUAGES = "שפות יישום";
+SYNC_APP = "סנכרון אפליקציה";
+SET_AUTO_SYNC_DURATION = "להגדיר משך סנכרון האוטומטי";
+UPDATE_PROFILE = "עדכון פרופיל";
+SIGN_OUT = "התנתק";
+
+// Change Application Languadge Page Strings
+
+ENGLISH = "אנגלית";
+HEBREW = "עברית";
+
+// Upload Media Page Strings
+
+UPLOAD_VIDEO = "העלאת וידאו";
+UPLOAD_IMAGE = "טעינת תמונה";
+UPLOAD_PDF = "ההעלאה PDF";
+CAPTURE_IMAGE = "לכידת תמונה";
+CAPTURE_VIDEO = "לכידת וידאו";
+
+// Media PreView Page Strings
+
+WHATS_APP = "Whats App";
+VIBER = "Viber";
+DROPBOX = "Dropbox";
+FACEBOOK = "FaceBook";
+CANCEL = "לבטל";
+
+// Alet Message
+
+There_is_no_data_for_english = "אין נתונים לאנגלית.";
+There_is_no_data_for_Hebrew = "אין נתונים לעברית.";
+
+user_not_login = "בבקשה התחבר קודם.";
+
+*/
+
+REGISTER = "הרשמה";
+TREASURE_HUNT = "אוצר היסט(ו)רי";
 NIGHT_STAR = "כוכב לערב אחד";
 MISSIONN_POSSIBLE = "אקשן. המשימה... אפשרית!";
 COPS_AND_ROBBERS = "שוטרים וגנבים";
@@ -35,26 +117,26 @@ UPLOAD_ON_SERVER = "להעלות לשרת";
 USER_NAME = "שם משתמש";
 PASSWORD = "סיסמא";
 SIGNIN = "כניסה";
-LOGIN = "Log In";
+LOGIN = "התחבר";
 LOGIN_WITH_FACEBOOK = "התחבר עם פייסבוק";
 SIGNUP = "הירשם";
-FORGOT_PASSWORD = "שכחת את סיסמא";
+FORGOT_PASSWORD = "שכחתי את הסיסמא";
 
 /* Sign Up page Strings */
 
-FIRST_NAME = "שם פרטים";
+FIRST_NAME = "שם פרטי";
 LAST_NAME = "שם משפחה";
 EMAIL = "דוא";
-CONTACT_NUMBER = "צור קשר עם מספר";
+CONTACT_NUMBER = "מספר טלפון";
 CONFIRM_PASSWORD = "אשר סיסמא";
 SIGNUP_WITH_FACEBOOK = "הרשמה דרך פייסבוק";
 UPDATE = "עדכון";
 
 /* Settings Page Strings */
 
-APPLICATION_LANGUAGES = "שפות יישום";
+APPLICATION_LANGUAGES = "שפת היישום";
 SYNC_APP = "סנכרון אפליקציה";
-SET_AUTO_SYNC_DURATION = "להגדיר משך סנכרון האוטומטי";
+SET_AUTO_SYNC_DURATION = " הגדרת משך סנכרון אוטומטי";
 UPDATE_PROFILE = "עדכון פרופיל";
 SIGN_OUT = "התנתק";
 
@@ -66,8 +148,8 @@ HEBREW = "עברית";
 /* Upload Media Page Strings */
 
 UPLOAD_VIDEO = "העלאת וידאו";
-UPLOAD_IMAGE = "טעינת תמונה";
-UPLOAD_PDF = "ההעלאה PDF";
+UPLOAD_IMAGE = "העלאת תמונה";
+UPLOAD_PDF = "PDF העלאת";
 CAPTURE_IMAGE = "לכידת תמונה";
 CAPTURE_VIDEO = "לכידת וידאו";
 
@@ -85,3 +167,4 @@ There_is_no_data_for_english = "אין נתונים לאנגלית.";
 There_is_no_data_for_Hebrew = "אין נתונים לעברית.";
 
 user_not_login = "בבקשה התחבר קודם.";
+

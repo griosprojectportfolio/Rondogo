@@ -211,7 +211,12 @@ class HomePageViewController: BaseViewController, facebookDataDelegate, UICollec
             failure: { ( operation: AFHTTPRequestOperation?, error: NSError? ) in
                 print(error)
                 self.stopLoadingIndicatorView()
-                self.showAlertMsg("Facebook !", message: "Login via Facebook have some error, please try again later.")
+                do {
+                    let dictUser : AnyObject = try NSJSONSerialization.JSONObjectWithData(operation!.responseData, options: NSJSONReadingOptions.MutableLeaves)
+                    self.showAlertMsg("Facebook !", message: dictUser["info"] as! String)
+                }catch {
+                    self.showAlertMsg("Facebook !", message: "Signup via facebook have some error, please try again later.")
+                }
         })
     }
     
