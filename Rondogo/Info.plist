@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.5</string>
+	<string>2.6</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -26,7 +26,6 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>db-69kfq4gc62233vv</string>
-				<string>viber://</string>
 			</array>
 		</dict>
 		<dict>
@@ -39,7 +38,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2.5</string>
+	<string>2.6</string>
 	<key>FacebookAppID</key>
 	<string>845037175595425</string>
 	<key>FacebookDisplayName</key>
@@ -69,8 +68,6 @@
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 </dict>

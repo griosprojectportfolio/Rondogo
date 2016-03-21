@@ -64,7 +64,7 @@ class HomePageViewController: BaseViewController, facebookDataDelegate, UICollec
 
             self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 125, 40, 250, 150))
             self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 85, 80, 80))
-            self.btnFbLogin = UIButton(frame: CGRectMake(self.view.center.x - 40, self.view.frame.size.height - 105, 80, 80))
+            self.btnFbLogin = UIButton(frame: CGRectMake(self.view.center.x - 40, self.view.frame.size.height - 85, 80, 80))
             self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 100, self.view.frame.size.height - 85, 80, 80))
 
         }else if isiPhone6{
