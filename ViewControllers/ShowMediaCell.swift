@@ -7,15 +7,23 @@
 //
 
 import Foundation
+import UIKit
+
+protocol showMediaCellDelegate {
+    func cellDownloadButtonTapped(intIndex: Int)
+}
 
 class ShowMediaCell: UITableViewCell {
     
     let api : AppApi = AppApi()
+    var btnDownload : UIButton = UIButton()
     var imagePreView : UIImageView = UIImageView()
     var videoPreView : UIImageView = UIImageView()
     var pdfPreView : UIWebView = UIWebView()
     var lblDesc : UILabel = UILabel()
-        
+    var showMediaDelegate: showMediaCellDelegate?
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -31,11 +39,15 @@ class ShowMediaCell: UITableViewCell {
         cell.pdfPreView.removeFromSuperview()
     }
     
-    
+    func downloadButtonTapped() {
+        showMediaDelegate?.cellDownloadButtonTapped(self.tag)
+    }
+
     func configureShowMediaTableViewCell(cell:ShowMediaCell, objMedia: MediaObject) {
     
         let mediaName : NSString = objMedia.object_name
         let mediaType : Int = objMedia.object_type as Int
+        var isDownloaded : Bool = false
         
         self.resetAllViewObjects(cell)
         
@@ -48,6 +60,7 @@ class ShowMediaCell: UITableViewCell {
                 imagePreView.frame = CGRectMake(self.frame.origin.x + 20, y, self.frame.size.width - 40, 150)
                 imagePreView.contentMode = .ScaleAspectFit
                 if(self.api.isMediaFileExistInDocumentDirectory(objMedia)){
+                    isDownloaded = true
                     imagePreView.image = UIImage(data: NSData(contentsOfURL: self.api.getDocumentDirectoryFileURL(objMedia))!)
                 }
                 cell.contentView.addSubview(imagePreView)
@@ -63,6 +76,7 @@ class ShowMediaCell: UITableViewCell {
                 pdfPreView.frame = CGRectMake(self.frame.origin.x + 20, y, self.frame.size.width - 40, 150)
                 pdfPreView.userInteractionEnabled = false
                 if(self.api.isMediaFileExistInDocumentDirectory(objMedia)){
+                    isDownloaded = true
                     let urlRequest : NSURLRequest = NSURLRequest(URL: self.api.getDocumentDirectoryFileURL(objMedia))
                     pdfPreView.loadRequest(urlRequest)
                 }
@@ -91,5 +105,16 @@ class ShowMediaCell: UITableViewCell {
             print("Default button Tapped")
         }
 
+        if (!isDownloaded) {
+            self.btnDownload.frame = CGRectMake(self.frame.size.width - 53, 5, 48, 48)
+            self.btnDownload.addTarget(self, action: "downloadButtonTapped", forControlEvents:.TouchUpInside)
+            self.btnDownload.setImage(UIImage( named: "icon_download"), forState: .Normal)
+            cell.contentView.addSubview(self.btnDownload)
+        }else {
+            self.btnDownload.removeFromSuperview()
+        }
+
     }
+    
+    
 }

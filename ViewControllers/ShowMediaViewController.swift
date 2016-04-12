@@ -9,7 +9,7 @@
 import Foundation
 import MediaPlayer
 
-class ShowMediaViewController: BaseViewController, UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ShowMediaViewController: BaseViewController, showMediaCellDelegate, UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var tblView : UITableView!
     
@@ -136,52 +136,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate,UITableV
         self.tblView.separatorColor = UIColor.whiteColor()
         self.view.addSubview(self.tblView)
         
-        downlaodAllMediaDataInDocumentDirectory(self.arrShowData ,success: { (responseObject: AnyObject?) in
-                self.tblView.reloadData()
-            },failure: { (responseObject: AnyObject?) in
-        })
     }
-    
-    
-    // MARK: -  Custom Methods to Download Data methods
-    
-    func downlaodAllMediaDataInDocumentDirectory(list: NSArray, success:((responseObject: AnyObject? ) -> Void)?, failure:((error: NSError? ) -> Void)? ){
-        
-        for (index, _) in list.enumerate() {
-            
-            let objMedia : MediaObject = list[index] as! MediaObject
-            
-            if !self.api.isMediaFileExistInDocumentDirectory(objMedia){
-              
-                self.api.downloadMediaData(objMedia, success: { (operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
-                    
-                    if index == list.count - 1 {
-                        if let success = success {
-                            success(responseObject: responseObject)
-                        }
-                    }
-                    },
-                    failure: { (operation: AFHTTPRequestOperation?, error: NSError? ) in
-                        print(error)
-                })
-            }
-            else{
-                if index == list.count - 1 {
-                    if let success = success {
-                        success(responseObject: nil)
-                    }
-                }
-            }
-        }
-        
-        if list.count == 0{
-            if let failure = failure{
-                failure(error: nil)
-            }
-        }
-    }
-    
-    
     
     // MARK: - TableView Delegate and Data Source Method
     
@@ -199,13 +154,14 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate,UITableV
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        let objMedia : MediaObject = self.arrShowData[indexPath.row] as! MediaObject
+
         var cell : ShowMediaCell!
         if cell == nil {
             cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ShowMediaCell
         }
-        
-        let objMedia : MediaObject = self.arrShowData[indexPath.row] as! MediaObject
         cell.tag = indexPath.row
+        cell.showMediaDelegate = self
         cell.selectionStyle = .None
         cell.configureShowMediaTableViewCell(cell, objMedia: objMedia)
         return cell
@@ -219,11 +175,31 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate,UITableV
             destinationViewController.socialShareDict = objMedia
             self.navigationController?.pushViewController(destinationViewController, animated: true)
         }else{
-            self.showAlertMsg("Downloading..", message: "Media downloading is in progress.")
+            self.showAlertMsg("Download", message: "Please download to view selected media.")
         }
     }
     
+    // MARK: - showMediaCellDelegate methods
     
+    func cellDownloadButtonTapped(intIndex: Int) {
+    
+        if let objMedia : MediaObject = self.arrShowData[intIndex] as? MediaObject {
+            self.startLoadingIndicatorView("Downloading..")
+            if !self.api.isMediaFileExistInDocumentDirectory(objMedia) {
+                self.api.downloadMediaData(objMedia, success: { (operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
+                    dispatch_async(dispatch_get_main_queue(),{
+                        self.tblView.reloadData()
+                        self.stopLoadingIndicatorView()
+                    })
+                },
+                failure: { (operation: AFHTTPRequestOperation?, error: NSError? ) in
+                    self.stopLoadingIndicatorView()
+                })
+            }
+        }
+    }
+    
+
     // MARK: - UIImagePickerController setup and Delegate methods
 
     func openCameraToCaptureImage(){
