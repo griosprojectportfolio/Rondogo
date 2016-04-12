@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class HomePageViewController: BaseViewController, facebookDataDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class HomePageViewController: BaseViewController, facebookDataDelegate, homePageCellDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     var logoImageView       : UIImageView!
     var collectionView      : UICollectionView!
@@ -40,8 +40,8 @@ class HomePageViewController: BaseViewController, facebookDataDelegate, UICollec
     }
 
     override func viewDidAppear(animated: Bool) {
-//        let value = UIInterfaceOrientation.Portrait.rawValue
-//        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+        // let value = UIInterfaceOrientation.Portrait.rawValue
+        // UIDevice.currentDevice().setValue(value, forKey: "orientation")
     }
 
     override func shouldAutorotate() -> Bool {
@@ -62,28 +62,28 @@ class HomePageViewController: BaseViewController, facebookDataDelegate, UICollec
 
         if isiPhone5orLower{
 
-            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 125, 40, 250, 150))
+            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 125, 20, 250, 150))
             self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 85, 80, 80))
             self.btnFbLogin = UIButton(frame: CGRectMake(self.view.center.x - 40, self.view.frame.size.height - 85, 80, 80))
             self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 100, self.view.frame.size.height - 85, 80, 80))
 
         }else if isiPhone6{
 
-            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 140, 40, 280, 180))
+            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 140, 20, 280, 180))
             self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 105, 100, 100))
             self.btnFbLogin = UIButton(frame: CGRectMake(self.view.center.x - 50, self.view.frame.size.height - 105, 100, 100))
             self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 120, self.view.frame.size.height - 105, 100, 100))
 
         }else if isiPhone6plus{
 
-            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 150, 40, 300, 200))
+            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 150, 20, 300, 200))
             self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 105, 100, 100))
             self.btnFbLogin = UIButton(frame: CGRectMake(self.view.center.x - 50, self.view.frame.size.height - 105, 100, 100))
             self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 120, self.view.frame.size.height - 105, 100, 100))
 
         }else {
 
-            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 165, 40, 300, 200))
+            self.logoImageView = UIImageView(frame: CGRectMake(self.view.center.x - 165, 20, 300, 200))
             self.btnLogin = UIButton(frame: CGRectMake(self.view.frame.origin.x + 20, self.view.frame.size.height - 105, 100, 100))
             self.btnFbLogin = UIButton(frame: CGRectMake(self.view.center.x - 50, self.view.frame.size.height - 105, 100, 100))
             self.btnSettings = UIButton(frame: CGRectMake(self.view.frame.size.width - 120, self.view.frame.size.height - 105, 100, 100))
@@ -92,10 +92,11 @@ class HomePageViewController: BaseViewController, facebookDataDelegate, UICollec
         self.logoImageView.image = UIImage (named: "HomePageLogo.png")
         self.view.addSubview(self.logoImageView)
 
-        collectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x + 20, self.logoImageView.frame.size.height + 60, self.view.frame.size.width - 40, self.view.frame.size.height - (self.logoImageView.frame.size.height + 70 + self.btnLogin.frame.size.height)), collectionViewLayout: flowLayout)
+        collectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x + 20, self.logoImageView.frame.size.height + 20, self.view.frame.size.width - 40, self.view.frame.size.height - (self.logoImageView.frame.size.height + 50 + self.btnLogin.frame.size.height)), collectionViewLayout: flowLayout)
         collectionView?.registerClass(CollectionCell.self, forCellWithReuseIdentifier: "categoryCell")
         collectionView?.delegate = self
         collectionView?.dataSource = self
+        collectionView.scrollEnabled = false
         collectionView?.backgroundColor = UIColor.clearColor()
         self.view.addSubview(collectionView!)
 
@@ -155,7 +156,7 @@ class HomePageViewController: BaseViewController, facebookDataDelegate, UICollec
     }
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: self.collectionView.frame.size.width / 3.5, height: self.collectionView.frame.size.width / 3.5);
+        return CGSize(width: self.collectionView.frame.size.width / 2.1, height: self.collectionView.frame.size.width / 2.1);
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -163,24 +164,19 @@ class HomePageViewController: BaseViewController, facebookDataDelegate, UICollec
         let objCategory : Categories = self.arrCategories[indexPath.row] as! Categories
 
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("categoryCell", forIndexPath: indexPath) as! CollectionCell
+        cell.tag = objCategory.cat_id as NSInteger
+        cell.homePageDelegate = self
         cell.configureCellLayout(cell.frame)
+        
         let urlString : String = objCategory.cat_imageUrl
-
-        //cell.imageView.image = nil
         cell.imageView.sd_setImageWithURL(NSURL(string: urlString), placeholderImage: nil , completed:{(image: UIImage?, error: NSError?, cacheType: SDImageCacheType!, imageURL: NSURL?) in
-            if self.arrCategories.count == indexPath.row + 1 {
-                self.stopLoadingIndicatorView()
-            }
-            if self.isiPhone4s{
-                self.stopLoadingIndicatorView()
-            }
+            self.stopLoadingIndicatorView()
         })
-
         return cell
     }
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-
+        /*
         let objCategory : Categories = self.arrCategories[indexPath.row] as! Categories
         let cellSelected : CollectionCell = self.collectionView!.cellForItemAtIndexPath(indexPath) as! CollectionCell
         self.collectionView.deselectItemAtIndexPath(indexPath, animated: false)
@@ -190,10 +186,19 @@ class HomePageViewController: BaseViewController, facebookDataDelegate, UICollec
         destinationViewController.categoryId = objCategory.cat_id as NSInteger
         destinationViewController.categoryImage = cellSelected.imageView.image
         self.navigationController?.pushViewController(destinationViewController, animated: true)
+        */
     }
 
+     // MARK: - homePageCellDelegate Methods
     
-    // MARK: - facebookDataDelegate Delegate Methods
+    func selectedPickerOption(objSubCategory : SubCategories) {
+        let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ShowMedia") as! ShowMediaViewController
+        destinationViewController.categoryId = objSubCategory.cat_id as NSInteger
+        destinationViewController.subCategoryId = objSubCategory.subCat_id as NSInteger
+        self.navigationController?.pushViewController(destinationViewController, animated: true)
+    }
+    
+    // MARK: - facebookDataDelegate Methods
     
     func currentFacebookUserData(dictResponse: NSDictionary) {
         

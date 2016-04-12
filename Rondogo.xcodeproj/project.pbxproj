@@ -16,6 +16,7 @@
 		0A6A52701C6381BE0016D44E /* Default-1104h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6A526D1C6381BE0016D44E /* Default-1104h@2x.png */; };
 		170ED2EE1C2951C900C8736F /* Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 170ED2EC1C2951C900C8736F /* Categories.m */; };
 		170ED2F41C29523800C8736F /* SubCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 170ED2F21C29523800C8736F /* SubCategories.m */; };
+		17149B601CBCD7F00014431E /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17149B5F1CBCD7F00014431E /* PickerTextField.swift */; };
 		1717143D1C34021400006305 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1717141D1C34021400006305 /* MKAnnotationView+WebCache.m */; };
 		1717143E1C34021400006305 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 1717141F1C34021400006305 /* NSData+ImageContentType.m */; };
 		1717143F1C34021400006305 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 171714211C34021400006305 /* SDImageCache.m */; };
@@ -109,6 +110,7 @@
 		170ED2EC1C2951C900C8736F /* Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Categories.m; sourceTree = "<group>"; };
 		170ED2F11C29523800C8736F /* SubCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCategories.h; sourceTree = "<group>"; };
 		170ED2F21C29523800C8736F /* SubCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCategories.m; sourceTree = "<group>"; };
+		17149B5F1CBCD7F00014431E /* PickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		1717141C1C34021400006305 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		1717141D1C34021400006305 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		1717141E1C34021400006305 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 		174E7F6B1AA701EB000807C1 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				17149B5F1CBCD7F00014431E /* PickerTextField.swift */,
 				0A1CBE7C1C993DE300081E00 /* RondogoSocials.swift */,
 				1717141B1C34021400006305 /* SDWebImage */,
 				17327B831AB710950000D151 /* Extensions */,
@@ -663,6 +666,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17149B601CBCD7F00014431E /* PickerTextField.swift in Sources */,
 				170ED2F41C29523800C8736F /* SubCategories.m in Sources */,
 				173760531AC4112700A6A0FD /* User.m in Sources */,
 				171714441C34021400006305 /* SDWebImageManager.m in Sources */,
