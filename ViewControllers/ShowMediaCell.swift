@@ -74,6 +74,8 @@ class ShowMediaCell: UITableViewCell {
         case 2 :
             if self.api.getDocumentDirectoryFileURL(objMedia) != nil{
                 pdfPreView.frame = CGRectMake(self.frame.origin.x + 20, y, self.frame.size.width - 40, 150)
+                pdfPreView.opaque = false
+                pdfPreView.backgroundColor = UIColor.clearColor()
                 pdfPreView.userInteractionEnabled = false
                 if(self.api.isMediaFileExistInDocumentDirectory(objMedia)){
                     isDownloaded = true
@@ -89,10 +91,13 @@ class ShowMediaCell: UITableViewCell {
             cell.contentView.addSubview(lblDesc)
             
         case 3 :
-            if self.api.generateThumbImage(objMedia) != nil{
+            if self.api.getDocumentDirectoryFileURL(objMedia) != nil {
                 videoPreView.frame = CGRectMake(self.frame.origin.x + 20, y, self.frame.size.width - 40, 150)
                 videoPreView.contentMode = .ScaleAspectFit
-                videoPreView.image = self.api.generateThumbImage(objMedia)
+                if(self.api.isMediaFileExistInDocumentDirectory(objMedia)){
+                    isDownloaded = true
+                    videoPreView.image = self.api.generateThumbImage(objMedia)
+                }
                 cell.contentView.addSubview(videoPreView)
             }
             lblDesc = UILabel(frame : CGRectMake(self.frame.origin.x + 20, y + 153, self.frame.size.width - 40, 20))

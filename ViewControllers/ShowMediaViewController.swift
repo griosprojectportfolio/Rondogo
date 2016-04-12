@@ -159,6 +159,7 @@ class ShowMediaViewController: BaseViewController, showMediaCellDelegate, UIScro
         var cell : ShowMediaCell!
         if cell == nil {
             cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ShowMediaCell
+            cell.backgroundColor = UIColor.clearColor()
         }
         cell.tag = indexPath.row
         cell.showMediaDelegate = self
@@ -175,7 +176,7 @@ class ShowMediaViewController: BaseViewController, showMediaCellDelegate, UIScro
             destinationViewController.socialShareDict = objMedia
             self.navigationController?.pushViewController(destinationViewController, animated: true)
         }else{
-            self.showAlertMsg("Download", message: "Please download to view selected media.")
+            self.showAlertMsg("Download required", message: "Please download to view selected media.")
         }
     }
     
@@ -184,7 +185,7 @@ class ShowMediaViewController: BaseViewController, showMediaCellDelegate, UIScro
     func cellDownloadButtonTapped(intIndex: Int) {
     
         if let objMedia : MediaObject = self.arrShowData[intIndex] as? MediaObject {
-            self.startLoadingIndicatorView("Downloading..")
+            self.startLoadingIndicatorView("Downloading")
             if !self.api.isMediaFileExistInDocumentDirectory(objMedia) {
                 self.api.downloadMediaData(objMedia, success: { (operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
                     dispatch_async(dispatch_get_main_queue(),{
