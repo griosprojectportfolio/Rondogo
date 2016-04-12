@@ -26,7 +26,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         self.title = NSLocalizedString("LOGIN",comment:"Log In")
         self.navigationController?.navigationBarHidden = false
         self.view.backgroundColor =  UIColor().appBackgroundColor() //UIColor(hexColorCode: "#ded0a4") // F7F8E0
-        self.addRightAndLeftNavItemOnView()
+        self.addLeftNavigationBarButtonItemOnView()
         self.applyDefaults()
     }
     
@@ -37,22 +37,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    // MARK: - Navigation bar and their action methods
-    
-    func addRightAndLeftNavItemOnView()
-    {
-        let buttonBack: UIButton = UIButton(type: UIButtonType.Custom)
-        buttonBack.frame = CGRectMake(0, 0, 40, 40)
-        buttonBack.setImage(UIImage(named:"icon_back.png"), forState: UIControlState.Normal)
-        buttonBack.addTarget(self, action: "leftNavBackButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
-        let leftBarButtonItemback: UIBarButtonItem = UIBarButtonItem(customView: buttonBack)
-        self.navigationItem.setLeftBarButtonItem(leftBarButtonItemback, animated: false)
-    }
-    
-    func leftNavBackButtonTapped(){
-        self.navigationController?.popViewControllerAnimated(true)
     }
     
     

@@ -9,10 +9,9 @@
 import Foundation
 import MediaPlayer
 
-class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomTabBarDelegate,UITableViewDelegate, UITableViewDataSource{
+class ShowMediaViewController: BaseViewController, UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource{
     
     var tblView : UITableView!
-    var bottomTabBar : BottomTabBarView!
     
     var arrShowData : NSArray = NSArray()
     var socialShareMedia : MediaObject!
@@ -30,7 +29,8 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
         self.title = NSLocalizedString("ALL_MEDIA",comment: "All Media")
         self.navigationController?.navigationBarHidden = false
         self.view.backgroundColor = UIColor().appBackgroundColor()
-        self.addRightAndLeftNavItemOnView()
+        self.addLeftNavigationBarButtonItemOnView()
+        self.addRightNavigationBarButtonItemOnView()
         self.refreshData()
         self.applyDefaults()
     }
@@ -43,35 +43,39 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-    
     
     // MARK: -  Nanigation bar button and there methods
     
-    func addRightAndLeftNavItemOnView()
-    {
-        let buttonBack: UIButton = UIButton(type: UIButtonType.Custom)
-        buttonBack.frame = CGRectMake(0, 0, 40, 40)
-        buttonBack.setImage(UIImage(named:"icon_back.png"), forState: UIControlState.Normal)
-        buttonBack.addTarget(self, action: "leftNavBackButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
-        let leftBarButtonItemback: UIBarButtonItem = UIBarButtonItem(customView: buttonBack)
-        self.navigationItem.setLeftBarButtonItem(leftBarButtonItemback, animated: false)
+    func addRightNavigationBarButtonItemOnView() {
         
         if self.is_Admin[0] {
-            let buttonShare: UIButton = UIButton(type: UIButtonType.Custom)
-            buttonShare.frame = CGRectMake(0, 0, 35, 35)
-            buttonShare.setImage(UIImage(named:"icon_admin.png"), forState: UIControlState.Normal)
-            buttonShare.addTarget(self, action: "rightNavShareButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
-            let rightBarButtonItemShare: UIBarButtonItem = UIBarButtonItem(customView: buttonShare)
-            self.navigationItem.setRightBarButtonItem(rightBarButtonItemShare, animated: false)
+            
+            let btnAdmin: UIButton = UIButton(type: UIButtonType.Custom)
+            btnAdmin.frame = CGRectMake(0, 0, 35, 35)
+            btnAdmin.setImage(UIImage(named:"icon_admin.png"), forState: UIControlState.Normal)
+            btnAdmin.addTarget(self, action: "rightNavAdminButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+            let rightBarAdmin: UIBarButtonItem = UIBarButtonItem(customView: btnAdmin)
+            
+            let btnCamera: UIButton = UIButton(type: UIButtonType.Custom)
+            btnCamera.frame = CGRectMake(0, 0, 35, 35)
+            btnCamera.setImage(UIImage(named:"icon_camera.png"), forState: UIControlState.Normal)
+            btnCamera.addTarget(self, action: "rightNavCameraButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+            let rightBarCamera: UIBarButtonItem = UIBarButtonItem(customView: btnCamera)
+            
+            self.navigationItem.setRightBarButtonItems([rightBarAdmin, rightBarCamera], animated: false)
+            
+        }else {
+            
+            let btnCamera: UIButton = UIButton(type: UIButtonType.Custom)
+            btnCamera.frame = CGRectMake(0, 0, 35, 35)
+            btnCamera.setImage(UIImage(named:"icon_camera.png"), forState: UIControlState.Normal)
+            btnCamera.addTarget(self, action: "rightNavCameraButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+            let rightBarCamera: UIBarButtonItem = UIBarButtonItem(customView: btnCamera)
+            self.navigationItem.setRightBarButtonItem(rightBarCamera, animated: false)
         }
     }
     
-    func leftNavBackButtonTapped(){
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-    
-    func rightNavShareButtonTapped(){
+    func rightNavAdminButtonTapped(){
         let destinationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("AdminPanel") as! AdminPanelViewController
         destinationViewController.categoryId = categoryId
         destinationViewController.subCategoryId = subCategoryId
@@ -105,7 +109,7 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
             }
         }
         
-        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height-50))
+        self.tblView = UITableView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height))
         tblView.tableFooterView = UIView(frame:CGRectZero)
         self.tblView.delegate = self
         self.tblView.dataSource = self
@@ -118,11 +122,6 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
                 self.tblView.reloadData()
             },failure: { (responseObject: AnyObject?) in
         })
-        
-        bottomTabBar = BottomTabBarView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.size.height - 50, self.view.frame.size.width ,50))
-        bottomTabBar.bottomBarDelegate = self
-        bottomTabBar.addBottomViewWithShareOptions()
-        self.view.addSubview(bottomTabBar)
     }
     
     
@@ -236,43 +235,6 @@ class ShowMediaViewController: BaseViewController, UIScrollViewDelegate, BottomT
             selectedCell.setSelected(true, animated: true)
         }else{
             self.showAlertMsg("Downloading..", message: "Media downloading is in progress.")
-        }
-    }
-    
-    
-    // MARK: - BottomTabBarDelegate Delegate Method
-    
-    func sendTappedButtonTag(sender: AnyObject){
-        
-        if self.auth_token[0] != "" {
-            
-            let btnSender = sender as! UIButton
-            
-            switch btnSender.tag {
-                
-            case 0 :
-                if self.socialShareMedia != nil {
-                    self.bottomTabBar.btnWhatsAppTapped(self.socialShareMedia)
-                }else{
-                    self.showAlertMsg("Choose Media !", message: "Please tap on any media to choose and share.")
-                }
-                
-            case 1 : self.openDefaultFacebookPage()
-                
-            case 2 :
-                if self.socialShareMedia != nil {
-                    self.bottomTabBar.btnDropBoxTapped(self.socialShareMedia , viewController: self)
-                }else{
-                    self.showAlertMsg("Choose Media !", message: "Please tap on any media to choose and share.")
-                }
-                
-            case 3 : bottomTabBar.btnWazeTapped(sender)
-                
-            default: print("Other Button Tapped")
-                
-            }
-        }else {
-            self.showAlertMsg("Login required !", message:"Please login to share media on socials.")
         }
     }
     

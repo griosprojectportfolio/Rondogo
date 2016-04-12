@@ -10,13 +10,12 @@ import UIKit
 import Foundation
 import MediaPlayer
 
-class MediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
+class MediaPreviewViewController: BaseViewController {
 
     var imagePreview         : UIImageView!
     var moviePlayer          : MPMoviePlayerController!
     var tempWebView          : UIWebView!
     var socialShareDict      : MediaObject!
-    var bottomTabBar         : BottomTabBarView!
 
 
     // MARK: - View related methods
@@ -25,7 +24,8 @@ class MediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor().appBackgroundColor()
         self.title =  NSLocalizedString("PREVIEW",comment:"Preview")
-        self.addRightAndLeftNavItemOnView()
+        self.addLeftNavigationBarButtonItemOnView()
+        self.addRightNavigationBarButtonItemOnView()
         self.applyDefaults()
     }
 
@@ -36,23 +36,20 @@ class MediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-    // MARK: - Navigation bar and their action methods
-
-    func addRightAndLeftNavItemOnView()
-    {
-        let buttonBack: UIButton = UIButton(type: UIButtonType.Custom)
-        buttonBack.frame = CGRectMake(0, 0, 40, 40)
-        buttonBack.setImage(UIImage(named:"icon_back.png"), forState: UIControlState.Normal)
-        buttonBack.addTarget(self, action: "leftNavBackButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
-        let leftBarButtonItemback: UIBarButtonItem = UIBarButtonItem(customView: buttonBack)
-        self.navigationItem.setLeftBarButtonItem(leftBarButtonItemback, animated: false)
+    
+    
+    // MARK: -  Nanigation bar button and there methods
+    
+    func addRightNavigationBarButtonItemOnView() {
+        
+        let btnCamera: UIButton = UIButton(type: UIButtonType.Custom)
+        btnCamera.frame = CGRectMake(0, 0, 35, 35)
+        btnCamera.setImage(UIImage(named:"icon_camera.png"), forState: UIControlState.Normal)
+        btnCamera.addTarget(self, action: "rightNavCameraButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+        let rightBarCamera: UIBarButtonItem = UIBarButtonItem(customView: btnCamera)
+        self.navigationItem.setRightBarButtonItem(rightBarCamera, animated: false)
     }
-
-    func leftNavBackButtonTapped(){
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-
+    
     // MARK: - View layout setup methods
 
     func applyDefaults(){
@@ -79,7 +76,6 @@ class MediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "moviePlayerWillEnterFullScreen:" , name: MPMoviePlayerWillEnterFullscreenNotification, object: moviePlayer)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "moviePlayerWillExitFullScreen:" , name: MPMoviePlayerWillExitFullscreenNotification, object: moviePlayer)
 
-
         }else if mediaType == 2{
 
             let url : NSURL = self.api.getDocumentDirectoryFileURL(self.socialShareDict)
@@ -89,12 +85,6 @@ class MediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
             self.view.addSubview(tempWebView)
 
         }
-
-        bottomTabBar = BottomTabBarView(frame: CGRectMake(self.view.frame.origin.x, self.view.frame.size.height - 50, self.view.frame.size.width ,50))
-        bottomTabBar.bottomBarDelegate = self
-        bottomTabBar.addBottomViewWithShareOptions()
-        self.view.addSubview(bottomTabBar)
-
     }
 
 
@@ -110,33 +100,5 @@ class MediaPreviewViewController: BaseViewController,BottomTabBarDelegate {
         applicationDel.restricRotation = true
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
-
-
-    // MARK: - BottomTabBarDelegate Delegate Method
-
-    func sendTappedButtonTag(sender: AnyObject){
-
-        if self.auth_token[0] != "" {
-
-            let btnSender = sender as! UIButton
-
-            switch btnSender.tag {
-
-            case 0 : bottomTabBar.btnWhatsAppTapped(self.socialShareDict)
-
-            case 1 : self.openDefaultFacebookPage()
-
-            case 2 : bottomTabBar.btnDropBoxTapped(self.socialShareDict, viewController: self)
-
-            case 3 : bottomTabBar.btnWazeTapped(sender)
-
-            default:
-                print("Other Button Tapped")
-            }
-        }else {
-            self.showAlertMsg("Login required !", message:"Please login to share media on socials.")
-        }
-    }
-    
     
 }

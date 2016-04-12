@@ -22,7 +22,7 @@ class ForgotPasswordViewController: BaseViewController,UITextFieldDelegate {
         self.title = NSLocalizedString("FORGOT_PASSWORD",comment:"Forgot Password")
         self.navigationController?.navigationBarHidden = false
         self.view.backgroundColor =  UIColor().appBackgroundColor()
-        self.addRightAndLeftNavItemOnView()
+        self.addLeftNavigationBarButtonItemOnView()
         self.applyDefaults()
     }
     
@@ -33,22 +33,6 @@ class ForgotPasswordViewController: BaseViewController,UITextFieldDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-
-    // MARK: - Navigation bar and their action methods
-    
-    func addRightAndLeftNavItemOnView()
-    {
-        let buttonBack: UIButton = UIButton(type: UIButtonType.Custom)
-        buttonBack.frame = CGRectMake(0, 0, 40, 40)
-        buttonBack.setImage(UIImage(named:"icon_back.png"), forState: UIControlState.Normal)
-        buttonBack.addTarget(self, action: "leftNavBackButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
-        let leftBarButtonItemback: UIBarButtonItem = UIBarButtonItem(customView: buttonBack)
-        self.navigationItem.setLeftBarButtonItem(leftBarButtonItemback, animated: false)
-    }
-    
-    func leftNavBackButtonTapped(){
-        self.navigationController?.popViewControllerAnimated(true)
     }
 
     // MARK: - View layout setup methods

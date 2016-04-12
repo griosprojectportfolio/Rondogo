@@ -57,12 +57,14 @@ class BaseViewController: UIViewController {
         }
     }
 
-    // MARK: - Common methods
+    // MARK: - View related methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.commonInitialization()
     }
+    
+    // MARK: - Common methods
     
     func commonInitialization(){
         AppApi.sharedClient()
@@ -78,6 +80,27 @@ class BaseViewController: UIViewController {
         UIView.commitAnimations()
     }
 
+    
+    // MARK: - Navigation bar and their action methods
+    
+    func addLeftNavigationBarButtonItemOnView() {
+        let buttonBack: UIButton = UIButton(type: UIButtonType.Custom)
+        buttonBack.frame = CGRectMake(0, 0, 40, 40)
+        buttonBack.setImage(UIImage(named:"icon_back.png"), forState: UIControlState.Normal)
+        buttonBack.addTarget(self, action: "leftNavBackBtnTapped", forControlEvents: UIControlEvents.TouchUpInside)
+        let leftBarButtonItemback: UIBarButtonItem = UIBarButtonItem(customView: buttonBack)
+        self.navigationItem.setLeftBarButtonItem(leftBarButtonItemback, animated: false)
+    }
+    
+    func leftNavBackBtnTapped(){
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+
+    func rightNavCameraButtonTapped(){
+        
+    }
+
+    
     // MARK: - Show common alert method
     
     func showAlertMsg(title:String!,message:String!) {

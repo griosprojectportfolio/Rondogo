@@ -34,7 +34,7 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
         super.viewDidLoad()
         self.title = strNavigationTittle
         self.navigationController?.navigationBarHidden = false
-        self.addRightAndLeftNavItemOnView()
+        self.addLeftNavigationBarButtonItemOnView()
         self.applyDefaults()
         self.getAllSubCategoriesDataFromLocalDB()
     }
@@ -47,22 +47,6 @@ class DetailViewController: BaseViewController,UICollectionViewDataSource, UICol
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    
-    // MARK: - Navigation bar methods
-    func addRightAndLeftNavItemOnView()
-    {
-        let buttonBack: UIButton = UIButton(type: UIButtonType.Custom)
-        buttonBack.frame = CGRectMake(0, 0, 40, 40)
-        buttonBack.setImage(UIImage(named:"icon_back.png"), forState: UIControlState.Normal)
-        buttonBack.addTarget(self, action: "leftNavBackButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
-        let leftBarButtonItemback: UIBarButtonItem = UIBarButtonItem(customView: buttonBack)
-        self.navigationItem.setLeftBarButtonItem(leftBarButtonItemback, animated: false)
-    }
-    
-    func leftNavBackButtonTapped(){
-        self.navigationController?.popViewControllerAnimated(true)
     }
     
     
