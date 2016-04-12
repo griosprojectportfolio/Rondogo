@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import MediaPlayer
 
-class MediaPreviewViewController: BaseViewController {
+class MediaPreviewViewController: BaseViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var imagePreview         : UIImageView!
     var moviePlayer          : MPMoviePlayerController!
@@ -48,6 +48,30 @@ class MediaPreviewViewController: BaseViewController {
         btnCamera.addTarget(self, action: "rightNavCameraButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
         let rightBarCamera: UIBarButtonItem = UIBarButtonItem(customView: btnCamera)
         self.navigationItem.setRightBarButtonItem(rightBarCamera, animated: false)
+    }
+    
+    func rightNavCameraButtonTapped(){
+        
+        let optionMenu = UIAlertController(title: nil, message:NSLocalizedString("ALERT",comment:"Alert"), preferredStyle: .ActionSheet)
+        
+        let imageAction = UIAlertAction(title:NSLocalizedString("CAPTURE_IMAGE",comment:"Capture Image"), style: .Default, handler: {
+            (alert: UIAlertAction) -> Void in
+            self.openCameraToCaptureImage()
+        })
+        let videoAction = UIAlertAction(title: NSLocalizedString("CAPTURE_VIDEO",comment:"Capture Video"), style: .Default, handler: {
+            (alert: UIAlertAction) -> Void in
+            self.openCameraToCaptureVideo()
+        })
+        let cancelAction = UIAlertAction(title: NSLocalizedString("CANCEL",comment:"Cancel"), style: .Cancel, handler: {
+            (alert: UIAlertAction) -> Void in
+        })
+        optionMenu.addAction(imageAction)
+        optionMenu.addAction(videoAction)
+        optionMenu.addAction(cancelAction)
+        
+        if let popoverController = optionMenu.popoverPresentationController {
+        }
+        self.presentViewController(optionMenu, animated: true, completion: nil)
     }
     
     // MARK: - View layout setup methods
@@ -99,6 +123,60 @@ class MediaPreviewViewController: BaseViewController {
         let applicationDel = UIApplication.sharedApplication().delegate as! AppDelegate
         applicationDel.restricRotation = true
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    // MARK: - UIImagePickerController setup and Delegate methods
+    
+    func openCameraToCaptureImage(){
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
+            let captureImage = UIImagePickerController()
+            captureImage.delegate = self
+            captureImage.sourceType = UIImagePickerControllerSourceType.Camera
+            captureImage.mediaTypes = [String(kUTTypeImage)]
+            captureImage.allowsEditing = false
+            self.presentViewController(captureImage, animated: true, completion: nil)
+        }else{
+            self.showAlertMsg(NSLocalizedString("ALERT",comment:"Alert"), message:NSLocalizedString("CAMERA_NOT_AVAILABLE",comment:"Camera Not Available in Device"))
+        }
+    }
+    
+    func openCameraToCaptureVideo(){
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
+            let captureVideo = UIImagePickerController()
+            captureVideo.delegate = self
+            captureVideo.sourceType = UIImagePickerControllerSourceType.Camera
+            captureVideo.mediaTypes = [String(kUTTypeMovie)]
+            captureVideo.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Video
+            self.presentViewController(captureVideo, animated: false ) { () -> Void in  }
+            
+        }else{
+            self.showAlertMsg(NSLocalizedString("ALERT",comment:"Alert"), message:NSLocalizedString("CAMERA_NOT_AVAILABLE",comment:"Camera Not Available in Device"))
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        let mediaType = info[UIImagePickerControllerMediaType] as! NSString
+        var chosenImage : UIImage!
+        var videoPath : NSURL!
+        
+        if mediaType.isEqualToString(kUTTypeImage as String) {
+            /* Media is an image */
+            chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+            UIImageWriteToSavedPhotosAlbum(chosenImage, nil, nil, nil);
+        } else if mediaType.isEqualToString(kUTTypeMovie as String) {
+            /* Media is a video */
+            //let url: AnyObject? = info[UIImagePickerControllerMediaURL]
+            videoPath = info[UIImagePickerControllerMediaURL] as! NSURL
+            UISaveVideoAtPathToSavedPhotosAlbum("\(videoPath)",nil,nil,nil);
+        }
+        dismissViewControllerAnimated(true, completion:nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
 }

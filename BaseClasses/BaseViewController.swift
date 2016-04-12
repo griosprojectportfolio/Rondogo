@@ -95,11 +95,6 @@ class BaseViewController: UIViewController {
     func leftNavBackBtnTapped(){
         self.navigationController?.popViewControllerAnimated(true)
     }
-
-    func rightNavCameraButtonTapped(){
-        
-    }
-
     
     // MARK: - Show common alert method
     
@@ -127,46 +122,5 @@ class BaseViewController: UIViewController {
     }
     
     
-    // MARK: - Share media on Facebook
-
-    func shareMediaOnFacebook(objMedia: MediaObject) {
-        
-        var activityVC : UIActivityViewController!
-        let mediaType : Int = objMedia.object_type as Int
-        
-        if mediaType == 1 {
-            let shareImage : UIImage = self.api.getImageFromDocumentDirectoryFileURL(objMedia)
-            let objectsToShare : NSArray = [shareImage]
-            activityVC = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
-        }else {
-            let videoURL = self.api.getDocumentDirectoryFileURL(objMedia)
-            let objectsToShare : NSArray = [videoURL]
-            activityVC = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
-        }
-        
-        activityVC.excludedActivityTypes =  [
-            UIActivityTypePostToTwitter,
-            UIActivityTypePostToWeibo,
-            UIActivityTypeMessage,
-            UIActivityTypeMail,
-            UIActivityTypePrint,
-            UIActivityTypeCopyToPasteboard,
-            UIActivityTypeAssignToContact,
-            UIActivityTypeSaveToCameraRoll,
-            UIActivityTypeAddToReadingList,
-            UIActivityTypePostToFlickr,
-            UIActivityTypePostToVimeo,
-            UIActivityTypePostToTencentWeibo,
-            UIActivityTypeAirDrop
-        ]
-        self.presentViewController(activityVC, animated: true, completion: nil)
-        
-    }
-    
-    func openDefaultFacebookPage() {
-        if let url : NSURL = NSURL(string: "https://www.facebook.com/groups/mysterious.figure/")! {
-            UIApplication.sharedApplication().openURL(url)
-        }
-    }
     
 }

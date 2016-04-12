@@ -787,8 +787,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Doron Shamir";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Doron Shamir";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Doron Shamir (22PKVYDCDP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Doron Shamir (22PKVYDCDP)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -811,7 +811,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "f4444aec-965e-4b35-ae82-2a511f6cdb23";
+				PROVISIONING_PROFILE = "42faa782-d9fc-489d-91e7-49ec9a2026f8";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -837,8 +837,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Doron Shamir";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Doron Shamir";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Doron Shamir (22PKVYDCDP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Doron Shamir (22PKVYDCDP)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -854,7 +854,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "f4444aec-965e-4b35-ae82-2a511f6cdb23";
+				PROVISIONING_PROFILE = "42faa782-d9fc-489d-91e7-49ec9a2026f8";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -868,8 +868,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Doron Shamir";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Doron Shamir";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Doron Shamir (22PKVYDCDP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Doron Shamir (22PKVYDCDP)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -886,7 +886,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f4444aec-965e-4b35-ae82-2a511f6cdb23";
+				PROVISIONING_PROFILE = "42faa782-d9fc-489d-91e7-49ec9a2026f8";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/API/Rondogo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -900,8 +900,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Doron Shamir";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Doron Shamir";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Doron Shamir (22PKVYDCDP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Doron Shamir (22PKVYDCDP)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -918,7 +918,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f4444aec-965e-4b35-ae82-2a511f6cdb23";
+				PROVISIONING_PROFILE = "42faa782-d9fc-489d-91e7-49ec9a2026f8";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/API/Rondogo-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -929,6 +929,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Doron Shamir (22PKVYDCDP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Doron Shamir (22PKVYDCDP)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -940,7 +942,7 @@
 				INFOPLIST_FILE = RondogoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f4444aec-965e-4b35-ae82-2a511f6cdb23";
+				PROVISIONING_PROFILE = "42faa782-d9fc-489d-91e7-49ec9a2026f8";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rondogo.app/Rondogo";
 			};
 			name = Debug;
@@ -949,6 +951,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Doron Shamir (22PKVYDCDP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Doron Shamir (22PKVYDCDP)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -956,7 +960,7 @@
 				INFOPLIST_FILE = RondogoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f4444aec-965e-4b35-ae82-2a511f6cdb23";
+				PROVISIONING_PROFILE = "42faa782-d9fc-489d-91e7-49ec9a2026f8";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rondogo.app/Rondogo";
 			};
 			name = Release;
