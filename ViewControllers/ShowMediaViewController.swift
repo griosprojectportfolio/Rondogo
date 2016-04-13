@@ -183,21 +183,34 @@ class ShowMediaViewController: BaseViewController, showMediaCellDelegate, UIScro
     // MARK: - showMediaCellDelegate methods
     
     func cellDownloadButtonTapped(intIndex: Int) {
-    
-        if let objMedia : MediaObject = self.arrShowData[intIndex] as? MediaObject {
-            self.startLoadingIndicatorView("Downloading")
-            if !self.api.isMediaFileExistInDocumentDirectory(objMedia) {
-                self.api.downloadMediaData(objMedia, success: { (operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
-                    dispatch_async(dispatch_get_main_queue(),{
-                        self.tblView.reloadData()
-                        self.stopLoadingIndicatorView()
+        
+        let downloadAlert = UIAlertController(title:"Download", message:"Do you want to download this media?", preferredStyle: .Alert)
+        
+        let cancelAction = UIAlertAction(title: NSLocalizedString("CANCEL",comment:"Cancel"), style: .Cancel, handler: {
+            (alert: UIAlertAction) -> Void in
+        })
+        let videoAction = UIAlertAction(title: "Yes, Download", style: .Default, handler: {
+            (alert: UIAlertAction) -> Void in
+            
+            if let objMedia : MediaObject = self.arrShowData[intIndex] as? MediaObject {
+                self.startLoadingIndicatorView("Downloading")
+                if !self.api.isMediaFileExistInDocumentDirectory(objMedia) {
+                    self.api.downloadMediaData(objMedia, success: { (operation: AFHTTPRequestOperation?, responseObject: AnyObject? ) in
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.tblView.reloadData()
+                            self.stopLoadingIndicatorView()
+                        })
+                        },
+                        failure: { (operation: AFHTTPRequestOperation?, error: NSError? ) in
+                            self.stopLoadingIndicatorView()
                     })
-                },
-                failure: { (operation: AFHTTPRequestOperation?, error: NSError? ) in
-                    self.stopLoadingIndicatorView()
-                })
+                }
             }
-        }
+            
+        })
+        downloadAlert.addAction(videoAction)
+        downloadAlert.addAction(cancelAction)
+        self.presentViewController(downloadAlert, animated: true, completion: nil)
     }
     
 

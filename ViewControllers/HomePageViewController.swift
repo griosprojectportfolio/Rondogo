@@ -92,6 +92,7 @@ class HomePageViewController: BaseViewController, facebookDataDelegate, homePage
         self.logoImageView.image = UIImage (named: "HomePageLogo.png")
         self.view.addSubview(self.logoImageView)
 
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
         collectionView = UICollectionView(frame: CGRectMake(self.view.frame.origin.x + 20, self.logoImageView.frame.size.height + 20, self.view.frame.size.width - 40, self.view.frame.size.height - (self.logoImageView.frame.size.height + 50 + self.btnLogin.frame.size.height)), collectionViewLayout: flowLayout)
         collectionView?.registerClass(CollectionCell.self, forCellWithReuseIdentifier: "categoryCell")
         collectionView?.delegate = self
