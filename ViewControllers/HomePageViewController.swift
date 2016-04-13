@@ -96,7 +96,7 @@ class HomePageViewController: BaseViewController, facebookDataDelegate, homePage
         collectionView?.registerClass(CollectionCell.self, forCellWithReuseIdentifier: "categoryCell")
         collectionView?.delegate = self
         collectionView?.dataSource = self
-        collectionView.scrollEnabled = false
+        collectionView.scrollEnabled = true
         collectionView?.backgroundColor = UIColor.clearColor()
         self.view.addSubview(collectionView!)
 

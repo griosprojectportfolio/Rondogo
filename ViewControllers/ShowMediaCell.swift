@@ -16,6 +16,7 @@ protocol showMediaCellDelegate {
 class ShowMediaCell: UITableViewCell {
     
     let api : AppApi = AppApi()
+    var noImage : UIImageView = UIImageView()
     var btnDownload : UIButton = UIButton()
     var imagePreView : UIImageView = UIImageView()
     var videoPreView : UIImageView = UIImageView()
@@ -32,11 +33,20 @@ class ShowMediaCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    func setCellSeparatorInsectProperty() {
+        self.separatorInset = UIEdgeInsetsMake(0, 0, self.frame.size.width, 0)
+        if self.respondsToSelector("preservesSuperviewLayoutMargins") {
+            self.layoutMargins = UIEdgeInsetsZero
+            self.preservesSuperviewLayoutMargins = false
+        }
+    }
+    
     func resetAllViewObjects(cell:ShowMediaCell) {
         cell.lblDesc.text = ""
         cell.imagePreView.image = nil
         cell.videoPreView.image = nil
         cell.pdfPreView.removeFromSuperview()
+        self.setCellSeparatorInsectProperty()
     }
     
     func downloadButtonTapped() {
@@ -69,6 +79,7 @@ class ShowMediaCell: UITableViewCell {
             lblDesc.text = mediaName as String
             lblDesc.textColor = UIColor.darkGrayColor()
             lblDesc.textAlignment = NSTextAlignment.Center
+            lblDesc.font = UIFont.boldSystemFontOfSize(15.0)
             cell.contentView.addSubview(lblDesc)
             
         case 2 :
@@ -111,12 +122,21 @@ class ShowMediaCell: UITableViewCell {
         }
 
         if (!isDownloaded) {
-            self.btnDownload.frame = CGRectMake(self.frame.size.width - 53, 5, 48, 48)
+            self.noImage.frame = CGRectMake(self.frame.origin.x + 20, y, self.frame.size.width - 40, 150)
+            self.noImage.backgroundColor = UIColor.whiteColor()
+            self.noImage.layer.cornerRadius = 10
+            self.noImage.userInteractionEnabled = true
+            self.noImage.image = UIImage( named: "icon_no_image")
+            self.noImage.contentMode = .ScaleAspectFit
+            
+            self.btnDownload.frame = CGRectMake(self.noImage.frame.size.width - 48, 0, 48, 48)
             self.btnDownload.addTarget(self, action: "downloadButtonTapped", forControlEvents:.TouchUpInside)
             self.btnDownload.setImage(UIImage( named: "icon_download"), forState: .Normal)
-            cell.contentView.addSubview(self.btnDownload)
+            self.noImage.addSubview(self.btnDownload)
+            
+            cell.contentView.addSubview(self.noImage)
         }else {
-            self.btnDownload.removeFromSuperview()
+            self.noImage.removeFromSuperview()
         }
 
     }

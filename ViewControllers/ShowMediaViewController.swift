@@ -115,8 +115,8 @@ class ShowMediaViewController: BaseViewController, showMediaCellDelegate, UIScro
         if arrShowData.count == 0 {
             let lblAlert:UILabel = UILabel(frame: CGRectMake((self.view.frame.width-250)/2,(self.view.frame.height-40)/2,250,40))
             lblAlert.textAlignment = NSTextAlignment.Center
-            lblAlert.font = UIFont.systemFontOfSize(20.0)
-            lblAlert.textColor = UIColor.darkGrayColor()
+            lblAlert.font = UIFont.boldSystemFontOfSize(18.0)
+            lblAlert.textColor = UIColor.lightGrayColor()
             self.view.addSubview(lblAlert)
             self.view.bringSubviewToFront(lblAlert)
             

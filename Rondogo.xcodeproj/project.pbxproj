@@ -75,6 +75,7 @@
 		175043881AA854AA00D3ECD6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175043871AA854A900D3ECD6 /* LoginViewController.swift */; };
 		175F65B31ABFDE40004A219D /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175F65B21ABFDE40004A219D /* ActivityIndicatorView.swift */; };
 		1784303E1AE64825007A76E1 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784303D1AE64825007A76E1 /* TextField.swift */; };
+		178A99C61CBE3A7900808E16 /* icon_no_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 178A99C51CBE3A7900808E16 /* icon_no_image.png */; };
 		17BB2A271AB828E300044054 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB2A261AB828E300044054 /* DetailViewController.swift */; };
 		17C0B8571AC00C0D0044D3B5 /* AdminPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0B8561AC00C0D0044D3B5 /* AdminPanelViewController.swift */; };
 		17C0B8591AC01F380044D3B5 /* icon_adminPanel.png in Resources */ = {isa = PBXBuildFile; fileRef = 17C0B8581AC01F380044D3B5 /* icon_adminPanel.png */; };
@@ -197,6 +198,7 @@
 		175043871AA854A900D3ECD6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		175F65B21ABFDE40004A219D /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		1784303D1AE64825007A76E1 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		178A99C51CBE3A7900808E16 /* icon_no_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_no_image.png; sourceTree = "<group>"; };
 		17BB2A261AB828E300044054 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		17C0B8561AC00C0D0044D3B5 /* AdminPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminPanelViewController.swift; sourceTree = "<group>"; };
 		17C0B8581AC01F380044D3B5 /* icon_adminPanel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_adminPanel.png; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 				174137C41AC693B9003126BD /* icon_admin.png */,
 				17149B611CBD00BD0014431E /* icon_camera.png */,
 				170BACC21CBD258700E9759A /* icon_download.png */,
+				178A99C51CBE3A7900808E16 /* icon_no_image.png */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				17149B621CBD00BD0014431E /* icon_camera.png in Resources */,
 				174E7F3B1AA6D822000807C1 /* Main.storyboard in Resources */,
 				1750404C1AB9B7B90041AE2A /* icon_settings.png in Resources */,
+				178A99C61CBE3A7900808E16 /* icon_no_image.png in Resources */,
 				174137C51AC693B9003126BD /* icon_admin.png in Resources */,
 				17C563C11AB849AC0046E714 /* icon_dropBox.png in Resources */,
 				174E7F401AA6D822000807C1 /* LaunchScreen.xib in Resources */,
