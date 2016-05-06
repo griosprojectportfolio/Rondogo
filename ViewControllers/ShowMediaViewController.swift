@@ -250,18 +250,27 @@ class ShowMediaViewController: BaseViewController, showMediaCellDelegate, UIScro
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         var chosenImage : UIImage!
         var videoPath : NSURL!
+        var isMediaTypeImage : Bool = false
         
         if mediaType.isEqualToString(kUTTypeImage as String) {
             /* Media is an image */
+            isMediaTypeImage = true
             chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
             UIImageWriteToSavedPhotosAlbum(chosenImage, nil, nil, nil);
         } else if mediaType.isEqualToString(kUTTypeMovie as String) {
             /* Media is a video */
             //let url: AnyObject? = info[UIImagePickerControllerMediaURL]
+            isMediaTypeImage = false
             videoPath = info[UIImagePickerControllerMediaURL] as! NSURL
             UISaveVideoAtPathToSavedPhotosAlbum("\(videoPath)",nil,nil,nil);
         }
-        dismissViewControllerAnimated(true, completion:nil)
+        dismissViewControllerAnimated(true, completion:{
+            if isMediaTypeImage {
+                self.shareMediaOnSocials(chosenImage, videoURL: NSURL(), isImage: true)
+            }else {
+                self.shareMediaOnSocials(UIImage(), videoURL: videoPath, isImage: false)
+            }
+        })
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {

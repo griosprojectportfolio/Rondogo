@@ -121,6 +121,20 @@ class BaseViewController: UIViewController {
         })
     }
     
+    // MARK: - Share media on Socials
     
+    func shareMediaOnSocials(shareImage: UIImage, videoURL: NSURL, isImage: Bool) {
+        
+        var activityVC : UIActivityViewController!
+        
+        if isImage {
+            let objectsToShare : NSArray = [shareImage]
+            activityVC = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
+        }else {
+            let objectsToShare : NSArray = [videoURL]
+            activityVC = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
+        }
+        self.presentViewController(activityVC, animated: true, completion: nil)
+    }
     
 }

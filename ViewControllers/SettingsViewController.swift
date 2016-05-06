@@ -98,6 +98,7 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
         case 1 :
             let objSyncApp : SynchronizeApp = SynchronizeApp()
             objSyncApp.startSyncMethodCall(self, success: { (responseObject: AnyObject?) in
+                    self.api.deleteAllEntityObjects()
                     self.stopLoadingIndicatorView()
                 }, failure: { (responseObject: AnyObject?) in
                     self.stopLoadingIndicatorView()

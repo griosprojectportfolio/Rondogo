@@ -77,5 +77,6 @@
 - (UIImage*)getImageFromDocumentDirectoryFileURL:(MediaObject *)objMeida;
 - (UIImage *)generateThumbImage:(MediaObject *)objMeida;
 - (NSString *)getFileName:(MediaObject *)objMedia;
+- (void) deleteAllEntityObjects;
 
 @end

@@ -23,7 +23,6 @@ class HomePageViewController: BaseViewController, facebookDataDelegate, homePage
     override func viewDidLoad() {
         super.viewDidLoad()
         self.applyDefaults()
-        self.loadMediaDataFromServer()
         self.navigationController?.navigationBarHidden = true
         self.social.fbDelegate = self
     }
@@ -31,6 +30,7 @@ class HomePageViewController: BaseViewController, facebookDataDelegate, homePage
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBarHidden = true
+        self.loadMediaDataFromServer()
         self.showAndHideLoginAndSettingsButton()
     }
 
@@ -292,11 +292,8 @@ class HomePageViewController: BaseViewController, facebookDataDelegate, homePage
         }
         let categoryFilter : NSPredicate = NSPredicate(format: "cat_language = %@ AND is_deleted = 0",strLanguage)
         self.arrCategories = Categories.MR_findAllSortedBy("cat_sequence", ascending: true, withPredicate: categoryFilter)
-        if self.arrCategories.count != 0 {
-            self.collectionView.reloadData()
-        }else {
-            self.stopLoadingIndicatorView()
-        }
+        self.collectionView.reloadData()
+        self.stopLoadingIndicatorView()
     }
 
 }
